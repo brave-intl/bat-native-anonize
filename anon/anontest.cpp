@@ -28,11 +28,11 @@ void pretty(const char* str, const char* title) {
 	printf("%s:\n",title);
 	const char *p = str;
 	do {
-		char *l = strchr(p, '\n');
+		char *l = (char*)strchr(p, '\n');
 		if (l) {
 			printf("         %.*s\n", (int)(l-p),p);
 			p = l+1;
-		} else { 
+		} else {
 			printf("         %s\n", p);
 			p = l;
 		}
@@ -77,16 +77,16 @@ int main() {
 
 		if (createSurvey(&s) != 1) {
 			fprintf(stderr, "!!!! ERROR CREATING Survey!\n");
-			exit(1);		
-		} 
+			exit(1);
+		}
 
 		if (extendSurvey(emails, &s) != 7) {
 			fprintf(stderr, "!!!! ERROR extending Survey!\n");
-			exit(1);		
+			exit(1);
 		}
 		if (extendSurvey(emails2, &s) != 6) {
 			fprintf(stderr, "!!!! ERROR extending Survey!\n");
-			exit(1);		
+			exit(1);
 		}
 
 

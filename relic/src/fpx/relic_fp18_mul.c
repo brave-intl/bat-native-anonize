@@ -210,7 +210,7 @@ static void fp6_mul_dxs_unr(dv6_t c, fp6_t a, fp6_t b) {
 	}
 }
 
-static void fp6_mul0_basic(fp6_t c, fp6_t a, fp6_t b) {
+/*static void fp6_mul0_basic(fp6_t c, fp6_t a, fp6_t b) {
 	fp2_t v0, v1, v2, t0, t1, t2;
 
 	fp2_null(v0);
@@ -228,19 +228,15 @@ static void fp6_mul0_basic(fp6_t c, fp6_t a, fp6_t b) {
 		fp2_new(t1);
 		fp2_new(t2);
 
-		/* v0 = a_0b_0 */
 		fp2_mul(v0, a[0], b[0]);
 
-		/* v1 = a_1b_1 */
 		fp_mul(v1[0], a[1][0], b[1][0]);
 		fp_mul(v1[1], a[1][1], b[1][0]);
 
-		/* v2 = a_2b_2 */
 		fp_mul(v2[0], a[2][0], b[2][1]);
 		fp_mul(v2[1], a[2][1], b[2][1]);
 		fp2_mul_art(v2, v2);
 
-		/* t2 (c_0) = v0 + E((a_1 + a_2)(b_1 + b_2) - v1 - v2) */
 		fp2_add(t0, a[1], a[2]);
 		fp_copy(t1[0], b[1][0]);
 		fp_copy(t1[1], b[2][1]);
@@ -250,7 +246,6 @@ static void fp6_mul0_basic(fp6_t c, fp6_t a, fp6_t b) {
 		fp2_mul_nor(t0, t2);
 		fp2_add(t2, t0, v0);
 
-		/* c_1 = (a_0 + a_1)(b_0 + b_1) - v0 - v1 + Ev2 */
 		fp2_add(t0, a[0], a[1]);
 		fp_add(t1[0], b[0][0], b[1][0]);
 		fp_copy(t1[1], b[0][1]);
@@ -260,7 +255,6 @@ static void fp6_mul0_basic(fp6_t c, fp6_t a, fp6_t b) {
 		fp2_mul_nor(t0, v2);
 		fp2_add(c[1], c[1], t0);
 
-		/* c_2 = (a_0 + a_2)(b_0 + b_2) - v0 + v1 - v2 */
 		fp2_add(t0, a[0], a[2]);
 		fp_copy(t1[0], b[0][0]);
 		fp_add(t1[1], b[0][1], b[2][1]);
@@ -269,7 +263,6 @@ static void fp6_mul0_basic(fp6_t c, fp6_t a, fp6_t b) {
 		fp2_add(c[2], c[2], v1);
 		fp2_sub(c[2], c[2], v2);
 
-		/* c_0 = t2 */
 		fp2_copy(c[0], t2);
 	} CATCH_ANY {
 		THROW(ERR_CAUGHT);
@@ -301,20 +294,16 @@ static void fp6_mul1_basic(fp6_t c, fp6_t a, fp6_t b) {
 		fp2_new(t1);
 		fp2_new(t2);
 
-		/* v0 = a_0b_0 */
 		fp_mul(v0[0], a[0][0], b[0][0]);
 		fp_mul(v0[1], a[0][1], b[0][0]);
 
-		/* v1 = a_1b_1 */
 		fp_mul(v1[0], a[1][0], b[1][1]);
 		fp_mul(v1[1], a[1][1], b[1][1]);
 		fp2_mul_art(v1, v1);
 
-		/* v2 = a_2b_2 */
 		fp_mul(v2[0], a[2][0], b[2][0]);
 		fp_mul(v2[1], a[2][1], b[2][0]);
 
-		/* t2 (c_0) = v0 + E((a_1 + a_2)(b_1 + b_2) - v1 - v2) */
 		fp2_add(t0, a[1], a[2]);
 		fp_copy(t1[0], b[2][0]);
 		fp_copy(t1[1], b[1][1]);
@@ -324,7 +313,6 @@ static void fp6_mul1_basic(fp6_t c, fp6_t a, fp6_t b) {
 		fp2_mul_nor(t0, t2);
 		fp2_add(t2, t0, v0);
 
-		/* c_1 = (a_0 + a_1)(b_0 + b_1) - v0 - v1 + Ev2 */
 		fp2_add(t0, a[0], a[1]);
 		fp_copy(t1[0], b[0][0]);
 		fp_copy(t1[1], b[1][1]);
@@ -334,7 +322,6 @@ static void fp6_mul1_basic(fp6_t c, fp6_t a, fp6_t b) {
 		fp2_mul_nor(t0, v2);
 		fp2_add(c[1], c[1], t0);
 
-		/* c_2 = (a_0 + a_2)(b_0 + b_2) - v0 + v1 - v2 */
 		fp2_add(t0, a[0], a[2]);
 		fp_add(t1[0], b[0][0], b[2][0]);
 		fp_zero(t1[1]);
@@ -344,7 +331,6 @@ static void fp6_mul1_basic(fp6_t c, fp6_t a, fp6_t b) {
 		fp2_add(c[2], c[2], v1);
 		fp2_sub(c[2], c[2], v2);
 
-		/* c_0 = t2 */
 		fp2_copy(c[0], t2);
 	} CATCH_ANY {
 		THROW(ERR_CAUGHT);
@@ -356,7 +342,7 @@ static void fp6_mul1_basic(fp6_t c, fp6_t a, fp6_t b) {
 		fp2_free(v1);
 		fp2_free(v0);
 	}
-}
+}*/
 
 void fp18_mul_dxs_basic(fp18_t c, fp18_t a, fp18_t b) {
 #if EP_ADD == BASIC

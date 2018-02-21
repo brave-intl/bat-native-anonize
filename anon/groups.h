@@ -83,7 +83,7 @@ typedef struct _GT {
 	fp12_t g;
 } GT;
 
-void rand_int(Big& k) { 
+void rand_int(Big& k) {
 	bn_new(k.k);
 	bn_rand(k.k, BN_POS, 256);
 }
@@ -100,7 +100,7 @@ static inline void set_int(Big& k, const char* cmsg, int len) {
 }
 
 static inline void zero(Big& k) {
-	bn_new(k.k);	
+	bn_new(k.k);
 }
 
 
@@ -116,7 +116,7 @@ static inline void zero(G2& g) {
 	ep2_null(g.g);
 	fp2_zero(g.g->x);
 	fp2_zero(g.g->y);
-	fp2_zero(g.g->z);	
+	fp2_zero(g.g->z);
 	g.g->norm = 1;
 }
 
@@ -208,10 +208,10 @@ std::ostream &operator<<( std::ostream &output, const G1& G ) {
     memset(bx, 0, 1024);
     memset(by, 0, 1024);
     memset(bz, 0, 1024);
-    return output;            
+    return output;
 }
 
-std::ostream &operator<<( std::ostream &output,  const G2& G ) { 
+std::ostream &operator<<( std::ostream &output,  const G2& G ) {
 	char bx[1024];
 	ep2_t t;
 	ep2_norm(t, (ep2_st*)G.g);
@@ -229,34 +229,34 @@ std::ostream &operator<<( std::ostream &output,  const G2& G ) {
     return output;
 }
 
-std::ostream &operator<<( std::ostream &output, const Big& k ) { 
+std::ostream &operator<<( std::ostream &output, const Big& k ) {
 	char buf[1024];
 	bn_write_str(buf, 1024, k.k, 64);
     output << buf;
     memset(buf, 0, 1024);
 
-    return output;            
+    return output;
 }
 
 std::ostream &operator<<( std::ostream &output, const GT& G ) {
 	char buf[1024];
 
-	fp_write_str(buf, 1024, (dig_t*)G.g[0][0][0], 64); output << buf << " ";	
+	fp_write_str(buf, 1024, (dig_t*)G.g[0][0][0], 64); output << buf << " ";
 	fp_write_str(buf, 1024, (dig_t*)G.g[0][0][1], 64); output << buf << " ";
-	fp_write_str(buf, 1024, (dig_t*)G.g[0][1][0], 64); output << buf << " ";	
+	fp_write_str(buf, 1024, (dig_t*)G.g[0][1][0], 64); output << buf << " ";
 	fp_write_str(buf, 1024, (dig_t*)G.g[0][1][1], 64); output << buf << " ";
-	fp_write_str(buf, 1024, (dig_t*)G.g[0][2][0], 64); output << buf << " ";	
+	fp_write_str(buf, 1024, (dig_t*)G.g[0][2][0], 64); output << buf << " ";
 	fp_write_str(buf, 1024, (dig_t*)G.g[0][2][1], 64); output << buf << " ";
 
-	fp_write_str(buf, 1024, (dig_t*)G.g[1][0][0], 64); output << buf << " ";	
+	fp_write_str(buf, 1024, (dig_t*)G.g[1][0][0], 64); output << buf << " ";
 	fp_write_str(buf, 1024, (dig_t*)G.g[1][0][1], 64); output << buf << " ";
-	fp_write_str(buf, 1024, (dig_t*)G.g[1][1][0], 64); output << buf << " ";	
+	fp_write_str(buf, 1024, (dig_t*)G.g[1][1][0], 64); output << buf << " ";
 	fp_write_str(buf, 1024, (dig_t*)G.g[1][1][1], 64); output << buf << " ";
-	fp_write_str(buf, 1024, (dig_t*)G.g[1][2][0], 64); output << buf << " ";	
+	fp_write_str(buf, 1024, (dig_t*)G.g[1][2][0], 64); output << buf << " ";
 	fp_write_str(buf, 1024, (dig_t*)G.g[1][2][1], 64); output << buf;
 
-	memset(buf,0,1024);	
-    return output;            
+	memset(buf,0,1024);
+    return output;
 }
 
 
@@ -310,7 +310,7 @@ std::istream &operator>>( std::istream &input,  G1& G ) {
     return input;
 }
 
-std::istream &operator>>( std::istream &input,  G2& G ) { 
+std::istream &operator>>( std::istream &input,  G2& G ) {
 	std::string str;
 	ep2_null(G.g);
 	G.g->norm = 1;
@@ -328,10 +328,10 @@ std::istream &operator>>( std::istream &input,  G2& G ) {
 		std::cerr << "!!! input error2" << std::endl;
 	}
 
-    return input;            
+    return input;
 }
 
-std::istream &operator>>( std::istream &input,  GT& G ) { 
+std::istream &operator>>( std::istream &input,  GT& G ) {
 	std::string str;
 
 	fp12_zero(G.g);
@@ -349,7 +349,7 @@ std::istream &operator>>( std::istream &input,  GT& G ) {
 	input >> str; fp_read_str(G.g[1][2][0], str.c_str(), str.length(), 64);
 	input >> str; fp_read_str(G.g[1][2][1], str.c_str(), str.length(), 64);
 
-    return input;            
+    return input;
 }
 
 std::istream &operator>>( std::istream &input,  Big& k ) {
@@ -357,7 +357,7 @@ std::istream &operator>>( std::istream &input,  Big& k ) {
 	std::string str;
 	input >> str;
 	bn_read_str(k.k, str.c_str(), str.length(), 64);
-    return input;            
+    return input;
 }
 
 class Params {
@@ -372,7 +372,7 @@ class Params {
 
 	void print() {
 		ep_param_print();
-		std::cout << " =========== public parameters =========" << std::endl 
+		std::cout << " =========== public parameters =========" << std::endl
 			<< gg1 <<std::endl<< gg2 <<std::endl << eegg << std::endl <<
 			"========================================" << std::endl;
 	}
@@ -428,7 +428,7 @@ static inline void mult(Big& c, Big& a, Big& b) {
 	bn_mul(c.k, a.k, b.k);
 	bn_mod_basic(c.k, c.k, p.order);
 }
-	
+
 
 // y = ax + b
 static inline void eval(Big& y, Big& a, Big& x, Big& b) {
@@ -466,7 +466,7 @@ static inline void invplus(Big& y, Big& a, Big& b) {
 	bn_new(y.k);
 	// t = a+b
 	bn_add(t, a.k, b.k);
-	
+
 	bn_gcd_ext(gcd, y.k, e, t, p.order);
 	if (bn_sign(y.k)==BN_NEG) {
 		bn_add(y.k, y.k, p.order);
@@ -476,7 +476,3 @@ static inline void invplus(Big& y, Big& a, Big& b) {
 
 
 #endif
-
-
-
-

@@ -38,7 +38,7 @@ anontest: anontest.cpp libanon.a anon.h groups.h
 
 libanon.a: anon.cpp sha2.o anon.h groups.h
 	$(CC) -static $(CFLAGS) -o anon.o -c -DRELIC_LIBRARY anon.cpp $(RELIC_CFLAGS)
-	ar cr libanon.a anon.o sha2.o		
+	ar cr libanon.a anon.o sha2.o
 
 #For MR_PAIRING_BLS curve
 #   cl /O2 /GX hibe.cpp bls_pair.cpp zzn24.cpp zzn8.cpp zzn4.cpp zzn2.cpp ecn4.cpp big.cpp zzn.cpp ecn.cpp miracl.lib
@@ -47,9 +47,9 @@ clean:
 	rm *.o anonize anonize256
 
 cleanfile:
-	rm	PrivateRA.keytxt PrivateVA.keytxt PublicParameters.key RAToUsernNetworkTraffic  
+	rm	PrivateRA.keytxt PrivateVA.keytxt PublicParameters.key RAToUsernNetworkTraffic
 	rm	UserToRANetworkTraffic UserToVANetworkTraffic  VerificationRA.keytxt VerificationVA.keytxt
-		
-	
+
+
 valgrind: dev
 	valgrind --leak-check=yes ./anontest
