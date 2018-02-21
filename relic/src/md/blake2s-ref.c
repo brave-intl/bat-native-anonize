@@ -44,11 +44,11 @@ static inline int blake2s_set_lastnode( blake2s_state *S )
   return 0;
 }
 
-static inline int blake2s_clear_lastnode( blake2s_state *S )
+/*static inline int blake2s_clear_lastnode( blake2s_state *S )
 {
   S->f[1] = 0;
   return 0;
-}
+}*/
 
 /* Some helper functions, not necessarily useful */
 static inline int blake2s_set_lastblock( blake2s_state *S )
@@ -59,13 +59,13 @@ static inline int blake2s_set_lastblock( blake2s_state *S )
   return 0;
 }
 
-static inline int blake2s_clear_lastblock( blake2s_state *S )
+/*static inline int blake2s_clear_lastblock( blake2s_state *S )
 {
   if( S->last_node ) blake2s_clear_lastnode( S );
 
   S->f[0] = 0;
   return 0;
-}
+}*/
 
 static inline int blake2s_increment_counter( blake2s_state *S, const uint32_t inc )
 {
@@ -75,7 +75,7 @@ static inline int blake2s_increment_counter( blake2s_state *S, const uint32_t in
 }
 
 // Parameter-related functions
-static inline int blake2s_param_set_digest_length( blake2s_param *P, const uint8_t digest_length )
+/*static inline int blake2s_param_set_digest_length( blake2s_param *P, const uint8_t digest_length )
 {
   P->digest_length = digest_length;
   return 0;
@@ -127,7 +127,7 @@ static inline int blake2s_param_set_personal( blake2s_param *P, const uint8_t pe
 {
   memcpy( P->personal, personal, BLAKE2S_PERSONALBYTES );
   return 0;
-}
+}*/
 
 static inline int blake2s_init0( blake2s_state *S )
 {
@@ -319,7 +319,7 @@ int blake2s_final( blake2s_state *S, uint8_t *out, uint8_t outlen )
 
   for( int i = 0; i < 8; ++i ) /* Output full hash to temp buffer */
     store32( buffer + sizeof( S->h[i] ) * i, S->h[i] );
-    
+
   memcpy( out, buffer, outlen );
   return 0;
 }
@@ -379,5 +379,3 @@ int main( int argc, char **argv )
   return 0;
 }
 #endif
-
-
