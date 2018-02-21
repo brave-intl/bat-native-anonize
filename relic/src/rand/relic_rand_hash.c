@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -23,9 +23,8 @@
 /**
  * @file
  *
- * Implementation of the hash-drbg pseudo-random number generator.
+ * Implementation of the Hash_DRBG pseudo-random number generator.
  *
- * @version $Id: relic_rand.c 1522 2013-08-27 15:55:54Z dfaranha $
  * @ingroup rand
  */
 

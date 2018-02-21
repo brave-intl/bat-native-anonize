@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -26,7 +26,6 @@
  * Implementation of the low-level multiple precision integer multiplication
  * functions.
  *
- * @version $Id$
  * @ingroup bn
  */
 
@@ -46,7 +45,7 @@
  * @param[in] A				- the first digit to multiply.
  * @param[in] B				- the second digit to multiply.
  */
-#define COMBA_STEP(R2, R1, R0, A, B)										\
+#define COMBA_STEP_BN_MUL_LOW(R2, R1, R0, A, B)								\
 	dbl_t r = (dbl_t)(A) * (dbl_t)(B);										\
 	dig_t _r = (R1);														\
 	(R0) += (dig_t)(r);														\
@@ -105,7 +104,7 @@ void bn_muln_low(dig_t *c, const dig_t *a, const dig_t *b, int size) {
 		tmpa = a;
 		tmpb = b + i;
 		for (j = 0; j <= i; j++, tmpa++, tmpb--) {
-			COMBA_STEP(r2, r1, r0, *tmpa, *tmpb);
+			COMBA_STEP_BN_MUL_LOW(r2, r1, r0, *tmpa, *tmpb);
 		}
 		*c = r0;
 		r0 = r1;
@@ -116,7 +115,7 @@ void bn_muln_low(dig_t *c, const dig_t *a, const dig_t *b, int size) {
 		tmpa = a + i + 1;
 		tmpb = b + (size - 1);
 		for (j = 0; j < size - (i + 1); j++, tmpa++, tmpb--) {
-			COMBA_STEP(r2, r1, r0, *tmpa, *tmpb);
+			COMBA_STEP_BN_MUL_LOW(r2, r1, r0, *tmpa, *tmpb);
 		}
 		*c = r0;
 		r0 = r1;
@@ -138,7 +137,7 @@ void bn_muld_low(dig_t *c, const dig_t *a, int sa, const dig_t *b, int sb,
 		tmpa = a;
 		tmpb = b + i;
 		for (j = 0; j <= i; j++, tmpa++, tmpb--) {
-			COMBA_STEP(r2, r1, r0, *tmpa, *tmpb);
+			COMBA_STEP_BN_MUL_LOW(r2, r1, r0, *tmpa, *tmpb);
 		}
 		*c = r0;
 		r0 = r1;
@@ -150,7 +149,7 @@ void bn_muld_low(dig_t *c, const dig_t *a, int sa, const dig_t *b, int sb,
 		tmpa = a + ++ta;
 		tmpb = b + (sb - 1);
 		for (j = 0; j < sb; j++, tmpa++, tmpb--) {
-			COMBA_STEP(r2, r1, r0, *tmpa, *tmpb);
+			COMBA_STEP_BN_MUL_LOW(r2, r1, r0, *tmpa, *tmpb);
 		}
 		*c = r0;
 		r0 = r1;
@@ -161,7 +160,7 @@ void bn_muld_low(dig_t *c, const dig_t *a, int sa, const dig_t *b, int sb,
 		tmpa = a + ++ta;
 		tmpb = b + (sb - 1);
 		for (j = 0; j < sa - ta; j++, tmpa++, tmpb--) {
-			COMBA_STEP(r2, r1, r0, *tmpa, *tmpb);
+			COMBA_STEP_BN_MUL_LOW(r2, r1, r0, *tmpa, *tmpb);
 		}
 		*c = r0;
 		r0 = r1;

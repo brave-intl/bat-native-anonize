@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -25,7 +25,6 @@
  *
  * Implementation of the multiple precision utilities.
  *
- * @version $Id$
  * @ingroup bn
  */
 
@@ -191,6 +190,12 @@ void bn_rand(bn_t a, int sign, int bits) {
 		a->dp[a->used - 1] &= mask;
 	}
 	bn_trim(a);
+}
+
+void bn_rand_mod(bn_t a, bn_t b) {
+	do {
+		bn_rand(a, bn_sign(b), bn_bits(b));
+	} while (bn_is_zero(a) || bn_cmp_abs(a, b) != CMP_LT);
 }
 
 void bn_print(const bn_t a) {

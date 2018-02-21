@@ -3,7 +3,7 @@
 cat << PREAMBLE
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -28,7 +28,6 @@ cat << PREAMBLE
  *
  * Symbol renaming to a#undef clashes when simultaneous linking multiple builds.
  *
- * @version \$Id\$
  * @ingroup core
  */
 
@@ -89,6 +88,10 @@ REDEF pool
 REDEF test
 REDEF trace
 REDEF util
+
+echo "#undef conf_print"
+echo "#define conf_print       PREFIX(conf_print)"
+echo
 
 echo "#undef dv_t"
 echo "#define dv_t	PREFIX(dv_t)"

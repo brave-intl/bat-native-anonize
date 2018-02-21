@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -25,7 +25,6 @@
  *
  * Implementation of Hash-based Message Authentication Code.
  *
- * @version $Id$
  * @ingroup md
  */
 
@@ -42,7 +41,7 @@
 
 void md_hmac(uint8_t *mac, const uint8_t *in, int in_len, const uint8_t *key,
 		int key_len) {
-#if MD_MAP == SHONE || MD_MAP == SH224 || MD_MAP == SH256
+#if MD_MAP == SHONE || MD_MAP == SH224 || MD_MAP == SH256 || MD_MAP == BLAKE2S_160 || MD_MAP == BLAKE2S_256
 	int block_size = 64;
 #elif MD_MAP == SH384 || MD_MAP == SH512
 	int block_size = 128;

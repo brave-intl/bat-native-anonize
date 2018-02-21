@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -26,7 +26,6 @@
  * Implementation of configuration of prime elliptic curves over quadratic
  * extensions.
  *
- * @version $Id$
  * @ingroup epx
  */
 
@@ -312,6 +311,7 @@ void ep2_curve_set_twist(int type) {
 		fp_copy(ctx->ep2_b[0], b[0]);
 		fp_copy(ctx->ep2_b[1], b[1]);
 		bn_copy(&(ctx->ep2_r), r);
+		bn_set_dig(&(ctx->ep2_h), 1);
 
 		/* I don't have a better place for this. */
 		fp_prime_calc();

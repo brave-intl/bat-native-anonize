@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -25,7 +25,6 @@
  *
  * Tests for prime field arithmetic.
  *
- * @version $Id$
  * @ingroup test
  */
 
@@ -124,7 +123,9 @@ static int util(void) {
 		TEST_END;
 
 		TEST_BEGIN("assignment to zero and comparison are consistent") {
-			fp_rand(a);
+			do {
+				fp_rand(a);
+			} while (fp_is_zero(a));
 			fp_zero(c);
 			TEST_ASSERT(fp_cmp(a, c) == CMP_GT, end);
 			TEST_ASSERT(fp_cmp(c, a) == CMP_LT, end);
@@ -132,8 +133,10 @@ static int util(void) {
 		TEST_END;
 
 		TEST_BEGIN("assignment to random and comparison are consistent") {
-			fp_rand(a);
-			fp_rand(b);
+			do {
+				fp_rand(a);
+				fp_rand(b);
+			} while (fp_is_zero(a) || fp_is_zero(b));
 			fp_zero(c);
 			TEST_ASSERT(fp_cmp(a, c) == CMP_GT, end);
 			TEST_ASSERT(fp_cmp(b, c) == CMP_GT, end);
@@ -198,7 +201,6 @@ static int util(void) {
 			fp_rand(a);
 			fp_prime_back(d, a);
 			TEST_ASSERT((fp_size_str(a, 2) - 1) == bn_bits(d), end);
-			TEST_ASSERT(fp_size_bin(a) == FP_BYTES, end);
 		}
 		TEST_END;
 	}
@@ -902,7 +904,20 @@ static int exponentiation(void) {
 		bn_new(d);
 
 		TEST_BEGIN("exponentiation is correct") {
-			fp_rand(a);
+			fp_rand(a);			
+			bn_zero(d);
+			fp_exp(c, a, d);
+			TEST_ASSERT(fp_cmp_dig(c, 1) == CMP_EQ, end);
+			bn_set_dig(d, 1);
+			fp_exp(c, a, d);
+			TEST_ASSERT(fp_cmp(c, a) == CMP_EQ, end);
+			bn_rand(d, BN_POS, FP_BITS);
+			fp_exp(b, a, d);
+			bn_neg(d, d);
+			fp_exp(c, a, d);
+			fp_inv(c, c);
+			TEST_ASSERT(fp_cmp(b, c) == CMP_EQ, end);
+			d->sign = BN_POS;
 			d->used = FP_DIGS;
 			dv_copy(d->dp, fp_prime_get(), FP_DIGS);
 			fp_exp(c, a, d);

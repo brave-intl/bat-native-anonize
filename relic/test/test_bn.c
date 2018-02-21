@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -25,7 +25,6 @@
  *
  * Tests for multiple precision integer arithmetic.
  *
- * @version $Id$
  * @ingroup test
  */
 
@@ -176,6 +175,20 @@ static int util(void) {
 			}
 			TEST_ASSERT(bn_ham(a) == bits, end);
 			bits = (bits + 1) % BN_BITS;
+		}
+		TEST_END;
+
+		TEST_BEGIN("generating a random integer is consistent") {
+			bn_rand(b, BN_POS, BN_BITS);
+			bn_rand_mod(a, b);
+			TEST_ASSERT(bn_sign(a) == bn_sign(b), end);
+			TEST_ASSERT(bn_is_zero(a) == 0, end);
+			TEST_ASSERT(bn_cmp(a, b) == CMP_LT, end);
+			bn_rand(b, BN_NEG, BN_DIGIT);
+			bn_rand_mod(a, b);
+			TEST_ASSERT(bn_sign(a) == bn_sign(b), end);
+			TEST_ASSERT(bn_is_zero(a) == 0, end);
+			TEST_ASSERT(bn_cmp(a, b) == CMP_GT, end);
 		}
 		TEST_END;
 
@@ -1013,6 +1026,38 @@ static int exponentiation(void) {
 	return code;
 }
 
+static int square_root(void) {
+	int code = STS_ERR;
+	bn_t a, b, c;
+
+	bn_null(a);
+	bn_null(b);
+	bn_null(c);
+
+	TRY {
+		bn_new(a);
+		bn_new(b);
+		bn_new(c);
+
+		TEST_BEGIN("square root extraction is correct") {
+			bn_rand(a, BN_POS, BN_BITS / 2);
+			bn_sqr(c, a);
+			bn_srt(b, c);
+			TEST_ASSERT(bn_cmp(a, b) == CMP_EQ, end);
+		}
+		TEST_END;
+	}
+	CATCH_ANY {
+		ERROR(end);
+	}
+	code = STS_OK;
+  end:
+	bn_free(a);
+	bn_free(b);
+	bn_free(c);
+	return code;
+}
+
 static int gcd(void) {
 	int code = STS_ERR;
 	bn_t a, b, c, d, e, f;
@@ -1667,21 +1712,18 @@ static int recoding(void) {
 
 #if defined(WITH_EB) && defined(EB_KBLTZ) && (EB_MUL == LWNAF || EB_MUL == RWNAF || EB_FIX == LWNAF || EB_SIM == INTER || !defined(STRIP))
 		if (eb_param_set_any_kbltz() == STS_OK) {
-			eb_curve_get_vm(v1[0]);			
-			eb_curve_get_s0(v1[1]);
-			eb_curve_get_s1(v1[2]);
-			eb_curve_get_ord(v2[2]);
+			eb_curve_get_ord(v1[2]);
 			TEST_BEGIN("tnaf recoding is correct") {
 				for (w = 2; w <= 8; w++) {
-					int8_t t_w, beta[1 << (w - 2)], gama[1 << (w - 2)];
+					uint8_t t_w;
+					int8_t beta[1 << (w - 2)], gama[1 << (w - 2)];
 					int8_t tnaf[FB_BITS + 8];
 					int8_t u = (eb_curve_opt_a() == OPT_ZERO ? -1 : 1);
-					bn_rand(a, BN_POS, BN_BITS);
-					bn_mod(a, a, v2[2]);
+					bn_rand_mod(a, v1[2]);
 					l = FB_BITS + 1;
-					bn_rec_tnaf_mod(v2[0], v2[1], a, v1[0], v1[1], v1[2], u, FB_BITS);
+					bn_rec_tnaf_mod(v1[0], v1[1], a, u, FB_BITS);
 					bn_rec_tnaf_get(&t_w, beta, gama, u, w);
-					bn_rec_tnaf(tnaf, &l, a, v1[0], v1[1], v1[2], u, FB_BITS, w);
+					bn_rec_tnaf(tnaf, &l, a, u, FB_BITS, w);
 					bn_zero(a);
 					bn_zero(b);
 					for (k = l - 1; k >= 0; k--) {
@@ -1726,26 +1768,26 @@ static int recoding(void) {
 							}							
 						}
 					}
-					TEST_ASSERT(bn_cmp(a, v2[0]) == CMP_EQ, end);
-					TEST_ASSERT(bn_cmp(b, v2[1]) == CMP_EQ, end);
+					TEST_ASSERT(bn_cmp(a, v1[0]) == CMP_EQ, end);
+					TEST_ASSERT(bn_cmp(b, v1[1]) == CMP_EQ, end);
 				}
 			}
 			TEST_END;
 
 			TEST_BEGIN("regular tnaf recoding is correct") {
 				for (w = 2; w <= 8; w++) {
-					int8_t t_w, beta[1 << (w - 2)], gama[1 << (w - 2)];
+					uint8_t t_w;
+					int8_t beta[1 << (w - 2)], gama[1 << (w - 2)];
 					int8_t tnaf[FB_BITS + 8];
 					int8_t u = (eb_curve_opt_a() == OPT_ZERO ? -1 : 1);
 					int n;
 					do {
-						bn_rand(a, BN_POS, BN_BITS);
-						bn_mod(a, a, v2[2]);
+						bn_rand_mod(a, v1[2]);
 						l = FB_BITS + 1;
-						bn_rec_tnaf_mod(v2[0], v2[1], a, v1[0], v1[1], v1[2], u, FB_BITS);
-					} while (bn_is_even(v2[0]) || bn_is_even(v2[1]));
+						bn_rec_tnaf_mod(v1[0], v1[1], a, u, FB_BITS);
+					} while (bn_is_even(v1[0]) || bn_is_even(v1[1]));
 					bn_rec_tnaf_get(&t_w, beta, gama, u, w);
-					bn_rec_rtnaf(tnaf, &l, a, v1[0], v1[1], v1[2], u, FB_BITS, w);
+					bn_rec_rtnaf(tnaf, &l, a, u, FB_BITS, w);
 					bn_zero(a);
 					bn_zero(b);
 					n = 0;
@@ -1796,8 +1838,8 @@ static int recoding(void) {
 							}				
 						}
 					}
-					TEST_ASSERT(bn_cmp(a, v2[0]) == CMP_EQ, end);
-					TEST_ASSERT(bn_cmp(b, v2[1]) == CMP_EQ, end);
+					TEST_ASSERT(bn_cmp(a, v1[0]) == CMP_EQ, end);
+					TEST_ASSERT(bn_cmp(b, v1[1]) == CMP_EQ, end);
 				}
 			} TEST_END;			
 		}
@@ -1851,14 +1893,13 @@ static int recoding(void) {
 #if defined(WITH_EP) && defined(EP_ENDOM) && (EP_MUL == LWNAF || EP_FIX == COMBS || EP_FIX == LWNAF || EP_SIM == INTER || !defined(STRIP))
 		TEST_BEGIN("glv recoding is correct") {
 			if (ep_param_set_any_endom() == STS_OK) {
-				bn_rand(a, BN_POS, FP_BITS);
-				ep_curve_get_ord(b);
-				bn_mod(a, a, b);
 				ep_curve_get_v1(v1);
 				ep_curve_get_v2(v2);
+				ep_curve_get_ord(b);
+				bn_rand_mod(a, b);
 				bn_rec_glv(b, c, a, b, (const bn_t *)v1, (const bn_t *)v2);
 				ep_curve_get_ord(v2[0]);
-				/* Recover parameter lambda. */
+				/* Recover lambda parameter. */
 				bn_gcd_ext(v1[0], v2[1], NULL, v1[2], v2[0]);
 				if (bn_sign(v2[1]) == BN_NEG) {
 					bn_add(v2[1], v2[1], v2[0]);
@@ -1949,6 +1990,11 @@ int main(void) {
 	}
 
 	if (reduction() != STS_OK) {
+		core_clean();
+		return 1;
+	}
+
+	if (square_root() != STS_OK) {
 		core_clean();
 		return 1;
 	}

@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -29,7 +29,6 @@
  *
  * Interface of the module for computing hash functions.
  *
- * @version $Id$
  * @ingroup md
  */
 
@@ -47,14 +46,18 @@
 enum {
 	/** Hash length for SHA-1 function. */
 	MD_LEN_SHONE = 20,
-	/** Hash kength for SHA-224 function. */
+	/** Hash length for SHA-224 function. */
 	MD_LEN_SH224 = 28,
-	/** Hash kength for SHA-256 function. */
+	/** Hash length for SHA-256 function. */
 	MD_LEN_SH256 = 32,
-	/** Hash kength for SHA-384 function. */
+	/** Hash length for SHA-384 function. */
 	MD_LEN_SH384 = 48,
-	/** Hash kength for SHA-512 function. */
-	MD_LEN_SH512 = 64
+	/** Hash length for SHA-512 function. */
+	MD_LEN_SH512 = 64,
+	/** Hash length for BLAKE2s-160 function. */
+	MD_LEN_BLAKE2s_160 = 20,
+	/** Hash length for BLAKE2s-256 function. */
+	MD_LEN_BLAKE2s_256 = 32
 };
 
 /**
@@ -70,6 +73,10 @@ enum {
 #define MD_LEN					MD_LEN_SH384
 #elif MD_MAP == SH512
 #define MD_LEN					MD_LEN_SH512
+#elif MD_MAP == BLAKE2S_160
+#define MD_LEN					MD_LEN_BLAKE2s_160
+#elif MD_MAP == BLAKE2S_256
+#define MD_LEN					MD_LEN_BLAKE2s_256
 #endif
 
 /*============================================================================*/
@@ -94,6 +101,10 @@ enum {
 #define md_map(H, M, L)			md_map_sh384(H, M, L)
 #elif MD_MAP == SH512
 #define md_map(H, M, L)			md_map_sh512(H, M, L)
+#elif MD_MAP == BLAKE2S_160
+#define md_map(H, M, L)			md_map_blake2s_160(H, M, L)
+#elif MD_MAP == BLAKE2S_256
+#define md_map(H, M, L)			md_map_blake2s_256(H, M, L)
 #endif
 
 /*============================================================================*/
@@ -152,6 +163,24 @@ void md_map_sh384(uint8_t *hash, const uint8_t *msg, int len);
  * @param[in] len				- the message length in bytes.
  */
 void md_map_sh512(uint8_t *hash, const uint8_t *msg, int len);
+
+/**
+ * Computes the BLAKE2s-160 hash function.
+ *
+ * @param[out] hash				- the digest.
+ * @param[in] msg				- the message to hash.
+ * @param[in] len				- the message length in bytes.
+ */
+void md_map_blake2s_160(uint8_t *hash, const uint8_t *msg, int len);
+
+/**
+ * Computes the BLAKE2s-256 hash function.
+ *
+ * @param[out] hash				- the digest.
+ * @param[in] msg				- the message to hash.
+ * @param[in] len				- the message length in bytes.
+ */
+void md_map_blake2s_256(uint8_t *hash, const uint8_t *msg, int len);
 
 /**
  * Derives a key from shared secret material through the standardized KDF1

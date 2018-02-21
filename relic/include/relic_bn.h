@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -29,7 +29,6 @@
  *
  * Interface of the module for multiple precision integer arithmetic.
  *
- * @version $Id$
  * @ingroup bn
  */
 
@@ -88,12 +87,12 @@
 /**
  * Positive sign of a multiple precision integer.
  */
-#define BN_POS		(0)
+#define BN_POS		0
 
 /**
  * Negative sign of a multiple precision integer.
  */
-#define BN_NEG		(1)
+#define BN_NEG		1
 
 /*============================================================================*/
 /* Type definitions                                                           */
@@ -575,6 +574,15 @@ void bn_set_2b(bn_t a, int b);
 void bn_rand(bn_t a, int sign, int bits);
 
 /**
+ * Assigns a non-zero random value to a multiple precision integer with absolute
+ * value smaller than a given modulus.
+ *
+ * @param[out] a			- the multiple precision integer to assign.
+ * @param[in] b				- the modulus.
+ */
+void bn_rand_mod(bn_t a, bn_t b);
+
+/**
  * Prints a multiple precision integer to standard output.
  *
  * @param[in] a				- the multiple precision integer to print.
@@ -1047,6 +1055,16 @@ void bn_mxp_monty(bn_t c, const bn_t a, const bn_t b, const bn_t m);
 void bn_mxp_dig(bn_t c, const bn_t a, dig_t b, const bn_t m);
 
 /**
+ * Extracts an approximate integer square-root of a multiple precision integer.
+ *
+ * @param[out] c 			- the result.
+ * @param[in] a 			- the multiple precision integer to extract.
+ *
+ * @throw ERR_NO_VALID		- if the argument is negative.
+ */
+void bn_srt(bn_t c, bn_t a);
+
+/**
  * Computes the greatest common divisor of two multiple precision integers
  * using the standard Euclidean algorithm.
  *
@@ -1124,8 +1142,8 @@ void bn_gcd_ext_stein(bn_t c, bn_t d, bn_t e, const bn_t a, const bn_t b);
 
 /**
  * Computes the extended greatest common divisor of two multiple precision
- * halfway through the algorithm returning also two short vectors
- * v1 = (c, d), v2 = (-d, e) useful to decompose an integer k into k0, k1 such
+ * integers halfway through the algorithm. Returns also two short vectors
+ * v1 = (c, d), v2 = (-e, f) useful to decompose an integer k into k0, k1 such
  * that k = k_0 + k_1 * a (mod b).
  *
  * @param[out] c			- the first component of the first vector.
@@ -1265,7 +1283,8 @@ int bn_factor(bn_t c, const bn_t a);
 int bn_is_factor(bn_t c, const bn_t a);
 
 /**
- * Recodes an integer in window form.
+ * Recodes a positive integer in window form. If a negative integer is given
+ * instead, its absolute value is taken.
  *
  * @param[out] win			- the recoded integer.
  * @param[out] len			- the number of bytes written.
@@ -1276,7 +1295,8 @@ int bn_is_factor(bn_t c, const bn_t a);
 void bn_rec_win(uint8_t *win, int *len, const bn_t k, int w);
 
 /**
- * Recodes an integer in sliding window form.
+ * Recodes a positive integer in sliding window form. If a negative integer is
+ * given instead, its absolute value is taken.
  *
  * @param[out] win			- the recoded integer.
  * @param[out] len			- the number of bytes written.
@@ -1287,7 +1307,8 @@ void bn_rec_win(uint8_t *win, int *len, const bn_t k, int w);
 void bn_rec_slw(uint8_t *win, int *len, const bn_t k, int w);
 
 /**
- * Recodes an integer in width-w Non-Adjacent Form.
+ * Recodes a positive integer in width-w Non-Adjacent Form. If a negative
+ * integer is given instead, its absolute value is taken.
  *
  * @param[out] naf			- the recoded integer.
  * @param[out] len			- the number of bytes written.
@@ -1298,38 +1319,32 @@ void bn_rec_slw(uint8_t *win, int *len, const bn_t k, int w);
 void bn_rec_naf(int8_t *naf, int *len, const bn_t k, int w);
 
 /**
- * Recodes an integer in width-w \tau-NAF.
+ * Recodes a positive integer in width-w \tau-NAF. If a negative integer is
+ * given instead, its absolute value is taken.
  *
  * @param[out] tnaf			- the recoded integer.
  * @param[out] len			- the number of bytes written.
  * @param[in] k				- the integer to recode.
- * @param[in] vm			- the V_m curve parameter.
- * @param[in] s0			- the S_0 curve parameter.
- * @param[in] s1			- the S_1 curve parameter.
  * @param[in] u				- the u curve parameter.
  * @param[in] m				- the extension degree of the binary field.
  * @param[in] w				- the window size in bits.
  * @throw ERR_NO_BUFFER		- if the buffer capacity is insufficient.
  */
-void bn_rec_tnaf(int8_t *tnaf, int *len, const bn_t k, const bn_t vm,
-		const bn_t s0, const bn_t s1, int8_t u, int m, int w);
+void bn_rec_tnaf(int8_t *tnaf, int *len, const bn_t k, int8_t u, int m, int w);
 
 /**
- * Recodes an integer in regular fixed-length width-w \tau-NAF.
+ * Recodes a positive integer in regular fixed-length width-w \tau-NAF.
+ * If a negative integer is given instead, its absolute value is taken.
  *
  * @param[out] tnaf			- the recoded integer.
  * @param[out] len			- the number of bytes written.
  * @param[in] k				- the integer to recode.
- * @param[in] vm			- the V_m curve parameter.
- * @param[in] s0			- the S_0 curve parameter.
- * @param[in] s1			- the S_1 curve parameter.
  * @param[in] u				- the u curve parameter.
  * @param[in] m				- the extension degree of the binary field.
  * @param[in] w				- the window size in bits.
  * @throw ERR_NO_BUFFER		- if the buffer capacity is insufficient.
  */
-void bn_rec_rtnaf(int8_t *tnaf, int *len, const bn_t k, const bn_t vm,
-		const bn_t s0, const bn_t s1, int8_t u, int m, int w);
+void bn_rec_rtnaf(int8_t *tnaf, int *len, const bn_t k, int8_t u, int m, int w);
 
 /**
  * Write the constants needed for \tau-NAF recoding as a set of \alpha_u = 
@@ -1341,25 +1356,23 @@ void bn_rec_rtnaf(int8_t *tnaf, int *len, const bn_t k, const bn_t vm,
  * @param[in] u 		- the u curve parameter.
  * @param[in] w 		- the window size in bits.
  */
-void bn_rec_tnaf_get(int8_t *t, int8_t *beta, int8_t *gama, int8_t u, int w);
+void bn_rec_tnaf_get(uint8_t *t, int8_t *beta, int8_t *gama, int8_t u, int w);
 
 /**
- * Computes k partmod d = r0 + r1 * t, where d = (t^m - 1)/(t - 1).
+ * Computes the partial reduction k partmod d = r0 + r1 * t, where
+ * d = (t^m - 1)/(t - 1).
  *
  * @param[out] r0		- the first half of the result.
  * @param[out] r1		- the second half of the result.
  * @param[in] k			- the number to reduce.
- * @param[in] vm		- the V_m curve parameter.
- * @param[in] s0		- the S_0 curve parameter.
- * @param[in] s1		- the S_1 curve parameter.
  * @param[in] u			- the u curve parameter.
  * @param[in] m			- the extension degree of the binary field.
  */
-void bn_rec_tnaf_mod(bn_t r0, bn_t r1, const bn_t k, const bn_t vm,
-		const bn_t s0, const bn_t s1, int u, int m);
+void bn_rec_tnaf_mod(bn_t r0, bn_t r1, const bn_t k, int u, int m);
 
 /**
- * Recodes an integer in regular fixed-length width-w NAF.
+ * Recodes a positive integer in regular fixed-length width-w NAF. If a negative
+ * integer is given instead, its absolute value is taken.
  *
  * @param[out] naf			- the recoded integer.
  * @param[out] len			- the number of bytes written.
@@ -1371,7 +1384,8 @@ void bn_rec_tnaf_mod(bn_t r0, bn_t r1, const bn_t k, const bn_t vm,
 void bn_rec_reg(int8_t *naf, int *len, const bn_t k, int n, int w);
 
 /**
- * Recodes a pair of integers in Joint Sparse Form.
+ * Recodes of a pair of positive integers in Joint Sparse Form. If negative
+ * integers are given instead, takes their absolute value.
  *
  * @param[out] jsf			- the recoded pair of integers.
  * @param[out] len			- the number of bytes written.
@@ -1382,8 +1396,9 @@ void bn_rec_reg(int8_t *naf, int *len, const bn_t k, int n, int w);
 void bn_rec_jsf(int8_t *jsf, int *len, const bn_t k, const bn_t l);
 
 /**
- * Recodes an integer in two parts such that k = k0 + phi(k1), where
- * phi is the efficient curve endomorphism.
+ * Recodes a positive integer into two parts k0,k1 such that k = k0 + phi(k1),
+ * where phi is an efficient curve endomorphism. If a negative integer is
+ * given instead, its absolute value is taken.
  *
  * @param[out] k0			- the first part of the result.
  * @param[out] k1			- the second part of the result.

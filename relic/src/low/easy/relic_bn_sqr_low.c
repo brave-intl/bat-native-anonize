@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -26,7 +26,6 @@
  * Implementation of the multiple precision integer arithmetic multiplication
  * functions.
  *
- * @version $Id$
  * @ingroup bn
  */
 
@@ -46,7 +45,7 @@
  * @param[in] A				- the first digit to multiply.
  * @param[in] B				- the second digit to multiply.
  */
-#define COMBA_STEP(R2, R1, R0, A, B)										\
+#define COMBA_STEP_BN_SQR_LOW(R2, R1, R0, A, B)								\
 	dbl_t r = (dbl_t)(A) * (dbl_t)(B);										\
 	dbl_t s = r + r;														\
 	dig_t _r = (R1);														\
@@ -129,7 +128,7 @@ void bn_sqrn_low(dig_t *c, const dig_t *a, int size) {
 		/* Compute the number of additions in this column. */
 		j = (i + 1);
 		for (j = 0; j < (i + 1) / 2; j++, tmpa++, tmpb--) {
-			COMBA_STEP(r2, r1, r0, *tmpa, *tmpb);
+			COMBA_STEP_BN_SQR_LOW(r2, r1, r0, *tmpa, *tmpb);
 		}
 		if (!(i & 0x01)) {
 			COMBA_FINAL(r2, r1, r0, *tmpa);
@@ -145,7 +144,7 @@ void bn_sqrn_low(dig_t *c, const dig_t *a, int size) {
 
 		/* Compute the number of additions in this column. */
 		for (j = 0; j < (size - 1 - i) / 2; j++, tmpa++, tmpb--) {
-			COMBA_STEP(r2, r1, r0, *tmpa, *tmpb);
+			COMBA_STEP_BN_SQR_LOW(r2, r1, r0, *tmpa, *tmpb);
 		}
 		if (!((size - i) & 0x01)) {
 			COMBA_FINAL(r2, r1, r0, *tmpa);

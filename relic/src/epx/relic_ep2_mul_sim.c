@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -26,7 +26,6 @@
  * Implementation of simultaneous point multiplication on a prime elliptic
  * curve over a quadratic extension.
  *
- * @version $Id$
  * @ingroup epx
  */
 

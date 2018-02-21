@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -25,7 +25,6 @@
  *
  * Implementation of the multiple precision multiplication functions.
  *
- * @version $Id$
  * @ingroup bn
  */
 
@@ -175,16 +174,10 @@ static void bn_mul_karat_imp(bn_t c, const bn_t a, const bn_t b, int level) {
 /*============================================================================*/
 
 void bn_mul_dig(bn_t c, const bn_t a, dig_t b) {
-	dig_t carry;
-
-	c->used = a->used;
+	bn_grow(c, a->used + 1);
 	c->sign = a->sign;
-	carry = bn_mul1_low(c->dp, a->dp, b, a->used);
-	if (carry) {
-		bn_grow(c, a->used + 1);
-		c->dp[a->used] = carry;
-		c->used = a->used + 1;
-	}
+	c->dp[a->used] = bn_mul1_low(c->dp, a->dp, b, a->used);
+	c->used = a->used + 1;	
 	bn_trim(c);
 }
 

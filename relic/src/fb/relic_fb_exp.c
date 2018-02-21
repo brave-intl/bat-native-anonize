@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -25,7 +25,6 @@
  *
  * Implementation of prime field exponentiation functions.
  *
- * @version $Id$
  * @ingroup bn
  */
 
@@ -47,6 +46,11 @@ void fb_exp_basic(fb_t c, const fb_t a, const bn_t b) {
 	int i, l;
 	fb_t r;
 
+	if (bn_is_zero(b)) {
+		fb_set_dig(c, 1);
+		return;
+	}
+
 	fb_null(r);
 
 	TRY {
@@ -63,7 +67,11 @@ void fb_exp_basic(fb_t c, const fb_t a, const bn_t b) {
 			}
 		}
 
-		fb_copy(c, r);
+		if (bn_sign(b) == BN_NEG) {
+			fb_inv(c, r);
+		} else {
+			fb_copy(c, r);
+		}
 	}
 	CATCH_ANY {
 		THROW(ERR_CAUGHT);
@@ -84,13 +92,19 @@ void fb_exp_slide(fb_t c, const fb_t a, const bn_t b) {
 
 	fb_null(r);
 
+	if (bn_is_zero(b)) {
+		fb_set_dig(c, 1);
+		return;
+	}
+
+
 	/* Initialize table. */
 	for (i = 0; i < (1 << (FB_WIDTH - 1)); i++) {
 		fb_null(t[i]);
 	}
 
 	TRY {
-		for (i = 0; i < (1 << (FB_WIDTH - 1)); i++) {
+		for (i = 0; i < (1 << (FB_WIDTH - 1)); i ++) {
 			fb_new(t[i]);
 		}
 		fb_new(r);
@@ -104,7 +118,7 @@ void fb_exp_slide(fb_t c, const fb_t a, const bn_t b) {
 		}
 
 		fb_set_dig(r, 1);
-		l = FB_BITS +  1;
+		l = FB_BITS + 1;
 		bn_rec_slw(win, &l, b, FB_WIDTH);
 		for (i = 0; i < l; i++) {
 			if (win[i] == 0) {
@@ -117,7 +131,11 @@ void fb_exp_slide(fb_t c, const fb_t a, const bn_t b) {
 			}
 		}
 
-		fb_copy(c, r);
+		if (bn_sign(b) == BN_NEG) {
+			fb_inv(c, r);
+		} else {
+			fb_copy(c, r);
+		}
 	}
 	CATCH_ANY {
 		THROW(ERR_CAUGHT);
@@ -137,6 +155,11 @@ void fb_exp_slide(fb_t c, const fb_t a, const bn_t b) {
 void fb_exp_monty(fb_t c, const fb_t a, const bn_t b) {
 	fb_t t[2];
 
+	if (bn_is_zero(b)) {
+		fb_set_dig(c, 1);
+		return;
+	}
+
 	fb_null(t[0]);
 	fb_null(t[1]);
 
@@ -155,8 +178,11 @@ void fb_exp_monty(fb_t c, const fb_t a, const bn_t b) {
 			dv_swap_cond(t[0], t[1], FB_DIGS, j ^ 1);
 		}
 
-		fb_copy(c, t[0]);
-
+		if (bn_sign(b) == BN_NEG) {
+			fb_inv(c, t[0]);
+		} else {
+			fb_copy(c, t[0]);
+		}
 	} CATCH_ANY {
 		THROW(ERR_CAUGHT);
 	}

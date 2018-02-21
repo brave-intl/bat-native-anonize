@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -25,7 +25,6 @@
  *
  * Implementation of Benaloh's Dense Probabilistic Encryption cryptosystem.
  *
- * @version $Id$
  * @ingroup cp
  */
 
@@ -134,11 +133,7 @@ int cp_bdpe_enc(uint8_t *out, int *out_len, dig_t in, bdpe_t pub) {
 
 		bn_set_dig(m, in);
 
-		do {
-			bn_rand(u, BN_POS, bn_bits(pub->n));
-			bn_mod(u, u, pub->n);
-		} while (bn_is_zero(u));
-
+		bn_rand_mod(u, pub->n);
 		bn_mxp(m, pub->y, m, pub->n);
 		bn_mxp_dig(u, u, pub->t, pub->n);
 		bn_mul(m, m, u);

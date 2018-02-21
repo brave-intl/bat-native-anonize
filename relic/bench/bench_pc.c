@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -25,7 +25,6 @@
  *
  * Benchmarks for Pairing-Based Cryptography.
  *
- * @version $Id$
  * @ingroup bench
  */
 
@@ -196,7 +195,7 @@ static void arith1(void) {
 
 	BENCH_BEGIN("g1_mul") {
 		bn_rand(k, BN_POS, bn_bits(n));
-		bn_mod(k, k, n);
+		bn_rand_mod(k, n);
 		g1_rand(p);
 		BENCH_ADD(g1_mul(q, p, k));
 	}
@@ -204,7 +203,7 @@ static void arith1(void) {
 
 	BENCH_BEGIN("g1_mul_gen") {
 		bn_rand(k, BN_POS, bn_bits(n));
-		bn_mod(k, k, n);
+		bn_rand_mod(k, n);
 		BENCH_ADD(g1_mul_gen(q, k));
 	}
 	BENCH_END;
@@ -220,7 +219,7 @@ static void arith1(void) {
 
 	BENCH_BEGIN("g1_mul_fix") {
 		bn_rand(k, BN_POS, bn_bits(n));
-		bn_mod(k, k, n);
+		bn_rand_mod(k, n);
 		g1_mul_pre(t, p);
 		BENCH_ADD(g1_mul_fix(q, (const g1_t *)t, k));
 	}
@@ -228,9 +227,8 @@ static void arith1(void) {
 
 	BENCH_BEGIN("g1_mul_sim") {
 		bn_rand(k, BN_POS, bn_bits(n));
-		bn_mod(k, k, n);
-		bn_rand(l, BN_POS, bn_bits(n));
-		bn_mod(l, l, n);
+		bn_rand_mod(k, n);
+		bn_rand_mod(l, n);
 		g1_rand(p);
 		g1_rand(q);
 		BENCH_ADD(g1_mul_sim(r, p, k, q, l));
@@ -239,9 +237,8 @@ static void arith1(void) {
 
 	BENCH_BEGIN("g1_mul_sim_gen") {
 		bn_rand(k, BN_POS, bn_bits(n));
-		bn_mod(k, k, n);
-		bn_rand(l, BN_POS, bn_bits(n));
-		bn_mod(l, l, n);
+		bn_rand_mod(k, n);
+		bn_rand_mod(l, n);
 		g1_rand(q);
 		BENCH_ADD(g1_mul_sim_gen(r, k, q, l));
 	}
@@ -428,7 +425,7 @@ static void arith2(void) {
 
 	BENCH_BEGIN("g2_mul") {
 		bn_rand(k, BN_POS, bn_bits(n));
-		bn_mod(k, k, n);
+		bn_rand_mod(k, n);
 		g2_rand(p);
 		BENCH_ADD(g2_mul(q, p, k));
 	}
@@ -436,7 +433,7 @@ static void arith2(void) {
 
 	BENCH_BEGIN("g2_mul_gen") {
 		bn_rand(k, BN_POS, bn_bits(n));
-		bn_mod(k, k, n);
+		bn_rand_mod(k, n);
 		BENCH_ADD(g2_mul_gen(q, k));
 	}
 	BENCH_END;
@@ -452,7 +449,7 @@ static void arith2(void) {
 
 	BENCH_BEGIN("g2_mul_fix") {
 		bn_rand(k, BN_POS, bn_bits(n));
-		bn_mod(k, k, n);
+		bn_rand_mod(k, n);
 		g2_mul_pre(t, p);
 		BENCH_ADD(g2_mul_fix(q, (const g2_t *)t, k));
 	}
@@ -460,9 +457,8 @@ static void arith2(void) {
 
 	BENCH_BEGIN("g2_mul_sim") {
 		bn_rand(k, BN_POS, bn_bits(n));
-		bn_mod(k, k, n);
-		bn_rand(l, BN_POS, bn_bits(n));
-		bn_mod(l, l, n);
+		bn_rand_mod(k, n);
+		bn_rand_mod(l, n);
 		g2_rand(p);
 		g2_rand(q);
 		BENCH_ADD(g2_mul_sim(r, p, k, q, l));
@@ -471,9 +467,8 @@ static void arith2(void) {
 
 	BENCH_BEGIN("g2_mul_sim_gen") {
 		bn_rand(k, BN_POS, bn_bits(n));
-		bn_mod(k, k, n);
-		bn_rand(l, BN_POS, bn_bits(n));
-		bn_mod(l, l, n);
+		bn_rand_mod(k, n);
+		bn_rand_mod(l, n);
 		g2_rand(q);
 		BENCH_ADD(g2_mul_sim_gen(r, k, q, l));
 	}

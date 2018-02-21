@@ -29,7 +29,6 @@
  *
  * Abstractions of pairing computation useful to protocol implementors.
  *
- * @version $Id$
  * @ingroup pc
  */
 
@@ -277,7 +276,7 @@ typedef CAT(GT_LOWER, t) gt_t;
  * @param[in] P				- the element to test.
  * @return 1 if the element it the unity, 0 otherwise.
  */
-#define gt_is_unity(P)		CAT(GT_LOWER, cmp_dig)(P, 1)
+#define gt_is_unity(P)		(CAT(GT_LOWER, cmp_dig)(P, 1) == CMP_EQ)
 
 /**
  * Assigns a G_1 element to the unity.
@@ -357,6 +356,15 @@ typedef CAT(GT_LOWER, t) gt_t;
  * @return CMP_EQ if P == Q and CMP_NE if P != Q.
  */
 #define gt_cmp(P, Q)		CAT(GT_LOWER, cmp)(P, Q)
+
+/**
+ * Compares a G_T element with a digit.
+ *
+ * @param[in] P				- the G_T element.
+ * @param[in] D				- the digit.
+ * @return CMP_EQ if P == D and CMP_NE if P != D.
+ */
+#define gt_cmp_dig(P, D)	CAT(GT_LOWER, cmp_dig)(P, D)
 
 /**
  * Assigns a random value to a G_1 element.
@@ -616,6 +624,15 @@ typedef CAT(GT_LOWER, t) gt_t;
 #define g1_mul(R, P, K)		CAT(G1_LOWER, mul)(R, P, K)
 
 /**
+ * Multiplies an element from G_1 by a small integer. Computes R = kP.
+ *
+ * @param[out] R			- the result.
+ * @param[in] P				- the element to multiply.
+ * @param[in] K				- the small integer.
+ */
+#define g1_mul_dig(R, P, K)		CAT(G1_LOWER, mul_dig)(R, P, K)
+
+/**
  * Multiplies an element from G_2 by an integer. Computes R = kP.
  *
  * @param[out] R			- the result.
@@ -623,6 +640,15 @@ typedef CAT(GT_LOWER, t) gt_t;
  * @param[in] K				- the integer.
  */
 #define g2_mul(R, P, K)		CAT(G2_LOWER, mul)(R, P, K)
+
+/**
+ * Multiplies an element from G_2 by a small integer. Computes R = kP.
+ *
+ * @param[out] R			- the result.
+ * @param[in] P				- the element to multiply.
+ * @param[in] K				- the small integer.
+ */
+#define g2_mul_dig(R, P, K)		CAT(G2_LOWER, mul_dig)(R, P, K)
 
 /**
  * Powers an element from G_T. Computes R = kP.

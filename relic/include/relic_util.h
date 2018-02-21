@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -29,7 +29,6 @@
  *
  * Interface of misc utilitles.
  *
- * @version $Id$
  * @ingroup util
  */
 
@@ -129,6 +128,14 @@
 /** @{ */
 #define CAT(A, B)			_CAT(A, B)
 #define _CAT(A, B)			A ## B
+/** @} */
+
+ /**
+  * Inserts quotation marks in the macro argument.
+  */
+ /** @{ */
+#define QUOTE(A)			_QUOTE(A)
+#define _QUOTE(A)			#A
 /** @} */
 
 /**

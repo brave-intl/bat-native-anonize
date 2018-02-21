@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -25,12 +25,12 @@
  *
  * Implementation of the Miller addition functions.
  *
- * @version $Id$
  * @ingroup pp
  */
 
 #include "relic_core.h"
 #include "relic_pp.h"
+#include "relic_fp_low.h"
 #include "relic_fpx_low.h"
 #include "relic_util.h"
 
@@ -53,7 +53,6 @@ void pp_add_k2_basic(fp2_t l, ep_t r, ep_t p, ep_t q) {
 
 		ep_copy(t, r);
 		ep_add_slp_basic(r, s, r, p);
-		fp2_zero(l);
 		fp_add(l[0], t->x, q->x);
 		fp_mul(l[0], l[0], s);
 		fp_sub(l[0], t->y, l[0]);
@@ -274,6 +273,7 @@ void pp_add_k12_projc_basic(fp12_t l, ep2_t r, ep2_t q, ep_t p) {
 
 void pp_add_k2_projc_lazyr(fp2_t l, ep_t r, ep_t p, ep_t q) {
 	fp_t t0, t1, t2, t3, t4, t5;
+	dv_t u0, u1;
 
 	fp_null(t0);
 	fp_null(t1);
@@ -281,6 +281,8 @@ void pp_add_k2_projc_lazyr(fp2_t l, ep_t r, ep_t p, ep_t q) {
 	fp_null(t3);
 	fp_null(t4);
 	fp_null(t5);
+	dv_null(u0);
+	dv_null(u1);
 
 	TRY {
 		fp_new(t0);
@@ -289,6 +291,8 @@ void pp_add_k2_projc_lazyr(fp2_t l, ep_t r, ep_t p, ep_t q) {
 		fp_new(t3);
 		fp_new(t4);
 		fp_new(t5);
+		dv_new(u0);
+		dv_new(u1);
 
 		/* t0 = z1^2. */
 		fp_sqr(t0, r->z);
@@ -308,7 +312,7 @@ void pp_add_k2_projc_lazyr(fp2_t l, ep_t r, ep_t p, ep_t q) {
 
 		/* l0 = slope * (x2 + xq) - z3 * y2. */
 		fp_add(l[0], p->x, q->x);
-		fp_mul(l[0], l[0], t4);
+		fp_muln_low(u0, l[0], t4);
 
 		fp_dbl(t0, t3);
 		fp_add(t3, t0, t2);
@@ -328,8 +332,9 @@ void pp_add_k2_projc_lazyr(fp2_t l, ep_t r, ep_t p, ep_t q) {
 		fp_mul(t2, t2, t1);
 		fp_sub(t1, t5, t2);
 
-		fp_mul(t5, r->z, p->y);
-		fp_sub(l[0], l[0], t5);
+		fp_muln_low(u1, r->z, p->y);
+		fp_subc_low(u0, u0, u1);
+		fp_rdcn_low(l[0], u0);
 
 		fp_mul(l[1], r->z, q->y);
 
@@ -347,6 +352,8 @@ void pp_add_k2_projc_lazyr(fp2_t l, ep_t r, ep_t p, ep_t q) {
 		fp_free(t3);
 		fp_free(t4);
 		fp_free(t5);
+		dv_free(u0);
+		dv_free(u1);
 	}
 }
 

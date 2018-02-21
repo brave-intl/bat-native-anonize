@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -29,7 +29,6 @@
  *
  * Interface of the module for prime field arithmetic.
  *
- * @version $Id$
  * @ingroup fp
  */
 
@@ -96,6 +95,8 @@ enum {
 	PRIME_25519,
 	/** NIST 256-bit fast reduction polynomial. */
 	NIST_256,
+	/** Brainpool random 256-bit prime. */
+	BSI_256,
 	/** SECG 256-bit denser reduction prime. */
 	SECG_256,
 	/** Curve67254 382-bit prime modulus. */
@@ -673,14 +674,6 @@ void fp_read_str(fp_t a, const char *str, int len, int radix);
  * @throw ERR_NO_VALID		- if the radix is invalid.
  */
 void fp_write_str(char *str, int len, const fp_t a, int radix);
-
-/**
- * Returns the number of bytes necessary to store a prime field element.
- *
- * @param[in] a				- the prime field element.
- * @return the number of bytes.
- */
-int fp_size_bin(const fp_t a);
 
 /**
  * Reads a prime field element from a byte vector in big-endian format.

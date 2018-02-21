@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -30,7 +30,6 @@
  * Interface of the module for manipulating temporary double-precision digit
  * vectors.
  *
- * @version $Id$
  * @ingroup dv
  */
 

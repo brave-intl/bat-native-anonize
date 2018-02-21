@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -29,7 +29,6 @@
  *
  * Interface of the module for arithmetic on prime elliptic curves.
  *
- * @version $Id$
  * @ingroup ep
  */
 
@@ -57,7 +56,7 @@ enum {
 	NIST_P192,
 	/** SECG K-192 prime curve. */
 	SECG_K192,
-	/**	Curve22103 prime curve. */
+	/** Curve22103 prime curve. */
 	CURVE_22103,
 	/** NIST P-224 prime curve. */
 	NIST_P224,
@@ -71,11 +70,13 @@ enum {
 	CURVE_25519,
 	/** NIST P-256 prime curve. */
 	NIST_P256,
+	/** Brainpool P256r1 curve. */
+	BSI_P256,
 	/** SECG K-256 prime curve. */
 	SECG_K256,
 	/** Curve67254 prime curve. */
 	CURVE_67254,
-	/**	Curve383187 prime curve. */
+	/** Curve383187 prime curve. */
 	CURVE_383187,
 	/** NIST P-384 prime curve. */
 	NIST_P384,
@@ -1098,7 +1099,7 @@ void ep_pck(ep_t r, const ep_t p);
  *
  * @param[out] r			- the result.
  * @param[in] p				- the point to decompress.
- * @return if the decompression was successful
+ * @return a boolean value indicating if the decompression was successful.
  */
 int ep_upk(ep_t r, const ep_t p);
 

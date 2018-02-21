@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -25,7 +25,6 @@
  *
  * Implementation of useful configuration routines.
  *
- * @version $Id$
  * @ingroup relic
  */
 
@@ -37,6 +36,7 @@
 #include "relic_fb.h"
 #include "relic_ep.h"
 #include "relic_eb.h"
+#include "relic_ed.h"
 #include "relic_ec.h"
 #include "relic_pc.h"
 #include "relic_core.h"
@@ -63,6 +63,12 @@ void conf_print(void) {
 	util_print("** Arithmetic backend: easy\n\n");
 #elif ARITH == GMP
 	util_print("** Arithmetic backend: gmp\n\n");
+#else
+	util_print("** Arithmetic backend: " QUOTE(ARITH) "\n\n");
+#endif
+
+#ifdef LABEL
+	util_print("** Configured label: " QUOTE(LABEL) "\n\n");
 #endif
 
 #if BENCH > 1
@@ -116,6 +122,11 @@ void conf_print(void) {
 #ifdef WITH_EC
 	util_print("** Elliptic Curve Cryptography module options:\n");
 	util_print("   Arithmetic method: " EC_METHD "\n\n");
+#endif
+
+#ifdef WITH_ED
+	util_print("** Edwards Curve Cryptography module options:\n");
+	util_print("   Arithmetic method: " ED_METHD "\n\n");
 #endif
 
 #ifdef WITH_MD

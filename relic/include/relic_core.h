@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -29,7 +29,6 @@
  *
  * Interface of the library core functions.
  *
- * @version $Id$
  * @ingroup relic
  */
 
@@ -45,13 +44,14 @@
 #include "relic_bn.h"
 #include "relic_eb.h"
 #include "relic_epx.h"
+#include "relic_ed.h"
 #include "relic_conf.h"
 #include "relic_bench.h"
 #include "relic_rand.h"
 #include "relic_pool.h"
 #include "relic_label.h"
 
-#ifdef MULTI
+#if MULTI != NONE
 #include <math.h>
 
 #if MULTI == OPENMP
@@ -60,7 +60,7 @@
 #include <pthread.h>
 #endif /* OPENMP */
 
-#endif /* MULTI */
+#endif /* MULTI != NONE */
 
 /*============================================================================*/
 /* Constant definitions                                                       */
@@ -158,10 +158,10 @@ typedef struct _ctx_t {
 	int caught;
 #endif /* CHECK */
 
-#if defined(CHECK) || defined(TRACE)
+#if defined(CHECK) && defined(TRACE)
 	/** The current trace size. */
 	int trace;
-#endif /* CHECK || TRACE */
+#endif /* CHECK && TRACE */
 
 #if ALLOC == STATIC
 	/** The static pool of digit vectors. */
@@ -224,14 +224,6 @@ typedef struct _ctx_t {
 	bn_st eb_r;
 	/** The cofactor of the group order in the elliptic curve. */
 	bn_st eb_h;
-#ifdef EB_KBLTZ
-#if (EB_MUL == LWNAF || EB_MUL == RWNAF || EB_FIX == LWNAF || EB_SIM == INTER || !defined(STRIP))
-	/** Parameters required by Koblitz curves. @{ */
-	bn_st eb_vm;
-	bn_st eb_s0;
-	bn_st eb_s1;
-#endif /* EB_KBLTZ */
-#endif /* EB_MUL */
 	/** Flag that stores if the binary curve has efficient endomorphisms. */
 	int eb_is_kbltz;
 #ifdef EB_PRECO
@@ -252,7 +244,7 @@ typedef struct _ctx_t {
 	bn_st conv;
 	/** Value of constant one in Montgomery form. */
 	bn_st one;
-#endif /* FP_RDC */
+#endif /* FP_RDC == MONTY */
 	/** Prime modulus modulo 8. */
 	dig_t mod8;
 	/** Value derived from the prime used for modular reduction. */
@@ -261,10 +253,12 @@ typedef struct _ctx_t {
 	int qnr;
 	/** Cubic non-residue. */
 	int cnr;
+#if FP_RDC == QUICK || !defined(STRIP)
 	/** Sparse representation of prime modulus. */
 	int sps[MAX_TERMS + 1];
 	/** Length of sparse prime representation. */
 	int sps_len;
+#endif /* FP_RDC == QUICK */
 #endif /* WITH_FP */
 
 #ifdef WITH_EP
@@ -323,7 +317,7 @@ typedef struct _ctx_t {
 	/** The order of the group of points in the elliptic curve. */
 	bn_st ep2_r;
 	/** The cofactor of the group order in the elliptic curve. */
-	bn_st ep2_h;	
+	bn_st ep2_h;
 	/** Flag that stores if the prime curve is a twist. */
 	int ep2_is_twist;
 #ifdef EP_PRECO
@@ -337,6 +331,28 @@ typedef struct _ctx_t {
 	fp2_st _ep2_pre[3 * EP_TABLE];
 #endif /* ALLOC == STACK */
 #endif /* WITH_EPX */
+
+#ifdef WITH_ED
+	/** Identifier of the currently configured prime Twisted Edwards elliptic curve. */
+	int ed_id;
+	/** The 'a' coefficient of the Twisted Edwards elliptic curve. */
+	fp_st ed_a;
+	/** The 'd' coefficient of the Twisted Edwards elliptic curve. */
+	fp_st ed_d;
+	/** The generator of the elliptic curve. */
+	ed_st ed_g;
+	/** The order of the group of points in the elliptic curve. */
+	bn_st ed_r;
+	/** The cofactor of the Twisted Edwards elliptic curve */
+	bn_st ed_h;
+
+#ifdef ED_PRECO
+	/** Precomputation table for generator multiplication. */
+	ed_st ed_pre[ED_TABLE];
+	/** Array of pointers to the precomputation table. */
+	ed_st *ed_ptr[ED_TABLE];
+#endif /* ED_PRECO */
+#endif
 
 #ifdef WITH_PP
 	/** Constants for computing Frobenius maps in higher extensions. @{ */

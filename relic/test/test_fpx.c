@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -65,6 +65,7 @@ static int util2(void) {
 	int code = STS_ERR;
 	uint8_t bin[2 * FP_BYTES];
 	fp2_t a, b, c;
+	dig_t d;
 
 	fp2_null(a);
 	fp2_null(b);
@@ -111,7 +112,9 @@ static int util2(void) {
 		TEST_END;
 
 		TEST_BEGIN("assignment to zero and comparison are consistent") {
-			fp2_rand(a);
+			do {
+				fp2_rand(a);
+			} while (fp2_is_zero(a));
 			fp2_zero(c);
 			TEST_ASSERT(fp2_cmp(a, c) == CMP_NE, end);
 			TEST_ASSERT(fp2_cmp(c, a) == CMP_NE, end);
@@ -119,8 +122,10 @@ static int util2(void) {
 		TEST_END;
 
 		TEST_BEGIN("assignment to random and comparison are consistent") {
-			fp2_rand(a);
-			fp2_zero(c);
+			do {
+				fp2_rand(a);
+			} while (fp2_is_zero(a));			
+			fp2_rand(c);
 			TEST_ASSERT(fp2_cmp(a, c) == CMP_NE, end);
 		}
 		TEST_END;
@@ -128,6 +133,13 @@ static int util2(void) {
 		TEST_BEGIN("assignment to zero and zero test are consistent") {
 			fp2_zero(a);
 			TEST_ASSERT(fp2_is_zero(a), end);
+		}
+		TEST_END;
+
+		TEST_BEGIN("assignment to a constant and comparison are consistent") {
+			rand_bytes((uint8_t *)&d, (FP_DIGIT / 8));
+			fp2_set_dig(a, d);
+			TEST_ASSERT(fp2_cmp_dig(a, d) == CMP_EQ, end);
 		}
 		TEST_END;
 
@@ -139,7 +151,7 @@ static int util2(void) {
 			fp2_conv_uni(a, a);
 			fp2_write_bin(bin, FP_BYTES + 1, a, 1);
 			fp2_read_bin(b, bin, FP_BYTES + 1);
-			TEST_ASSERT(fp2_cmp(a, b) == CMP_EQ, end);						
+			TEST_ASSERT(fp2_cmp(a, b) == CMP_EQ, end);
 		}
 		TEST_END;
 
@@ -687,6 +699,44 @@ static int exponentiation2(void) {
 	return code;
 }
 
+static int compression2(void) {
+	int code = STS_ERR;
+	fp2_t a, b, c;
+
+	fp2_null(a);
+	fp2_null(b);
+	fp2_null(c);
+
+	TRY {
+		fp2_new(a);
+		fp2_new(b);
+		fp2_new(c);
+
+		TEST_BEGIN("compression is consistent") {
+			fp2_rand(a);
+			fp2_pck(b, a);
+			TEST_ASSERT(fp2_upk(c, b) == 1, end);
+			TEST_ASSERT(fp2_cmp(a, c) == CMP_EQ, end);
+			fp2_rand(a);
+			fp2_conv_uni(a, a);
+			fp2_pck(b, a);
+			TEST_ASSERT(fp2_upk(c, b) == 1, end);
+			TEST_ASSERT(fp2_cmp(a, c) == CMP_EQ, end);
+		} TEST_END;
+	}
+	CATCH_ANY {
+		util_print("FATAL ERROR!\n");
+		ERROR(end);
+	}
+	code = STS_OK;
+  end:
+	fp2_free(a);
+	fp2_free(b);
+	fp2_free(c);
+	return code;
+}
+
+
 static int square_root2(void) {
 	int code = STS_ERR;
 	fp2_t a, b, c;
@@ -753,6 +803,7 @@ static int util3(void) {
 	int code = STS_ERR;
 	uint8_t bin[3 * FP_BYTES];	
 	fp3_t a, b, c;
+	dig_t d;
 
 	fp3_null(a);
 	fp3_null(b);
@@ -799,7 +850,9 @@ static int util3(void) {
 		TEST_END;
 
 		TEST_BEGIN("assignment to zero and comparison are consistent") {
-			fp3_rand(a);
+			do {
+				fp3_rand(a);
+			} while (fp3_is_zero(a));
 			fp3_zero(c);
 			TEST_ASSERT(fp3_cmp(a, c) == CMP_NE, end);
 			TEST_ASSERT(fp3_cmp(c, a) == CMP_NE, end);
@@ -807,7 +860,9 @@ static int util3(void) {
 		TEST_END;
 
 		TEST_BEGIN("assignment to random and comparison are consistent") {
-			fp3_rand(a);
+			do {
+				fp3_rand(a);
+			} while (fp3_is_zero(a));
 			fp3_zero(c);
 			TEST_ASSERT(fp3_cmp(a, c) == CMP_NE, end);
 		}
@@ -818,6 +873,13 @@ static int util3(void) {
 			TEST_ASSERT(fp3_is_zero(a), end);
 		}
 		TEST_END;
+
+		TEST_BEGIN("assignment to a constant and comparison are consistent") {
+			rand_bytes((uint8_t *)&d, (FP_DIGIT / 8));
+			fp3_set_dig(a, d);
+			TEST_ASSERT(fp3_cmp_dig(a, d) == CMP_EQ, end);
+		}
+		TEST_END;		
 
 		TEST_BEGIN("reading and writing a finite field element are consistent") {
 			fp3_rand(a);
@@ -1428,6 +1490,7 @@ static int util6(void) {
 	int code = STS_ERR;
 	uint8_t bin[6 * FP_BYTES];	
 	fp6_t a, b, c;
+	dig_t d;
 
 	fp6_null(a);
 	fp6_null(b);
@@ -1474,7 +1537,9 @@ static int util6(void) {
 		TEST_END;
 
 		TEST_BEGIN("assignment to zero and comparison are consistent") {
-			fp6_rand(a);
+			do {
+				fp6_rand(a);
+			} while (fp6_is_zero(a));
 			fp6_zero(c);
 			TEST_ASSERT(fp6_cmp(a, c) == CMP_NE, end);
 			TEST_ASSERT(fp6_cmp(c, a) == CMP_NE, end);
@@ -1482,7 +1547,9 @@ static int util6(void) {
 		TEST_END;
 
 		TEST_BEGIN("assignment to random and comparison are consistent") {
-			fp6_rand(a);
+			do {
+				fp6_rand(a);
+			} while (fp6_is_zero(a));
 			fp6_zero(c);
 			TEST_ASSERT(fp6_cmp(a, c) == CMP_NE, end);
 		}
@@ -1491,6 +1558,13 @@ static int util6(void) {
 		TEST_BEGIN("assignment to zero and zero test are consistent") {
 			fp6_zero(a);
 			TEST_ASSERT(fp6_is_zero(a), end);
+		}
+		TEST_END;
+
+		TEST_BEGIN("assignment to a constant and comparison are consistent") {
+			rand_bytes((uint8_t *)&d, (FP_DIGIT / 8));
+			fp6_set_dig(a, d);
+			TEST_ASSERT(fp6_cmp_dig(a, d) == CMP_EQ, end);
 		}
 		TEST_END;
 
@@ -1935,6 +2009,7 @@ static int util12(void) {
 	int code = STS_ERR;
 	uint8_t bin[12 * FP_BYTES];	
 	fp12_t a, b, c;
+	dig_t d;
 
 	fp12_null(a);
 	fp12_null(b);
@@ -1981,7 +2056,9 @@ static int util12(void) {
 		TEST_END;
 
 		TEST_BEGIN("assignment to zero and comparison are consistent") {
-			fp12_rand(a);
+			do {
+				fp12_rand(a);
+			} while (fp12_is_zero(a));
 			fp12_zero(c);
 			TEST_ASSERT(fp12_cmp(a, c) == CMP_NE, end);
 			TEST_ASSERT(fp12_cmp(c, a) == CMP_NE, end);
@@ -1989,7 +2066,9 @@ static int util12(void) {
 		TEST_END;
 
 		TEST_BEGIN("assignment to random and comparison are consistent") {
-			fp12_rand(a);
+			do {
+				fp12_rand(a);
+			} while (fp12_is_zero(a));
 			fp12_zero(c);
 			TEST_ASSERT(fp12_cmp(a, c) == CMP_NE, end);
 		}
@@ -2000,6 +2079,13 @@ static int util12(void) {
 			TEST_ASSERT(fp12_is_zero(a), end);
 		}
 		TEST_END;
+
+		TEST_BEGIN("assignment to a constant and comparison are consistent") {
+			rand_bytes((uint8_t *)&d, (FP_DIGIT / 8));
+			fp12_set_dig(a, d);
+			TEST_ASSERT(fp12_cmp_dig(a, d) == CMP_EQ, end);
+		}
+		TEST_END;		
 
 		TEST_BEGIN("reading and writing a finite field element are consistent") {
 			fp12_rand(a);
@@ -2657,6 +2743,7 @@ static int memory18(void) {
 static int util18(void) {
 	int code = STS_ERR;
 	fp18_t a, b, c;
+	dig_t d;
 
 	fp18_null(a);
 	fp18_null(b);
@@ -2703,7 +2790,9 @@ static int util18(void) {
 		TEST_END;
 
 		TEST_BEGIN("assignment to zero and comparison are consistent") {
-			fp18_rand(a);
+			do {
+				fp18_rand(a);
+			} while (fp18_is_zero(a));
 			fp18_zero(c);
 			TEST_ASSERT(fp18_cmp(a, c) == CMP_NE, end);
 			TEST_ASSERT(fp18_cmp(c, a) == CMP_NE, end);
@@ -2711,7 +2800,9 @@ static int util18(void) {
 		TEST_END;
 
 		TEST_BEGIN("assignment to random and comparison are consistent") {
-			fp18_rand(a);
+			do {
+				fp18_rand(a);
+			} while (fp18_is_zero(a));
 			fp18_zero(c);
 			TEST_ASSERT(fp18_cmp(a, c) == CMP_NE, end);
 		}
@@ -2723,6 +2814,12 @@ static int util18(void) {
 		}
 		TEST_END;
 
+		TEST_BEGIN("assignment to a constant and comparison are consistent") {
+			rand_bytes((uint8_t *)&d, (FP_DIGIT / 8));
+			fp18_set_dig(a, d);
+			TEST_ASSERT(fp18_cmp_dig(a, d) == CMP_EQ, end);
+		}
+		TEST_END;
 	}
 	CATCH_ANY {
 		ERROR(end);
@@ -3277,6 +3374,11 @@ int main(void) {
 		}
 
 		if (exponentiation2() != STS_OK) {
+			core_clean();
+			return 1;
+		}
+
+		if (compression2() != STS_OK) {
 			core_clean();
 			return 1;
 		}

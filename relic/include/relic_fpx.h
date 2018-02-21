@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -29,7 +29,6 @@
  *
  * Interface of the module for extension field arithmetic over prime fields.
  *
- * @version $Id$
  * @ingroup fpx
  */
 
@@ -1016,6 +1015,24 @@ void fp3_write_bin(uint8_t *bin, int len, fp3_t a);
 int fp3_cmp(fp3_t a, fp3_t b);
 
 /**
+ * Returns the result of a signed comparison between a cubic extension field
+ * element and a digit.
+ *
+ * @param[in] a				- the cubic extension field element.
+ * @param[in] b				- the digit.
+ * @return CMP_LT if a < b, CMP_EQ if a == b and CMP_GT if a > b.
+ */
+int fp3_cmp_dig(fp3_t a, dig_t b);
+
+/**
+ * Assigns a cubic extension field element to a digit.
+ *
+ * @param[in] a				- the cubic extension field element.
+ * @param[in] b				- the digit.
+ */
+void fp3_set_dig(fp3_t a, dig_t b);
+
+/**
  * Adds two cubic extension field elements using basic arithmetic.
  *
  * @param[out] c			- the result.
@@ -1276,6 +1293,24 @@ void fp6_write_bin(uint8_t *bin, int len, fp6_t a);
  * @return CMP_LT if a < b, CMP_EQ if a == b and CMP_GT if a > b.
  */
 int fp6_cmp(fp6_t a, fp6_t b);
+
+/**
+ * Returns the result of a signed comparison between a sextic extension field
+ * element and a digit.
+ *
+ * @param[in] a				- the sextic extension field element.
+ * @param[in] b				- the digit.
+ * @return CMP_LT if a < b, CMP_EQ if a == b and CMP_GT if a > b.
+ */
+int fp6_cmp_dig(fp6_t a, dig_t b);
+
+/**
+ * Assigns a sextic extension field element to a digit.
+ *
+ * @param[in] a				- the sextic extension field element.
+ * @param[in] b				- the digit.
+ */
+void fp6_set_dig(fp6_t a, dig_t b);
 
 /**
  * Adds two sextic extension field elements. Computes c = a + b.

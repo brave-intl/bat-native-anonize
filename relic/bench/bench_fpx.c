@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -25,7 +25,6 @@
  *
  * Benchmarks for extensions of prime fields
  *
- * @version $Id$
  * @ingroup bench
  */
 
@@ -87,15 +86,20 @@ static void util2(void) {
 	}
 	BENCH_END;
 
-	BENCH_BEGIN("fp2_rand") {
-		BENCH_ADD(fp2_rand(a));
+	BENCH_BEGIN("fp2_set_dig (1)") {
+		fp2_rand(a);
+		BENCH_ADD(fp2_set_dig(a, 1));
 	}
 	BENCH_END;
 
-	BENCH_BEGIN("fp2_cmp") {
+	BENCH_BEGIN("fp2_set_dig") {
 		fp2_rand(a);
-		fp2_rand(b);
-		BENCH_ADD(fp2_cmp(b, a));
+		BENCH_ADD(fp2_set_dig(a, a[0][0]));
+	}
+	BENCH_END;
+
+	BENCH_BEGIN("fp2_rand") {
+		BENCH_ADD(fp2_rand(a));
 	}
 	BENCH_END;
 
@@ -141,6 +145,19 @@ static void util2(void) {
 		l = fp2_size_bin(a, 1);
 		fp2_write_bin(bin, l, a, 1);
 		BENCH_ADD(fp2_read_bin(a, bin, l));
+	}
+	BENCH_END;
+
+	BENCH_BEGIN("fp2_cmp") {
+		fp2_rand(a);
+		fp2_rand(b);
+		BENCH_ADD(fp2_cmp(b, a));
+	}
+	BENCH_END;
+
+	BENCH_BEGIN("fp2_cmp_dig") {
+		fp2_rand(a);
+		BENCH_ADD(fp2_cmp_dig(a, (dig_t)0));
 	}
 	BENCH_END;
 
@@ -306,6 +323,13 @@ static void arith2(void) {
 	BENCH_END;
 #endif
 
+	BENCH_BEGIN("fp2_test_uni") {
+		fp2_rand(a);
+		fp2_conv_uni(a, a);
+		BENCH_ADD(fp2_test_uni(a));
+	}
+	BENCH_END;
+
 	BENCH_BEGIN("fp2_conv_uni") {
 		fp2_rand(a);
 		BENCH_ADD(fp2_conv_uni(c, a));
@@ -377,6 +401,21 @@ static void arith2(void) {
 	}
 	BENCH_END;
 
+	BENCH_BEGIN("fp2_pck") {
+		fp2_rand(a);
+		fp2_conv_uni(a, a);
+		BENCH_ADD(fp2_pck(c, a));
+	}
+	BENCH_END;
+
+	BENCH_BEGIN("fp2_upk") {
+		fp2_rand(a);
+		fp2_conv_uni(a, a);
+		fp2_pck(a, a);
+		BENCH_ADD(fp2_upk(c, a));
+	}
+	BENCH_END;
+
 	fp2_free(a);
 	fp2_free(b);
 	fp2_free(c);
@@ -437,15 +476,20 @@ static void util3(void) {
 	}
 	BENCH_END;
 
-	BENCH_BEGIN("fp3_rand") {
-		BENCH_ADD(fp3_rand(a));
+	BENCH_BEGIN("fp3_set_dig (1)") {
+		fp3_rand(a);
+		BENCH_ADD(fp3_set_dig(a, 1));
 	}
 	BENCH_END;
 
-	BENCH_BEGIN("fp3_cmp") {
+	BENCH_BEGIN("fp3_set_dig") {
 		fp3_rand(a);
-		fp3_rand(b);
-		BENCH_ADD(fp3_cmp(b, a));
+		BENCH_ADD(fp3_set_dig(a, a[0][0]));
+	}
+	BENCH_END;
+
+	BENCH_BEGIN("fp3_rand") {
+		BENCH_ADD(fp3_rand(a));
 	}
 	BENCH_END;
 
@@ -465,6 +509,19 @@ static void util3(void) {
 		fp3_rand(a);
 		fp3_write_bin(bin, sizeof(bin), a);
 		BENCH_ADD(fp3_read_bin(a, bin, sizeof(bin)));
+	}
+	BENCH_END;
+
+	BENCH_BEGIN("fp3_cmp") {
+		fp3_rand(a);
+		fp3_rand(b);
+		BENCH_ADD(fp3_cmp(b, a));
+	}
+	BENCH_END;
+
+	BENCH_BEGIN("fp3_cmp_dig") {
+		fp3_rand(a);
+		BENCH_ADD(fp3_cmp_dig(a, (dig_t)0));
 	}
 	BENCH_END;
 
@@ -755,15 +812,20 @@ static void util6(void) {
 	}
 	BENCH_END;
 
-	BENCH_BEGIN("fp6_rand") {
-		BENCH_ADD(fp6_rand(a));
+	BENCH_BEGIN("fp6_set_dig (1)") {
+		fp6_rand(a);
+		BENCH_ADD(fp6_set_dig(a, 1));
 	}
 	BENCH_END;
 
-	BENCH_BEGIN("fp6_cmp") {
+	BENCH_BEGIN("fp6_set_dig") {
 		fp6_rand(a);
-		fp6_rand(b);
-		BENCH_ADD(fp6_cmp(b, a));
+		BENCH_ADD(fp6_set_dig(a, a[0][0][0]));
+	}
+	BENCH_END;
+
+	BENCH_BEGIN("fp6_rand") {
+		BENCH_ADD(fp6_rand(a));
 	}
 	BENCH_END;
 
@@ -784,7 +846,20 @@ static void util6(void) {
 		fp6_write_bin(bin, sizeof(bin), a);
 		BENCH_ADD(fp6_read_bin(a, bin, sizeof(bin)));
 	}
-	BENCH_END;	
+	BENCH_END;
+
+	BENCH_BEGIN("fp6_cmp") {
+		fp6_rand(a);
+		fp6_rand(b);
+		BENCH_ADD(fp6_cmp(b, a));
+	}
+	BENCH_END;
+
+	BENCH_BEGIN("fp6_cmp_dig") {
+		fp6_rand(a);
+		BENCH_ADD(fp6_cmp_dig(a, (dig_t)0));
+	}
+	BENCH_END;
 
 	fp6_free(a);
 	fp6_free(b);
@@ -955,15 +1030,20 @@ static void util12(void) {
 	}
 	BENCH_END;
 
-	BENCH_BEGIN("fp12_rand") {
-		BENCH_ADD(fp12_rand(a));
+	BENCH_BEGIN("fp12_set_dig (1)") {
+		fp12_rand(a);
+		BENCH_ADD(fp12_set_dig(a, 1));
 	}
 	BENCH_END;
 
-	BENCH_BEGIN("fp12_cmp") {
+	BENCH_BEGIN("fp12_set_dig") {
 		fp12_rand(a);
-		fp12_rand(b);
-		BENCH_ADD(fp12_cmp(b, a));
+		BENCH_ADD(fp12_set_dig(a, a[0][0][0][0]));
+	}
+	BENCH_END;
+
+	BENCH_BEGIN("fp12_rand") {
+		BENCH_ADD(fp12_rand(a));
 	}
 	BENCH_END;
 
@@ -1004,6 +1084,19 @@ static void util12(void) {
 		fp12_rand(a);
 		fp12_write_bin(bin, 8 * FP_BYTES, a, 1);
 		BENCH_ADD(fp12_read_bin(a, bin, sizeof(bin)));
+	}
+	BENCH_END;
+
+	BENCH_BEGIN("fp12_cmp") {
+		fp12_rand(a);
+		fp12_rand(b);
+		BENCH_ADD(fp12_cmp(b, a));
+	}
+	BENCH_END;
+
+	BENCH_BEGIN("fp12_cmp_dig") {
+		fp12_rand(a);
+		BENCH_ADD(fp12_cmp_dig(a, (dig_t)0));
 	}
 	BENCH_END;	
 
@@ -1243,12 +1336,6 @@ static void arith12(void) {
 
 	BENCH_BEGIN("fp12_pck") {
 		fp12_rand(a);
-		BENCH_ADD(fp12_pck(c, a));
-	}
-	BENCH_END;
-
-	BENCH_BEGIN("fp12_pck (cyc)") {
-		fp12_rand(a);
 		fp12_conv_cyc(a, a);
 		BENCH_ADD(fp12_pck(c, a));
 	}
@@ -1256,13 +1343,8 @@ static void arith12(void) {
 
 	BENCH_BEGIN("fp12_upk") {
 		fp12_rand(a);
-		BENCH_ADD(fp12_upk(c, a));
-	}
-	BENCH_END;
-
-	BENCH_BEGIN("fp12_upk (cyc)") {
-		fp12_rand(a);
 		fp12_conv_cyc(a, a);
+		fp12_pck(a, a);
 		BENCH_ADD(fp12_upk(c, a));
 	}
 	BENCH_END;
@@ -1326,6 +1408,18 @@ static void util18(void) {
 	}
 	BENCH_END;
 
+	BENCH_BEGIN("fp18_set_dig (1)") {
+		fp18_rand(a);
+		BENCH_ADD(fp18_set_dig(a, 1));
+	}
+	BENCH_END;
+
+	BENCH_BEGIN("fp18_set_dig") {
+		fp18_rand(a);
+		BENCH_ADD(fp18_set_dig(a, a[0][0][0][0]));
+	}
+	BENCH_END;
+
 	BENCH_BEGIN("fp18_rand") {
 		BENCH_ADD(fp18_rand(a));
 	}
@@ -1335,6 +1429,12 @@ static void util18(void) {
 		fp18_rand(a);
 		fp18_rand(b);
 		BENCH_ADD(fp18_cmp(b, a));
+	}
+	BENCH_END;
+
+	BENCH_BEGIN("fp18_cmp_dig") {
+		fp18_rand(a);
+		BENCH_ADD(fp18_cmp_dig(a, (dig_t)0));
 	}
 	BENCH_END;
 

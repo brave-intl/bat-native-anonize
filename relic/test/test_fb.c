@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -25,7 +25,6 @@
  *
  * Tests for binary field arithmetic.
  *
- * @version $Id$
  * @ingroup test
  */
 
@@ -989,7 +988,19 @@ static int exponentiation(void) {
 		bn_new(d);
 
 		TEST_BEGIN("exponentiation is correct") {
-			fb_rand(a);
+			fb_rand(a);			
+			bn_zero(d);
+			fb_exp(c, a, d);
+			TEST_ASSERT(fb_cmp_dig(c, 1) == CMP_EQ, end);
+			bn_set_dig(d, 1);
+			fb_exp(c, a, d);
+			TEST_ASSERT(fb_cmp(c, a) == CMP_EQ, end);
+			bn_rand(d, BN_POS, FB_BITS);
+			fb_exp(b, a, d);
+			bn_neg(d, d);
+			fb_exp(c, a, d);
+			fb_inv(c, c);
+			TEST_ASSERT(fb_cmp(b, c) == CMP_EQ, end);
 			bn_set_2b(d, FB_BITS);
 			fb_exp(c, a, d);
 			TEST_ASSERT(fb_cmp(a, c) == CMP_EQ, end);

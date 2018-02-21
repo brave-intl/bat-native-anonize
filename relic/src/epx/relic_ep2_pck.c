@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -26,7 +26,6 @@
  * Implementation of point compression on prime elliptic curves over quadratic
  * extensions.
  *
- * @version $Id: relic_ep_pck.c 1669 2013-12-28 03:20:53Z dfaranha $
  * @ingroup ep
  */
 

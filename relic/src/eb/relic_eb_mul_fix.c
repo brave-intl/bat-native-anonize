@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -25,7 +25,6 @@
  *
  * Implementation of fixed point multiplication on binary elliptic curves.
  *
- * @version $Id$
  * @ingroup eb
  */
 
@@ -50,57 +49,47 @@
  * @param[in] k					- the integer.
  */
 static void eb_mul_fix_kbltz(eb_t r, const eb_t *t, const bn_t k) {
-	int l, i, n;
-	int8_t u, tnaf[FB_BITS + 8], *_k;
-	bn_t vm, s0, s1;
+	int i, l, n;
+	int8_t u, tnaf[FB_BITS + 8];
 
-	bn_null(vm);
-	bn_null(s0);
-	bn_null(s1);
-
-	TRY {
-		bn_new(vm);
-		bn_new(s0);
-		bn_new(s1);
-
-		/* Compute the w-TNAF representation of k. */
-		if (eb_curve_opt_a() == OPT_ZERO) {
-			u = -1;
-		} else {
-			u = 1;
-		}
-
-		eb_curve_get_vm(vm);
-		eb_curve_get_s0(s0);
-		eb_curve_get_s1(s1);
-
-		/* Compute the w-TNAF representation of k. */
-		l = FB_BITS + 8;
-		bn_rec_tnaf(tnaf, &l, k, vm, s0, s1, u, FB_BITS, EB_DEPTH);
-
-		_k = tnaf + l - 1;
+	if (bn_is_zero(k)) {
 		eb_set_infty(r);
-		for (i = l - 1; i >= 0; i--, _k--) {
-			eb_frb(r, r);
+		return;
+	}
 
-			n = *_k;
-			if (n > 0) {
-				eb_add(r, r, t[n / 2]);
-			}
-			if (n < 0) {
-				eb_sub(r, r, t[-n / 2]);
-			}
+	/* Compute the w-TNAF representation of k. */
+	if (eb_curve_opt_a() == OPT_ZERO) {
+		u = -1;
+	} else {
+		u = 1;
+	}
+
+	/* Compute the w-TNAF representation of k. */
+	l = sizeof(tnaf);
+	bn_rec_tnaf(tnaf, &l, k, u, FB_BITS, EB_DEPTH);
+
+	n = tnaf[l - 1];
+	if (n > 0) {
+		eb_copy(r, t[n / 2]);
+	} else {
+		eb_neg(r, t[-n / 2]);
+	}
+
+	for (i = l - 2; i >= 0; i--) {
+		eb_frb(r, r);
+
+		n = tnaf[i];
+		if (n > 0) {
+			eb_add(r, r, t[n / 2]);
 		}
-		/* Convert r to affine coordinates. */
-		eb_norm(r, r);
+		if (n < 0) {
+			eb_sub(r, r, t[-n / 2]);
+		}
 	}
-	CATCH_ANY {
-		THROW(ERR_CAUGHT);
-	}
-	FINALLY {
-		bn_free(vm);
-		bn_free(s0);
-		bn_free(s1);
+	/* Convert r to affine coordinates. */
+	eb_norm(r, r);
+	if (bn_sign(k) == BN_NEG) {
+		eb_neg(r, r);
 	}
 }
 
@@ -118,18 +107,26 @@ static void eb_mul_fix_kbltz(eb_t r, const eb_t *t, const bn_t k) {
  */
 static void eb_mul_fix_plain(eb_t r, const eb_t *t, const bn_t k) {
 	int l, i, n;
-	int8_t naf[FB_BITS + 1], *_k;
+	int8_t naf[FB_BITS + 1];
+
+	if (bn_is_zero(k)) {
+		eb_set_infty(r);
+		return;
+	}
 
 	/* Compute the w-TNAF representation of k. */
 	l = FB_BITS + 1;
 	bn_rec_naf(naf, &l, k, EB_DEPTH);
 
-	_k = naf + l - 1;
-	eb_set_infty(r);
-	for (i = l - 1; i >= 0; i--, _k--) {
+	n = naf[l - 1];
+	if (n > 0) {
+		eb_copy(r, t[n / 2]);
+	}
+
+	for (i = l - 2; i >= 0; i--) {
 		eb_dbl(r, r);
 
-		n = *_k;
+		n = naf[i];
 		if (n > 0) {
 			eb_add(r, r, t[n / 2]);
 		}
@@ -139,6 +136,9 @@ static void eb_mul_fix_plain(eb_t r, const eb_t *t, const bn_t k) {
 	}
 	/* Convert r to affine coordinates. */
 	eb_norm(r, r);
+	if (bn_sign(k) == BN_NEG) {
+		eb_neg(r, r);
+	}
 }
 
 #endif /* EB_PLAIN */
@@ -177,18 +177,21 @@ void eb_mul_pre_basic(eb_t *t, const eb_t p) {
 }
 
 void eb_mul_fix_basic(eb_t r, const eb_t *t, const bn_t k) {
-	int i, l;
-
-	l = bn_bits(k);
+	if (bn_is_zero(k)) {
+		eb_set_infty(r);
+		return;
+	}
 
 	eb_set_infty(r);
-
-	for (i = 0; i < l; i++) {
+	for (int i = 0; i < bn_bits(k); i++) {
 		if (bn_get_bit(k, i)) {
 			eb_add(r, r, t[i]);
 		}
 	}
 	eb_norm(r, r);
+	if (bn_sign(k) == BN_NEG) {
+		eb_neg(r, r);
+	}
 }
 
 #endif
@@ -205,8 +208,7 @@ void eb_mul_pre_yaowi(eb_t *t, const eb_t p) {
 		bn_new(n);
 
 		eb_curve_get_ord(n);
-		l = bn_bits(n);
-		l = ((l % EB_DEPTH) == 0 ? (l / EB_DEPTH) : (l / EB_DEPTH) + 1);
+		l = CEIL(bn_bits(n), EB_DEPTH);
 
 		eb_copy(t[0], p);
 		for (int i = 1; i < l; i++) {
@@ -227,14 +229,14 @@ void eb_mul_pre_yaowi(eb_t *t, const eb_t p) {
 void eb_mul_fix_yaowi(eb_t r, const eb_t *t, const bn_t k) {
 	int i, j, l;
 	eb_t a;
-	uint8_t win[CEIL(FB_BITS, EP_DEPTH)];
-
-	eb_null(a);
+	uint8_t win[CEIL(FB_BITS, EB_DEPTH)];
 
 	if (bn_is_zero(k)) {
 		eb_set_infty(r);
 		return;
 	}
+
+	eb_null(a);
 
 	TRY {
 		eb_new(a);
@@ -242,7 +244,7 @@ void eb_mul_fix_yaowi(eb_t r, const eb_t *t, const bn_t k) {
 		eb_set_infty(r);
 		eb_set_infty(a);
 
-		l = CEIL(FB_BITS, EP_DEPTH);
+		l = CEIL(FB_BITS, EB_DEPTH);
 		bn_rec_win(win, &l, k, EB_DEPTH);
 
 		for (j = (1 << EB_DEPTH) - 1; j >= 1; j--) {
@@ -254,6 +256,9 @@ void eb_mul_fix_yaowi(eb_t r, const eb_t *t, const bn_t k) {
 			eb_add(r, r, a);
 		}
 		eb_norm(r, r);
+		if (bn_sign(k) == BN_NEG) {
+			eb_neg(r, r);
+		}
 	}
 	CATCH_ANY {
 		THROW(ERR_CAUGHT);
@@ -277,8 +282,7 @@ void eb_mul_pre_nafwi(eb_t *t, const eb_t p) {
 		bn_new(n);
 
 		eb_curve_get_ord(n);
-		l = bn_bits(n) + 1;
-		l = ((l % EB_DEPTH) == 0 ? (l / EB_DEPTH) : (l / EB_DEPTH) + 1);
+		l = CEIL(bn_bits(n) + 1, EB_DEPTH);
 
 		eb_copy(t[0], p);
 		for (int i = 1; i < l; i++) {
@@ -304,6 +308,11 @@ void eb_mul_fix_nafwi(eb_t r, const eb_t *t, const bn_t k) {
 	int8_t naf[FB_BITS + 1];
 	char w;
 
+	if (bn_is_zero(k)) {
+		eb_set_infty(r);
+		return;
+	}
+
 	eb_null(a);
 
 	TRY {
@@ -312,10 +321,9 @@ void eb_mul_fix_nafwi(eb_t r, const eb_t *t, const bn_t k) {
 		eb_set_infty(r);
 		eb_set_infty(a);
 
-		l = FB_BITS + 1;
+		l = sizeof(naf);
 		bn_rec_naf(naf, &l, k, 2);
-
-		d = ((l % EB_DEPTH) == 0 ? (l / EB_DEPTH) : (l / EB_DEPTH) + 1);
+		d = CEIL(l, EB_DEPTH);
 
 		for (i = 0; i < d; i++) {
 			w = 0;
@@ -346,6 +354,9 @@ void eb_mul_fix_nafwi(eb_t r, const eb_t *t, const bn_t k) {
 			eb_add(r, r, a);
 		}
 		eb_norm(r, r);
+		if (bn_sign(k) == BN_NEG) {
+			eb_neg(r, r);
+		}
 	}
 	CATCH_ANY {
 		THROW(ERR_CAUGHT);
@@ -369,8 +380,7 @@ void eb_mul_pre_combs(eb_t *t, const eb_t p) {
 		bn_new(ord);
 
 		eb_curve_get_ord(ord);
-		l = bn_bits(ord);
-		l = ((l % EB_DEPTH) == 0 ? (l / EB_DEPTH) : (l / EB_DEPTH) + 1);
+		l = CEIL(bn_bits(ord), EB_DEPTH);
 
 		eb_set_infty(t[0]);
 
@@ -402,17 +412,20 @@ void eb_mul_fix_combs(eb_t r, const eb_t *t, const bn_t k) {
 	int i, j, l, w, n, p0, p1;
 	bn_t ord;
 
+	if (bn_is_zero(k)) {
+		eb_set_infty(r);
+		return;
+	}
+
 	bn_null(ord);
 
 	TRY {
 		bn_new(ord);
 
 		eb_curve_get_ord(ord);
-		l = bn_bits(ord);
-		l = ((l % EB_DEPTH) == 0 ? (l / EB_DEPTH) : (l / EB_DEPTH) + 1);
+		l = CEIL(bn_bits(ord), EB_DEPTH);
 
 		n = bn_bits(k);
-
 		p0 = (EB_DEPTH) * l - 1;
 
 		w = 0;
@@ -441,6 +454,9 @@ void eb_mul_fix_combs(eb_t r, const eb_t *t, const bn_t k) {
 			}
 		}
 		eb_norm(r, r);
+		if (bn_sign(k) == BN_NEG) {
+			eb_neg(r, r);
+		}
 	}
 	CATCH_ANY {
 		THROW(ERR_CAUGHT);
@@ -455,17 +471,16 @@ void eb_mul_fix_combs(eb_t r, const eb_t *t, const bn_t k) {
 #if EB_FIX == COMBD || !defined(STRIP)
 
 void eb_mul_pre_combd(eb_t *t, const eb_t p) {
+	int i, j, d, e;
 	bn_t n;
 
 	bn_null(n);
 
 	TRY {
-		int i, j, d, e;
 		bn_new(n);
 
 		eb_curve_get_ord(n);
-		d = bn_bits(n);
-		d = ((d % EB_DEPTH) == 0 ? (d / EB_DEPTH) : (d / EB_DEPTH) + 1);
+		d = CEIL(bn_bits(n), EB_DEPTH);
 		e = (d % 2 == 0 ? (d / 2) : (d / 2) + 1);
 
 		eb_set_infty(t[0]);
@@ -503,6 +518,11 @@ void eb_mul_fix_combd(eb_t r, const eb_t *t, const bn_t k) {
 	int i, j, d, e, w0, w1, n0, p0, p1;
 	bn_t n;
 
+	if (bn_is_zero(k)) {
+		eb_set_infty(r);
+		return;
+	}
+
 	bn_null(n);
 
 	TRY {
@@ -510,8 +530,7 @@ void eb_mul_fix_combd(eb_t r, const eb_t *t, const bn_t k) {
 
 		eb_curve_get_ord(n);
 
-		d = bn_bits(n);
-		d = ((d % EB_DEPTH) == 0 ? (d / EB_DEPTH) : (d / EB_DEPTH) + 1);
+		d = CEIL(bn_bits(n), EB_DEPTH);
 		e = (d % 2 == 0 ? (d / 2) : (d / 2) + 1);
 
 		eb_set_infty(r);
@@ -543,6 +562,9 @@ void eb_mul_fix_combd(eb_t r, const eb_t *t, const bn_t k) {
 			eb_add(r, r, t[(1 << EB_DEPTH) + w1]);
 		}
 		eb_norm(r, r);
+		if (bn_sign(k) == BN_NEG) {
+			eb_neg(r, r);
+		}
 	}
 	CATCH_ANY {
 		THROW(ERR_CAUGHT);

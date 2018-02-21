@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -25,7 +25,6 @@
  *
  * Implementation of the prime field modulus manipulation.
  *
- * @version $Id$
  * @ingroup fp
  */
 
@@ -41,6 +40,15 @@
  * Cofactor description of 1536-bit prime modulus.
  */
 #define SS_P1536	"83093742908D4D529CEF06C72191A05D5E6073FE861E637D7747C3E52FBB92DAA5DDF3EF1C61F5F70B256802481A36CAFE995FE33CD54014B846751364C0D3B8327D9E45366EA08F1B3446AC23C9D4B656886731A8D05618CFA1A3B202A2445ABA0E77C5F4F00CA1239975A05377084F256DEAA07D21C4CF2A4279BC117603ACB7B10228C3AB8F8C1742D674395701BB02071A88683041D9C4231E8EE982B8DA"
+#endif
+
+#if FP_PRIME == 256
+
+/**
+ * Random prime modulus for the Brainpool P256r1.
+ */
+#define BSI_P256		"A9FB57DBA1EEA9BC3E660A909D838D726E3BF623D52620282013481D1F6E5377"
+
 #endif
 
 /*============================================================================*/
@@ -434,6 +442,10 @@ void fp_param_set(int param) {
 				f[4] = 256;
 				fp_prime_set_pmers(f, 5);
 				break;
+			case BSI_256:
+				bn_read_str(p, BSI_P256, strlen(BSI_P256), 16);
+				fp_prime_set_dense(p);
+				break;
 			case SECG_256:
 				/* p = 2^256 - 2^32 - 2^9 - 2^8 - 2^7 - 2^6 - 2^4 - 1. */
 				f[0] = -1;
@@ -595,8 +607,7 @@ void fp_param_set(int param) {
 				break;
 #else
 			default:
-				bn_gen_prime(p, FP_BITS);
-				fp_prime_set_dense(p);
+				fp_param_set_any_dense();
 				core_get()->fp_id = 0;
 				break;
 #endif
@@ -663,25 +674,31 @@ int fp_param_set_any(void) {
 }
 
 int fp_param_set_any_dense() {
-	bn_t modulus;
+	bn_t p;
 	int result = STS_OK;
 
-	bn_null(modulus);
+	bn_null(p);
 
 	TRY {
-		bn_new(modulus);
-		bn_gen_prime(modulus, FP_BITS);
-		if (!bn_is_prime(modulus)) {
+		bn_new(p);
+#ifdef FP_QNRES
+		do {
+			bn_gen_prime(p, FP_BITS);
+		} while ((p->dp[0] & 0x7) != 3);
+#else		
+		bn_gen_prime(p, FP_BITS);
+#endif
+		if (!bn_is_prime(p)) {
 			result = STS_ERR;
 		} else {
-			fp_prime_set_dense(modulus);
+			fp_prime_set_dense(p);
 		}
 	}
 	CATCH_ANY {
 		THROW(ERR_CAUGHT);
 	}
 	FINALLY {
-		bn_free(modulus);
+		bn_free(p);
 	}
 	return result;
 }

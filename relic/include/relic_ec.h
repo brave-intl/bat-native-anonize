@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -29,7 +29,6 @@
  *
  * Abstractions of elliptic curve arithmetic useful to protocol implementors.
  *
- * @version $Id$
  * @ingroup ec
  */
 
@@ -38,6 +37,7 @@
 
 #include "relic_ep.h"
 #include "relic_eb.h"
+#include "relic_ed.h"
 #include "relic_bn.h"
 #include "relic_util.h"
 #include "relic_conf.h"
@@ -54,6 +54,8 @@
 #define EC_LOWER			ep_
 #elif EC_CUR == CHAR2
 #define EC_LOWER			eb_
+#elif EC_CUR == EDWARD
+#define EC_LOWER      		ed_
 #endif
 
 /**
@@ -63,6 +65,8 @@
 #define EC_UPPER			EP_
 #elif EC_CUR == CHAR2
 #define EC_UPPER			EB_
+#elif EC_CUR == EDWARD
+#define EC_UPPER      		ED_
 #endif
 
 /**
@@ -72,6 +76,8 @@
 #define EC_TABLE			EP_TABLE
 #elif EC_CUR == CHAR2
 #define EC_TABLE			EB_TABLE
+#elif EC_CUR == EDWARD
+#define EC_TABLE			ED_TABLE
 #endif
 
 /**
@@ -81,6 +87,8 @@
 #define FC_DIGS				FP_DIGS
 #elif EC_CUR == CHAR2
 #define FC_DIGS				FB_DIGS
+#elif EC_CUR == EDWARD
+#define FC_DIGS				FP_DIGS
 #endif
 
 /**
@@ -90,6 +98,8 @@
 #define FC_BITS				FP_BITS
 #elif EC_CUR == CHAR2
 #define FC_BITS				FB_BITS
+#elif EC_CUR == EDWARD
+#define FC_BITS				FP_BITS
 #endif
 
 /**
@@ -99,6 +109,8 @@
 #define FC_BYTES			FP_BYTES
 #elif EC_CUR == CHAR2
 #define FC_BYTES			FB_BYTES
+#elif EC_CUR == EDWARD
+#define FC_BYTES 			FP_BYTES
 #endif
 
 /*============================================================================*/
@@ -179,6 +191,8 @@ typedef CAT(EC_LOWER, t) ec_t;
 #else
 #define ec_param_set_any()	eb_param_set_any()
 #endif
+#elif EC_CUR == EDWARD
+#define ec_param_set_any()  ed_param_set_any()
 #endif
 
 /**

@@ -27,7 +27,6 @@
  *
  * Implementation of low-level prime field multiplication.
  *
- * @version $Id$
  * @ingroup fp
  */
 
@@ -341,7 +340,7 @@
 	addq %rax,\R1
 	adcq %rdx,\R2
 
-        xorq \R0,\R0	
+    xorq \R0,\R0	
 	movq \A3,%rax
 	mulq \B2
 	addq %rax,\R1

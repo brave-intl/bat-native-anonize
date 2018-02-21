@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -25,7 +25,6 @@
  *
  * Implementation of Paillier's Homomorphic Probabilistic Encryption.
  *
- * @version $Id$
  * @ingroup cp
  */
 
@@ -102,10 +101,7 @@ int cp_phpe_enc(uint8_t *out, int *out_len, uint8_t *in, int in_len, bn_t n) {
 		bn_read_bin(m, in, in_len);
 
 		/* Generate r in Z_n^*. */
-		do {
-			bn_rand(r, BN_POS, bn_bits(n));
-			bn_mod(r, r, n);
-		} while (bn_is_zero(r));
+		bn_rand_mod(r, n);
 
 		/* Compute c = (g^m)(r^n) mod n^2. */
 		bn_add_dig(g, n, 1);

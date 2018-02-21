@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -29,7 +29,6 @@
  *
  * Interface of the module for arithmetic on binary elliptic curves.
  *
- * @version $Id$
  * @ingroup eb
  */
 
@@ -475,27 +474,6 @@ void eb_curve_get_ord(bn_t n);
 void eb_curve_get_cof(bn_t h);
 
 /**
- * Returns the parameter Vm of a Koblitz curve.
- *
- * @param[out] vm			- the returned parameter.
- */
-void eb_curve_get_vm(bn_t vm);
-
-/**
- * Returns the parameter S0 of a Koblitz curve.
- *
- * @param[out] s0			- the returned parameter.
- */
-void eb_curve_get_s0(bn_t s0);
-
-/**
- * Returns the parameter S1 of a Koblitz curve.
- *
- * @param[out] s1			- the returned parameter.
- */
-void eb_curve_get_s1(bn_t s1);
-
-/**
  * Configures an ordinary binary elliptic curve by its coefficients and
  * generator.
  *
@@ -764,7 +742,7 @@ void eb_mul_basic(eb_t r, const eb_t p, const bn_t k);
 
 /**
  * Multiplies a binary elliptic point by an integer using the constant-time
- * López-Dahab point multiplication method.
+ * Lopez-Dahab point multiplication method.
  *
  * @param[out] r			- the result.
  * @param[in] p				- the point to multiply.

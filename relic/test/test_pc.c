@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -25,7 +25,6 @@
  *
  * Tests for the Pairing-Based Cryptography module.
  *
- * @version $Id$
  * @ingroup test
  */
 
@@ -340,8 +339,7 @@ static int multiplication1(void) {
 		} TEST_END;
 
 		TEST_BEGIN("generator multiplication is correct") {
-			bn_rand(k, BN_POS, bn_bits(n));
-			bn_mod(k, k, n);
+			bn_rand_mod(k, n);
 			g1_mul(q, p, k);
 			g1_mul_gen(r, k);
 			TEST_ASSERT(g1_cmp(q, r) == CMP_EQ, end);
@@ -397,8 +395,7 @@ static int fixed1(void) {
 			g1_new(t[i]);
 		}
 		TEST_BEGIN("fixed point multiplication is correct") {
-			bn_rand(k, BN_POS, bn_bits(n));
-			bn_mod(k, k, n);
+			bn_rand_mod(k, n);
 			g1_mul(q, p, k);
 			g1_mul_pre(t, p);
 			g1_mul_fix(q, (const g1_t *)t, k);
@@ -449,10 +446,8 @@ static int simultaneous1(void) {
 		g1_get_ord(n);
 
 		TEST_BEGIN("simultaneous point multiplication is correct") {
-			bn_rand(k, BN_POS, bn_bits(n));
-			bn_mod(k, k, n);
-			bn_rand(l, BN_POS, bn_bits(n));
-			bn_mod(l, l, n);
+			bn_rand_mod(k, n);
+			bn_rand_mod(l, n);
 			g1_mul(q, p, k);
 			g1_mul(s, q, l);
 			g1_mul_sim(r, p, k, q, l);
@@ -462,10 +457,8 @@ static int simultaneous1(void) {
 		} TEST_END;
 
 		TEST_BEGIN("simultaneous multiplication with generator is correct") {
-			bn_rand(k, BN_POS, bn_bits(n));
-			bn_mod(k, k, n);
-			bn_rand(l, BN_POS, bn_bits(n));
-			bn_mod(l, l, n);
+			bn_rand_mod(k, n);
+			bn_rand_mod(l, n);
 			g1_mul_sim(r, p, k, q, l);
 			g1_get_gen(s);
 			g1_mul_sim(q, s, k, q, l);
@@ -828,8 +821,7 @@ static int multiplication2(void) {
 		} TEST_END;
 
 		TEST_BEGIN("generator multiplication is correct") {
-			bn_rand(k, BN_POS, bn_bits(n));
-			bn_mod(k, k, n);
+			bn_rand_mod(k, n);
 			g2_mul(q, p, k);
 			g2_mul_gen(r, k);
 			TEST_ASSERT(g2_cmp(q, r) == CMP_EQ, end);
@@ -885,8 +877,7 @@ static int fixed2(void) {
 			g2_new(t[i]);
 		}
 		TEST_BEGIN("fixed point multiplication is correct") {
-			bn_rand(k, BN_POS, bn_bits(n));
-			bn_mod(k, k, n);
+			bn_rand_mod(k, n);
 			g2_mul(q, p, k);
 			g2_mul_pre(t, p);
 			g2_mul_fix(q, t, k);
@@ -937,10 +928,8 @@ static int simultaneous2(void) {
 		g2_get_ord(n);
 
 		TEST_BEGIN("simultaneous point multiplication is correct") {
-			bn_rand(k, BN_POS, bn_bits(n));
-			bn_mod(k, k, n);
-			bn_rand(l, BN_POS, bn_bits(n));
-			bn_mod(l, l, n);
+			bn_rand_mod(k, n);
+			bn_rand_mod(l, n);
 			g2_mul(q, p, k);
 			g2_mul(s, q, l);
 			g2_mul_sim(r, p, k, q, l);
@@ -950,10 +939,8 @@ static int simultaneous2(void) {
 		} TEST_END;
 
 		TEST_BEGIN("simultaneous multiplication with generator is correct") {
-			bn_rand(k, BN_POS, bn_bits(n));
-			bn_mod(k, k, n);
-			bn_rand(l, BN_POS, bn_bits(n));
-			bn_mod(l, l, n);
+			bn_rand_mod(k, n);
+			bn_rand_mod(l, n);
 			g2_mul_sim_gen(r, k, q, l);
 			g2_get_gen(s);
 			g2_mul_sim(q, s, k, q, l);
@@ -1088,7 +1075,7 @@ int util(void) {
 		}
 		TEST_END;
 
-		TEST_BEGIN("assignment to infinity and infinity test are consistent") {
+		TEST_BEGIN("assignment to unity and unity test are consistent") {
 			gt_set_unity(a);
 			TEST_ASSERT(gt_is_unity(a), end);
 		}
@@ -1269,16 +1256,15 @@ int exponentiation(void) {
 static int pairing(void) {
 	int code = STS_ERR;
 	gt_t e1, e2;
-	g1_t p, q;
-	g2_t r, s;
+	g1_t p;
+	g2_t q, r;
 	bn_t k, n;
 
 	gt_null(e1);
 	gt_null(e2);
 	g1_null(p);
-	g1_null(q);
+	g2_null(q);
 	g2_null(r);
-	g2_null(s);
 	bn_null(k);
 	bn_null(n);
 
@@ -1286,31 +1272,46 @@ static int pairing(void) {
 		gt_new(e1);
 		gt_new(e2);
 		g1_new(p);
-		g1_new(q);
+		g2_new(q);
 		g2_new(r);
-		g2_new(s);
 		bn_new(k);
 		bn_new(n);
 
 		g1_get_ord(n);
 
-		TEST_BEGIN("pairing is not degenerate") {
+		TEST_BEGIN("pairing non-degeneracy is correct") {
 			g1_rand(p);
 			g2_rand(r);
 			pc_map(e1, p, r);
-			gt_set_unity(e2);
-			TEST_ASSERT(gt_cmp(e1, e2) != CMP_EQ, end);
+			TEST_ASSERT(gt_cmp_dig(e1, 1) != CMP_EQ, end);
+			g1_set_infty(p);
+			pc_map(e1, p, r);
+			TEST_ASSERT(gt_cmp_dig(e1, 1) == CMP_EQ, end);
+			g1_rand(p);
+			g2_set_infty(r);
+			pc_map(e1, p, r);
+			TEST_ASSERT(gt_cmp_dig(e1, 1) == CMP_EQ, end);
 		} TEST_END;
 
 		TEST_BEGIN("pairing is bilinear") {
 			g1_rand(p);
-			g2_rand(r);
-			bn_rand(k, BN_POS, bn_bits(n));
-			bn_mod(k, k, n);
-			g1_mul(q, p, k);
-			pc_map(e1, q, r);
-			g2_mul(s, r, k);
-			pc_map(e2, p, s);
+			g2_rand(q);
+			bn_rand_mod(k, n);
+			g2_mul(r, q, k);
+			pc_map(e1, p, r);
+			pc_map(e2, p, q);
+			gt_exp(e2, e2, k);
+			TEST_ASSERT(gt_cmp(e1, e2) == CMP_EQ, end);
+			g1_mul(p, p, k);
+			pc_map(e2, p, q);
+			TEST_ASSERT(gt_cmp(e1, e2) == CMP_EQ, end);
+			g1_dbl(p, p);
+			pc_map(e2, p, q);
+			gt_sqr(e1, e1);
+			TEST_ASSERT(gt_cmp(e1, e2) == CMP_EQ, end);
+			g2_dbl(q, q);
+			pc_map(e2, p, q);
+			gt_sqr(e1, e1);
 			TEST_ASSERT(gt_cmp(e1, e2) == CMP_EQ, end);
 		} TEST_END;
 	}
@@ -1323,9 +1324,8 @@ static int pairing(void) {
 	gt_free(e1);
 	gt_free(e2);
 	g1_free(p);
-	g1_free(q);
+	g2_free(q);
 	g2_free(r);
-	g2_free(s);
 	bn_free(k);
 	bn_free(n);
 	return code;

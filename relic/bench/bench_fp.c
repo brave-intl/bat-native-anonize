@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -25,7 +25,6 @@
  *
  * Benchmarks for prime field arithmetic.
  *
- * @version $Id$
  * @ingroup bench
  */
 
@@ -135,12 +134,6 @@ static void util(void) {
 	}
 	BENCH_END;
 
-	BENCH_BEGIN("fp_size_bin") {
-		fp_rand(a);
-		BENCH_ADD(fp_size_bin(a));
-	}
-	BENCH_END;
-
 	BENCH_BEGIN("fp_write_bin") {
 		fp_rand(a);
 		BENCH_ADD(fp_write_bin(bin, sizeof(bin), a));
@@ -154,16 +147,16 @@ static void util(void) {
 	}
 	BENCH_END;
 
-	BENCH_BEGIN("fp_cmp_dig") {
-		fp_rand(a);
-		BENCH_ADD(fp_cmp_dig(a, (dig_t)0));
-	}
-	BENCH_END;
-
 	BENCH_BEGIN("fp_cmp") {
 		fp_rand(a);
 		fp_rand(b);
 		BENCH_ADD(fp_cmp(b, a));
+	}
+	BENCH_END;
+
+	BENCH_BEGIN("fp_cmp_dig") {
+		fp_rand(a);
+		BENCH_ADD(fp_cmp_dig(a, (dig_t)0));
 	}
 	BENCH_END;
 

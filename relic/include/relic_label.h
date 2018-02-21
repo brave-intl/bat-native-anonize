@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -25,7 +25,6 @@
  *
  * Symbol renaming to a#undef clashes when simultaneous linking multiple builds.
  *
- * @version $Id$
  * @ingroup core
  */
 
@@ -141,6 +140,9 @@
 #define util_printf 	PREFIX(util_printf)
 #define util_print_dig 	PREFIX(util_print_dig)
 
+#undef conf_print
+#define conf_print       PREFIX(conf_print)
+
 #undef dv_t
 #define dv_t	PREFIX(dv_t)
 
@@ -192,6 +194,7 @@
 #undef bn_set_dig
 #undef bn_set_2b
 #undef bn_rand
+#undef bn_rand_mod
 #undef bn_print
 #undef bn_size_str
 #undef bn_read_str
@@ -240,6 +243,7 @@
 #undef bn_mxp_slide
 #undef bn_mxp_monty
 #undef bn_mxp_dig
+#undef bn_srt
 #undef bn_gcd_basic
 #undef bn_gcd_lehme
 #undef bn_gcd_stein
@@ -292,6 +296,7 @@
 #define bn_set_dig 	PREFIX(bn_set_dig)
 #define bn_set_2b 	PREFIX(bn_set_2b)
 #define bn_rand 	PREFIX(bn_rand)
+#define bn_rand_mod 	PREFIX(bn_rand_mod)
 #define bn_print 	PREFIX(bn_print)
 #define bn_size_str 	PREFIX(bn_size_str)
 #define bn_read_str 	PREFIX(bn_read_str)
@@ -340,6 +345,7 @@
 #define bn_mxp_slide 	PREFIX(bn_mxp_slide)
 #define bn_mxp_monty 	PREFIX(bn_mxp_monty)
 #define bn_mxp_dig 	PREFIX(bn_mxp_dig)
+#define bn_srt 	PREFIX(bn_srt)
 #define bn_gcd_basic 	PREFIX(bn_gcd_basic)
 #define bn_gcd_lehme 	PREFIX(bn_gcd_lehme)
 #define bn_gcd_stein 	PREFIX(bn_gcd_stein)
@@ -460,7 +466,6 @@
 #undef fp_size_str
 #undef fp_read_str
 #undef fp_write_str
-#undef fp_size_bin
 #undef fp_read_bin
 #undef fp_write_bin
 #undef fp_cmp
@@ -541,7 +546,6 @@
 #define fp_size_str 	PREFIX(fp_size_str)
 #define fp_read_str 	PREFIX(fp_read_str)
 #define fp_write_str 	PREFIX(fp_write_str)
-#define fp_size_bin 	PREFIX(fp_size_bin)
 #define fp_read_bin 	PREFIX(fp_read_bin)
 #define fp_write_bin 	PREFIX(fp_write_bin)
 #define fp_cmp 	PREFIX(fp_cmp)
@@ -686,7 +690,6 @@
 #undef fb_size_str
 #undef fb_read_str
 #undef fb_write_str
-#undef fb_size_bin
 #undef fb_read_bin
 #undef fb_write_bin
 #undef fb_cmp
@@ -762,7 +765,6 @@
 #define fb_size_str 	PREFIX(fb_size_str)
 #define fb_read_str 	PREFIX(fb_read_str)
 #define fb_write_str 	PREFIX(fb_write_str)
-#define fb_size_bin 	PREFIX(fb_size_bin)
 #define fb_read_bin 	PREFIX(fb_read_bin)
 #define fb_write_bin 	PREFIX(fb_write_bin)
 #define fb_cmp 	PREFIX(fb_cmp)
@@ -1042,9 +1044,6 @@
 #undef eb_curve_get_tab
 #undef eb_curve_get_ord
 #undef eb_curve_get_cof
-#undef eb_curve_get_vm
-#undef eb_curve_get_s0
-#undef eb_curve_get_s1
 #undef eb_curve_set
 #undef eb_param_set
 #undef eb_param_set_any
@@ -1117,9 +1116,6 @@
 #define eb_curve_get_tab 	PREFIX(eb_curve_get_tab)
 #define eb_curve_get_ord 	PREFIX(eb_curve_get_ord)
 #define eb_curve_get_cof 	PREFIX(eb_curve_get_cof)
-#define eb_curve_get_vm 	PREFIX(eb_curve_get_vm)
-#define eb_curve_get_s0 	PREFIX(eb_curve_get_s0)
-#define eb_curve_get_s1 	PREFIX(eb_curve_get_s1)
 #define eb_curve_set 	PREFIX(eb_curve_set)
 #define eb_param_set 	PREFIX(eb_param_set)
 #define eb_param_set_any 	PREFIX(eb_param_set_any)
@@ -1443,6 +1439,8 @@
 #undef fp3_read_bin
 #undef fp3_write_bin
 #undef fp3_cmp
+#undef fp3_cmp_dig
+#undef fp3_set_dig
 #undef fp3_add_basic
 #undef fp3_add_integ
 #undef fp3_sub_basic
@@ -1473,6 +1471,8 @@
 #define fp3_read_bin 	PREFIX(fp3_read_bin)
 #define fp3_write_bin 	PREFIX(fp3_write_bin)
 #define fp3_cmp 	PREFIX(fp3_cmp)
+#define fp3_cmp_dig 	PREFIX(fp3_cmp_dig)
+#define fp3_set_dig 	PREFIX(fp3_set_dig)
 #define fp3_add_basic 	PREFIX(fp3_add_basic)
 #define fp3_add_integ 	PREFIX(fp3_add_integ)
 #define fp3_sub_basic 	PREFIX(fp3_sub_basic)
@@ -1529,6 +1529,8 @@
 #undef fp6_read_bin
 #undef fp6_write_bin
 #undef fp6_cmp
+#undef fp6_cmp_dig
+#undef fp6_set_dig
 #undef fp6_add
 #undef fp6_sub
 #undef fp6_neg
@@ -1554,6 +1556,8 @@
 #define fp6_read_bin 	PREFIX(fp6_read_bin)
 #define fp6_write_bin 	PREFIX(fp6_write_bin)
 #define fp6_cmp 	PREFIX(fp6_cmp)
+#define fp6_cmp_dig 	PREFIX(fp6_cmp_dig)
+#define fp6_set_dig 	PREFIX(fp6_set_dig)
 #define fp6_add 	PREFIX(fp6_add)
 #define fp6_sub 	PREFIX(fp6_sub)
 #define fp6_neg 	PREFIX(fp6_neg)
@@ -1715,32 +1719,14 @@
 #undef fb2_sqr
 #undef fb2_slv
 #undef fb2_inv
-#undef fb4_inv
 
 #define fb2_mul 	PREFIX(fb2_mul)
  #define fb2_mul_nor 	PREFIX(fb2_mul_nor)
 #define fb2_sqr 	PREFIX(fb2_sqr)
 #define fb2_slv 	PREFIX(fb2_slv)
 #define fb2_inv 	PREFIX(fb2_inv)
-#define fb4_inv 	PREFIX(fb4_inv)
 
-#undef fb4_mul
-#undef fb4_mul_dxd
-#undef fb4_mul_dxs
-#undef fb4_mul_sxs
-#undef fb4_sqr
-#undef fb4_inv
-#undef fb4_exp
-#undef fb4_frb
 
-#define fb4_mul 	PREFIX(fb4_mul)
-#define fb4_mul_dxd 	PREFIX(fb4_mul_dxd)
-#define fb4_mul_dxs 	PREFIX(fb4_mul_dxs)
-#define fb4_mul_sxs 	PREFIX(fb4_mul_sxs)
-#define fb4_sqr 	PREFIX(fb4_sqr)
-#define fb4_inv 	PREFIX(fb4_inv)
-#define fb4_exp 	PREFIX(fb4_exp)
-#define fb4_frb 	PREFIX(fb4_frb)
 
 #undef pp_map_init
 #undef pp_map_clean
@@ -1836,12 +1822,28 @@
 #undef cp_sokaka_gen
 #undef cp_sokaka_gen_prv
 #undef cp_sokaka_key
+#undef cp_ibe_gen
+#undef cp_bgn_gen
+#undef cp_bgn_enc1
+#undef cp_bgn_dec1
+#undef cp_bgn_enc2
+#undef cp_bgn_dec2
+#undef cp_bgn_add
+#undef cp_bgn_mul
+#undef cp_bgn_dec
+#undef cp_ibe_gen_prv
+#undef cp_ibe_enc
+#undef cp_ibe_dec
 #undef cp_bls_gen
 #undef cp_bls_sig
 #undef cp_bls_ver
 #undef cp_bbs_gen
 #undef cp_bbs_sig
 #undef cp_bbs_ver
+#undef cp_vbnn_ibs_kgc_gen
+#undef cp_vbnn_ibs_kgc_extract_key
+#undef cp_vbnn_ibs_user_sign
+#undef cp_vbnn_ibs_user_verify
 
 #define cp_rsa_gen_basic 	PREFIX(cp_rsa_gen_basic)
 #define cp_rsa_gen_quick 	PREFIX(cp_rsa_gen_quick)
@@ -1876,12 +1878,28 @@
 #define cp_sokaka_gen 	PREFIX(cp_sokaka_gen)
 #define cp_sokaka_gen_prv 	PREFIX(cp_sokaka_gen_prv)
 #define cp_sokaka_key 	PREFIX(cp_sokaka_key)
+#define cp_ibe_gen 	PREFIX(cp_ibe_gen)
+#define cp_bgn_gen 	PREFIX(cp_bgn_gen)
+#define cp_bgn_enc1 	PREFIX(cp_bgn_enc1)
+#define cp_bgn_dec1 	PREFIX(cp_bgn_dec1)
+#define cp_bgn_enc2 	PREFIX(cp_bgn_enc2)
+#define cp_bgn_dec2 	PREFIX(cp_bgn_dec2)
+#define cp_bgn_add 	PREFIX(cp_bgn_add)
+#define cp_bgn_mul 	PREFIX(cp_bgn_mul)
+#define cp_bgn_dec 	PREFIX(cp_bgn_dec)
+#define cp_ibe_gen_prv 	PREFIX(cp_ibe_gen_prv)
+#define cp_ibe_enc 	PREFIX(cp_ibe_enc)
+#define cp_ibe_dec 	PREFIX(cp_ibe_dec)
 #define cp_bls_gen 	PREFIX(cp_bls_gen)
 #define cp_bls_sig 	PREFIX(cp_bls_sig)
 #define cp_bls_ver 	PREFIX(cp_bls_ver)
 #define cp_bbs_gen 	PREFIX(cp_bbs_gen)
 #define cp_bbs_sig 	PREFIX(cp_bbs_sig)
 #define cp_bbs_ver 	PREFIX(cp_bbs_ver)
+#define cp_vbnn_ibs_kgc_gen 	PREFIX(cp_vbnn_ibs_kgc_gen)
+#define cp_vbnn_ibs_kgc_extract_key 	PREFIX(cp_vbnn_ibs_kgc_extract_key)
+#define cp_vbnn_ibs_user_sign 	PREFIX(cp_vbnn_ibs_user_sign)
+#define cp_vbnn_ibs_user_verify 	PREFIX(cp_vbnn_ibs_user_verify)
 
 #endif /* LABEL */
 

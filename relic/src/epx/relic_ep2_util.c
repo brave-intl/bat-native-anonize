@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -26,7 +26,6 @@
  * Implementation of utilities for prime elliptic curves over quadratic
  * extensions.
  *
- * @version $Id$
  * @ingroup epx
  */
 
@@ -84,8 +83,7 @@ void ep2_rand(ep2_t p) {
 
 		ep2_curve_get_ord(n);
 
-		bn_rand(k, BN_POS, bn_bits(n));
-		bn_mod(k, k, n);
+		bn_rand_mod(k, n);
 
 		ep2_curve_get_gen(gen);
 		ep2_mul(p, gen, k);
@@ -275,7 +273,7 @@ void ep2_write_bin(uint8_t *bin, int len, ep2_t a, int pack) {
 		ep2_norm(t, a);
 
 		if (pack) {
-			if (len != 2 * FP_BYTES + 1) {
+			if (len < 2 * FP_BYTES + 1) {
 				THROW(ERR_NO_BUFFER);	
 			} else {
 				ep2_pck(t, t);
@@ -283,7 +281,7 @@ void ep2_write_bin(uint8_t *bin, int len, ep2_t a, int pack) {
 				fp2_write_bin(bin + 1, 2 * FP_BYTES, t->x, 0);
 			}
 		} else {
-			if (len != 4 * FP_BYTES + 1) {
+			if (len < 4 * FP_BYTES + 1) {
 				THROW(ERR_NO_BUFFER);
 			} else {
 				bin[0] = 4;

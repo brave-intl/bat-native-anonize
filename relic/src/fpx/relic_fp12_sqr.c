@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -80,7 +80,7 @@ static void fp4_mul_unr(dv2_t e, dv2_t f, fp2_t a, fp2_t b, fp2_t c, fp2_t d) {
 	}
 }
 
-void fp4_sqr_unr(dv2_t c, dv2_t d, fp2_t a, fp2_t b) {
+static void fp4_sqr_unr(dv2_t c, dv2_t d, fp2_t a, fp2_t b) {
 	fp2_t t;
 	dv2_t u0, u1;
 

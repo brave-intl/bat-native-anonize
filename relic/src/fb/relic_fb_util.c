@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -25,7 +25,6 @@
  *
  * Implementation of the basic functions to manipulate binary field elements.
  *
- * @version $Id$
  * @ingroup fb
  */
 
@@ -288,10 +287,6 @@ void fb_write_str(char *str, int len, const fb_t a, int radix) {
 	FINALLY {
 		fb_free(t);
 	}
-}
-
-int fb_size_bin(const fb_t a) {
-	return FB_BYTES;
 }
 
 void fb_read_bin(fb_t a, const uint8_t *bin, int len) {

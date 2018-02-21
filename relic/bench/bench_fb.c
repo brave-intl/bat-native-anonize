@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -25,7 +25,6 @@
  *
  * Benchmarks for binary field arithmetic.
  *
- * @version $Id$
  * @ingroup bench
  */
 
@@ -133,12 +132,6 @@ static void util(void) {
 		fb_rand(a);
 		fb_write_str(str, sizeof(str), a, 16);
 		BENCH_ADD(fb_read_str(a, str, sizeof(str), 16));
-	}
-	BENCH_END;
-
-	BENCH_BEGIN("fb_size_bin") {
-		fb_rand(a);
-		BENCH_ADD(fb_size_bin(a));
 	}
 	BENCH_END;
 

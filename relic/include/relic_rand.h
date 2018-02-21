@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -29,7 +29,6 @@
  *
  * Interface of the module for pseudo-random number generation.
  *
- * @version $Id$
  * @ingroup rand
  */
 
@@ -47,7 +46,7 @@
  */
 #if RAND == HASH
 
-#if MD_MAP == SHONE || MD_MAP == SH224 || MD_MAP == SH256
+#if MD_MAP == SHONE || MD_MAP == SH224 || MD_MAP == SH256 || MD_MAP == BLAKE2S_160 || MD_MAP == BLAKE2S_256
 #define RAND_SIZE		(1 + 2*440/8)
 #elif MD_MAP == SH384 || MD_MAP == SH512
 #define RAND_SIZE		(1 + 2*888/8)

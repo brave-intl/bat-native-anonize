@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -25,7 +25,6 @@
  *
  * Implementation of the prime field utilities.
  *
- * @version $Id$
  * @ingroup fp
  */
 
@@ -225,10 +224,6 @@ void fp_write_str(char *str, int len, const fp_t a, int radix) {
 	FINALLY {
 		bn_free(t);
 	}
-}
-
-int fp_size_bin(const fp_t a) {
-	return FP_BYTES;
 }
 
 void fp_read_bin(fp_t a, const uint8_t *bin, int len) {

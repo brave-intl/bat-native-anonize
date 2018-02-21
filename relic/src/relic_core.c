@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -25,7 +25,6 @@
  *
  * Implementation of the library basic functions.
  *
- * @version $Id$
  * @ingroup relic
  */
 
@@ -77,7 +76,7 @@ int core_init(void) {
 		core_ctx = &(first_ctx);
 	}
 
-#if defined(CHECK) || defined(TRACE)
+#if defined(CHECK) && defined(TRACE)
 	core_ctx->trace = 0;
 #endif
 
@@ -122,6 +121,9 @@ int core_init(void) {
 #ifdef WITH_EB
 		eb_curve_init();
 #endif
+#ifdef WITH_ED
+		ed_curve_init();
+#endif
 #ifdef WITH_PP
 		pp_map_init();
 #endif
@@ -149,6 +151,9 @@ int core_clean(void) {
 #endif
 #ifdef WITH_EB
 	eb_curve_clean();
+#endif
+#ifdef WITH_ED
+	ed_curve_clean();
 #endif
 #ifdef WITH_PP
 	pp_map_clean();

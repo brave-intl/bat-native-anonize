@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -80,9 +80,7 @@ void ep_rand(ep_t p) {
 		bn_new(n);
 
 		ep_curve_get_ord(n);
-
-		bn_rand(k, BN_POS, bn_bits(n));
-		bn_mod(k, k, n);
+		bn_rand_mod(k, n);
 
 		ep_mul_gen(p, k);
 	} CATCH_ANY {
@@ -291,7 +289,7 @@ void ep_write_bin(uint8_t *bin, int len, const ep_t a, int pack) {
 		ep_norm(t, a);
 
 		if (pack) {
-			if (len != FP_BYTES + 1) {
+			if (len < FP_BYTES + 1) {
 				THROW(ERR_NO_BUFFER);	
 			} else {
 				ep_pck(t, t);
@@ -299,7 +297,7 @@ void ep_write_bin(uint8_t *bin, int len, const ep_t a, int pack) {
 				fp_write_bin(bin + 1, FP_BYTES, t->x);
 			}
 		} else {
-			if (len != 2 * FP_BYTES + 1) {
+			if (len < 2 * FP_BYTES + 1) {
 				THROW(ERR_NO_BUFFER);
 			} else {
 				bin[0] = 4;

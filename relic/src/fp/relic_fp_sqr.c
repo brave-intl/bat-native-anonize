@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -26,7 +26,6 @@
  * Implementation of the multiple precision integer arithmetic squaring
  * functions.
  *
- * @version $Id$
  * @ingroup fp
  */
 
@@ -224,7 +223,14 @@ void fp_sqr_karat(fp_t c, const fp_t a) {
 	TRY {
 		dv_new(t);
 		dv_zero(t, 2 * FP_DIGS);
-		fp_sqr_karat_imp(t, a, FP_DIGS, FP_KARAT);
+
+		if (FP_DIGS > 1) {
+			fp_sqr_karat_imp(t, a, FP_DIGS, FP_KARAT);
+		} else {
+			fp_sqrn_low(t, a);
+		}
+
+
 		fp_rdc(c, t);
 	} CATCH_ANY {
 		THROW(ERR_CAUGHT);

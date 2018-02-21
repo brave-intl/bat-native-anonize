@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -25,7 +25,6 @@
  *
  * Implementation of the ECDSA protocol.
  *
- * @version $Id$
  * @ingroup cp
  */
 
@@ -46,12 +45,7 @@ int cp_ecdsa_gen(bn_t d, ec_t q) {
 		bn_new(n);
 
 		ec_curve_get_ord(n);
-
-		do {
-			bn_rand(d, BN_POS, bn_bits(n));
-			bn_mod(d, d, n);
-		} while (bn_is_zero(d));
-
+		bn_rand_mod(d, n);
 		ec_mul_gen(q, d);
 	}
 	CATCH_ANY {
@@ -86,11 +80,7 @@ int cp_ecdsa_sig(bn_t r, bn_t s, uint8_t *msg, int len, int hash, bn_t d) {
 		ec_curve_get_ord(n);
 		do {
 			do {
-				do {
-					bn_rand(k, BN_POS, bn_bits(n));
-					bn_mod(k, k, n);
-				} while (bn_is_zero(k));
-
+				bn_rand_mod(k, n);
 				ec_mul_gen(p, k);
 				ec_get_x(x, p);
 				bn_mod(r, x, n);

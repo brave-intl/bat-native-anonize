@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2014 RELIC Authors
+ * Copyright (C) 2007-2015 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -25,7 +25,6 @@
  *
  * Implementation of the prime elliptic curve utilities.
  *
- * @version $Id$
  * @ingroup ep
  */
 
@@ -35,20 +34,6 @@
 /*============================================================================*/
 /* Private definitions                                                        */
 /*============================================================================*/
-
-#if defined(EP_ENDOM) && FP_PRIME == 80
-/**
- * Parameters for a Galbraith-Linn-Scott prime curve over a quadratic extension.
- */
-/** @{ */
-#define GLS_P160_A		"A64DE9BD37A6F4DE9BD4"
-#define GLS_P160_B		"68"
-#define GLS_P160_X		"DF00327584BC470B3685"
-#define GLS_P160_Y		"4F51A281017F02370924"
-#define GLS_P160_R		"FEFFFFFFFF4B523AF38F"
-#define GLS_P160_H		"1"
-/** @} */
-#endif
 
 #if defined(EP_PLAIN) && FP_PRIME == 160
 /**
@@ -207,6 +192,20 @@
 #define NIST_P256_Y		"4FE342E2FE1A7F9B8EE7EB4A7C0F9E162BCE33576B315ECECBB6406837BF51F5"
 #define NIST_P256_R		"FFFFFFFF00000000FFFFFFFFFFFFFFFFBCE6FAADA7179E84F3B9CAC2FC632551"
 #define NIST_P256_H		"1"
+/** @} */
+#endif
+
+#if defined(EP_PLAIN) && FP_PRIME == 256
+/**
+ * Parameters for the Brainpool P256r1 prime elliptic curve.
+ */
+/** @{ */
+#define BSI_P256_A		"7D5A0975FC2C3057EEF67530417AFFE7FB8055C126DC5C6CE94A4B44F330B5D9"
+#define BSI_P256_B		"26DC5C6CE94A4B44F330B5D9BBD77CBF958416295CF7E1CE6BCCDC18FF8C07B6"
+#define BSI_P256_X		"8BD2AEB9CB7E57CB2C4B482FFC81B7AFB9DE27E1E3BD23C23A4453BD9ACE3262"
+#define BSI_P256_Y		"547EF835C3DAC4FD97F8461A14611DC9C27745132DED8E545C1D54C72F046997"
+#define BSI_P256_R		"A9FB57DBA1EEA9BC3E660A909D838D718C397AA3B561A6F7901E0E82974856A7"
+#define BSI_P256_H		"1"
 /** @} */
 #endif
 
@@ -379,6 +378,9 @@
 #if defined(EP_ENDOM) && FP_PRIME == 638
 /**
  * Parameters for a 638-bit pairing-friendly prime curve.
+ * 
+ * Pairing computation over this curve is not supported anymore, but B12_P638
+ * is an overall better candidate anyway.
  */
 /** @{ */
 #define BN_P638_A		"0"
@@ -491,12 +493,6 @@ void ep_param_set(int param) {
 		core_get()->ep_id = 0;
 
 		switch (param) {
-#if defined(EP_ENDOM) && FP_PRIME == 80
-			case GLS_P160:
-				ASSIGN(GLS_P160, GLS_80);
-				plain = 1;
-				break;
-#endif			
 #if defined(EP_ENDOM) && FP_PRIME == 158
 			case BN_P158:
 				ASSIGNK(BN_P158, BN_158);
@@ -574,6 +570,10 @@ void ep_param_set(int param) {
 				ASSIGN(NIST_P256, NIST_256);
 				plain = 1;
 				break;
+			case BSI_P256:
+				ASSIGN(BSI_P256, BSI_256);
+				plain = 1;
+				break;
 #endif
 #if defined(EP_ENDOM) && FP_PRIME == 256
 			case SECG_K256:
@@ -588,7 +588,7 @@ void ep_param_set(int param) {
 #if defined(EP_PLAIN) & FP_PRIME == 382
 			case CURVE_67254:
 				ASSIGN(CURVE_67254, PRIME_382105);
-				endom = 1;
+				plain = 1;
 				break;
 #endif
 #if defined(EP_PLAIN) && FP_PRIME == 383
@@ -609,7 +609,7 @@ void ep_param_set(int param) {
 				plain = 1;
 				break;
 #endif
-#if defined(EP_PLAIN) && FP_PRIME == 508
+#if defined(EP_ENDOM) && FP_PRIME == 508
 			case KSS_P508:
 				ASSIGNK(KSS_P508, KSS_508);
 				endom = 1;
@@ -727,7 +727,7 @@ int ep_param_set_any_plain() {
 #elif FP_PRIME == 255
 	ep_param_set(CURVE_25519);
 #elif FP_PRIME == 256
-	ep_param_set(NIST_P256);
+	ep_param_set(BSI_P256);
 #elif FP_PRIME == 382
 	ep_param_set(CURVE_67254);
 #elif FP_PRIME == 383
@@ -750,9 +750,7 @@ int ep_param_set_any_plain() {
 int ep_param_set_any_endom() {
 	int r = STS_OK;
 #if defined(EP_ENDOM)
-#if FP_PRIME == 80
-	ep_param_set(GLS_P160);
-#elif FP_PRIME == 158
+#if FP_PRIME == 158
 	ep_param_set(BN_P158);
 #elif FP_PRIME == 160
 	ep_param_set(SECG_K160);
@@ -796,11 +794,7 @@ int ep_param_set_any_super() {
 int ep_param_set_any_pairf() {
 	int type = 0, degree = 0, r = STS_OK;
 #if defined(EP_ENDOM)
-#if FP_PRIME == 80
-	ep_param_set(GLS_P160);
-	type = EP_MTYPE;
-	degree = 2;
-#elif FP_PRIME == 158
+#if FP_PRIME == 158
 	ep_param_set(BN_P158);
 	type = EP_DTYPE;
 	degree = 2;
@@ -874,6 +868,9 @@ void ep_param_print() {
 			break;
 		case NIST_P256:
 			util_banner("Curve NIST-P256:", 0);
+			break;
+		case BSI_P256:
+			util_banner("Curve BSI-P256:", 0);
 			break;
 		case SECG_K256:
 			util_banner("Curve SECG-K256:", 0);
