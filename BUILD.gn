@@ -161,6 +161,27 @@ static_library("anonize2") {
       "OVERH=0"
     ]
     include_dirs += [ "anon/macos_include" ]
+  } else if (is_linux) {
+    if (current_cpu == "x64") {
+      defines += [
+        "ARCH=X64",
+      ]
+      include_dirs += [ "anon/linux_x64_include" ]
+    } else if (current_cpu == "x86") {
+      defines += [
+        "ARCH=X86",
+      ]
+      include_dirs += [ "anon/linux_x86_include" ]
+    }
+    defines += [
+      "ALIGN=16",
+      "OPSYS=LINUX",
+      "COLOR=OFF",
+      "SEED=UDEV",
+      "WITH=\"BN;DV;FP;FPX;EP;EPX;PP;MD\"",
+      "BN_PRECI=256",
+      "BN_MAGNI=DOUBLE"
+    ]
   }
 
   include_dirs += [
