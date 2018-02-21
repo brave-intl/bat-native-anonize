@@ -1,0 +1,10 @@
+cmake ../relic -G "Unix Makefiles"  \
+		   -DCHECK=on -DDEBUG=on \
+		   -DARCH=X64 -DALIGN=16 \
+		   -DOPSYS=MACOSX -DSTLIB=ON -DSHLIB=OFF \
+		   -DALLOC=AUTO \
+		   -DCOLOR=OFF -DSEED=UDEV \
+		   -DWITH="BN;DV;FP;FPX;EP;EPX;PP;MD" \
+		   -DBN_PRECI=256 -DBN_MAGNI=DOUBLE  \
+		   -DBENCH=100 -DTESTS=0 -DTIMER=NONE -DOVERH=0
+mv include macos_include

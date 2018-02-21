@@ -138,12 +138,33 @@ static_library("anonize2") {
     sources += [ "relic/src/arch/relic_arch_arm.c" ]
   }
 
+  defines = [
+    "RELIC_LIBRARY",
+  ]
+  include_dirs = []
 
-  include_dirs = [
+  if (is_mac) {
+    defines += [
+      "ARCH=X64",
+      "ALIGN=16",
+      "OPSYS=MACOSX",
+      "SHLIB=OFF",
+      "ALLOC=AUTO",
+      "COLOR=OFF",
+      "SEED=UDEV",
+      "WITH=\"BN;DV;FP;FPX;EP;EPX;PP;MD\"",
+      "BN_PRECI=256",
+      "BN_MAGNI=DOUBLE",
+      "BENCH=100",
+      "TESTS=0",
+      "TIMER=NONE",
+      "OVERH=0"
+    ]
+    include_dirs += [ "anon/macos_include" ]
+  }
+
+  include_dirs += [
     "relic/include",
     "relic/include/low",
-    "anon",
   ]
-
-  defines = [ "RELIC_LIBRARY" ]
 }
