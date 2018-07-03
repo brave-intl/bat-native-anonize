@@ -6,7 +6,61 @@ if (is_android) {
   import("//build/config/android/rules.gni")
 }
 
+config("external_config") {
+  defines = [
+    "RELIC_LIBRARY",
+  ]
+  include_dirs = [ "." ]
+
+  if (is_mac) {
+    defines += [
+      "ARCH=X64",
+      "ALIGN=16",
+      "OPSYS=MACOSX",
+      "SHLIB=OFF",
+      "ALLOC=AUTO",
+      "COLOR=OFF",
+      "SEED=UDEV",
+      "WITH=\"BN;DV;FP;FPX;EP;EPX;PP;MD\"",
+      "BN_PRECI=256",
+      "BN_MAGNI=DOUBLE",
+      "BENCH=100",
+      "TESTS=0",
+      "TIMER=NONE",
+      "OVERH=0"
+    ]
+    include_dirs += [ "anon/macos_include" ]
+  } else if (is_linux) {
+    if (current_cpu == "x64") {
+      defines += [
+        "ARCH=X64",
+      ]
+      include_dirs += [ "anon/linux_x64_include" ]
+    } else if (current_cpu == "x86") {
+      defines += [
+        "ARCH=X86",
+      ]
+      include_dirs += [ "anon/linux_x86_include" ]
+    }
+    defines += [
+      "ALIGN=16",
+      "OPSYS=LINUX",
+      "COLOR=OFF",
+      "SEED=UDEV",
+      "WITH=\"BN;DV;FP;FPX;EP;EPX;PP;MD\"",
+      "BN_PRECI=256",
+      "BN_MAGNI=DOUBLE"
+    ]
+  }
+
+  include_dirs += [
+    "relic/include",
+    "relic/include/low",
+  ]
+}
+
 static_library("anonize2") {
+  public_configs = [ ":external_config" ]
   sources = [
     "relic/src/relic_err.c",
     "relic/src/relic_core.c",
@@ -137,55 +191,4 @@ static_library("anonize2") {
   } else {
     sources += [ "relic/src/arch/relic_arch_arm.c" ]
   }
-
-  defines = [
-    "RELIC_LIBRARY",
-  ]
-  include_dirs = []
-
-  if (is_mac) {
-    defines += [
-      "ARCH=X64",
-      "ALIGN=16",
-      "OPSYS=MACOSX",
-      "SHLIB=OFF",
-      "ALLOC=AUTO",
-      "COLOR=OFF",
-      "SEED=UDEV",
-      "WITH=\"BN;DV;FP;FPX;EP;EPX;PP;MD\"",
-      "BN_PRECI=256",
-      "BN_MAGNI=DOUBLE",
-      "BENCH=100",
-      "TESTS=0",
-      "TIMER=NONE",
-      "OVERH=0"
-    ]
-    include_dirs += [ "anon/macos_include" ]
-  } else if (is_linux) {
-    if (current_cpu == "x64") {
-      defines += [
-        "ARCH=X64",
-      ]
-      include_dirs += [ "anon/linux_x64_include" ]
-    } else if (current_cpu == "x86") {
-      defines += [
-        "ARCH=X86",
-      ]
-      include_dirs += [ "anon/linux_x86_include" ]
-    }
-    defines += [
-      "ALIGN=16",
-      "OPSYS=LINUX",
-      "COLOR=OFF",
-      "SEED=UDEV",
-      "WITH=\"BN;DV;FP;FPX;EP;EPX;PP;MD\"",
-      "BN_PRECI=256",
-      "BN_MAGNI=DOUBLE"
-    ]
-  }
-
-  include_dirs += [
-    "relic/include",
-    "relic/include/low",
-  ]
 }
