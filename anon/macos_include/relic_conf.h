@@ -36,11 +36,11 @@
 #define VERSION "0.4.1"
 
 /** Debugging support. */
-/* #undef DEBUG */
+#define DEBUG
 /** Profiling support. */
 /* #undef PROFL */
 /** Error handling support. */
-//#define CHECK
+#define CHECK
 /** Verbose error messages. */
 #define VERBS
 /** Trace support. */
@@ -59,12 +59,11 @@
 /* #undef BIGED */
 /** Build shared library. */
 /* #undef SHLIB */
-//#define SHLIB
 /** Build static library. */
 #define STLIB
 
 /** Number of times each test is ran. */
-#define TESTS    100
+#define TESTS    0
 /** Number of times each benchmark is ran. */
 #define BENCH    100
 
@@ -84,10 +83,10 @@
 /** AMD64-compatible 64-bit architecture. */
 #define X64      6
 /** Architecture. */
-#define ARCH	 ARM
+#define ARCH	 X64
 
 /** Size of word in this architecture. */
-#define WORD     32
+#define WORD     64
 
 /** Byte boundary to align digit vectors. */
 #define ALIGN    16
@@ -113,7 +112,7 @@
 /** Build pairings over prime curves module. */
 #define WITH_PP
 /** Build pairing-based cryptography module. */
-#define WITH_PC
+/* #undef WITH_PC */
 /** Build block ciphers. */
 /* #undef WITH_BC */
 /** Build hash functions. */
@@ -205,7 +204,7 @@
 /** Prefer Pseudo-Mersenne primes over random primes. */
 /* #undef FP_PMERS */
 /** Use -1 as quadratic non-residue. */
-//#define FP_QNRES
+/* #undef FP_QNRES */
 /** Width of window processing for exponentiation methods. */
 #define FP_WIDTH 4
 
@@ -648,7 +647,7 @@
 /** ECDSA with fast verification. */
 #define QUICK    2
 /** Chosen ECDSA method. */
-#define CP_ECDSA
+#define CP_ECDSA 
 
 /** Automatic memory allocation. */
 #define AUTO     1
@@ -706,7 +705,7 @@
 /* Arduino platform. */
 #define DUINO    7
 /** Detected operation system. */
-#define OPSYS    DROID
+#define OPSYS    MACOSX
 
 /** No multithreading. */
 #define NONE     1
@@ -732,7 +731,7 @@
 /** Cycle-counting timer. */
 #define CYCLE    7
 /** Chosen timer. */
-#define TIMER    HPROC
+#define TIMER    NONE
 
 /** Prefix to identity this build of the library. */
 /* #undef LABEL */
