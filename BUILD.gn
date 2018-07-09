@@ -51,6 +51,8 @@ config("external_config") {
       "BN_PRECI=256",
       "BN_MAGNI=DOUBLE"
     ]
+  } else if (is_android) {
+    include_dirs += [ "anon/android_include" ]
   }
 
   include_dirs += [
