@@ -213,7 +213,7 @@ void ed_norm(ed_t r, const ed_t p) {
 
 void ed_norm_sim(ed_t *r, const ed_t *t, int n) {
 	int i;
-	fp_t a[n];
+	fp_t *a = malloc(sizeof(fb_t) * n);
 
 	for (i = 0; i < n; i++) {
 		fp_null(a[i]);
@@ -243,6 +243,7 @@ void ed_norm_sim(ed_t *r, const ed_t *t, int n) {
 		for (i = 0; i < n; i++) {
 			fp_free(a[i]);
 		}
+		free(a);
 	}
 }
 

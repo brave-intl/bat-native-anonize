@@ -164,7 +164,7 @@ void fb_slvn_low(dig_t *c, const dig_t *a) {
 	m1 = _mm_or_si128(m1, m2);
 	m3 = _mm_or_si128(m3, m4);
 #ifndef __PCLMUL__
-	align dig_t x[2];
+	relic_align dig_t x[2];
 	_mm_store_si128((__m128i *)x, m1);
 	u0 = x[0];
 	u1 = x[1];

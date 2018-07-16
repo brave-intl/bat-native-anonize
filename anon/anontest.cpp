@@ -10,7 +10,11 @@
 //    limitations under the License.
 
 #include <fcntl.h>
+
+#if !defined _WINDOWS
 #include <unistd.h>
+#endif
+
 #include <string.h>
 #include <stdlib.h>
 
@@ -18,11 +22,17 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
+#include <chrono>
 
 
+#if !defined __cplusplus
 extern "C" {
 #include "anon.h"
 }
+#else
+#include "anon.h"
+#endif
+
 
 void pretty(const char* str, const char* title) {
 	printf("%s:\n",title);

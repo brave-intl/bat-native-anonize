@@ -28,7 +28,7 @@ typedef struct _surveyresponse {
 
 
 
-/** The initAnonize method must be called before any other calls are made to 
+/** The initAnonize method must be called before any other calls are made to
    the library.
 */
 void initAnonize();

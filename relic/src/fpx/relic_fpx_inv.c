@@ -96,7 +96,7 @@ void fp2_inv_uni(fp2_t c, fp2_t a) {
 
 void fp2_inv_sim(fp2_t *c, fp2_t *a, int n) {
 	int i;
-	fp2_t u, t[n];
+	fp2_t u, *t = malloc(sizeof(fp2_t) * n);
 
 	for (i = 0; i < n; i++) {
 		fp2_null(t[i]);
@@ -133,6 +133,7 @@ void fp2_inv_sim(fp2_t *c, fp2_t *a, int n) {
 			fp2_free(t[i]);
 		}
 		fp2_free(u);
+		free(t);
 	}
 }
 
@@ -209,7 +210,7 @@ void fp3_inv(fp3_t c, fp3_t a) {
 
 void fp3_inv_sim(fp3_t * c, fp3_t * a, int n) {
 	int i;
-	fp3_t u, t[n];
+	fp3_t u, *t = malloc(sizeof(fp3_t) * n);
 
 	for (i = 0; i < n; i++) {
 		fp3_null(t[i]);
@@ -246,6 +247,7 @@ void fp3_inv_sim(fp3_t * c, fp3_t * a, int n) {
 			fp3_free(t[i]);
 		}
 		fp3_free(u);
+		free(t);
 	}
 }
 
