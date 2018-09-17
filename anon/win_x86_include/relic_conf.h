@@ -98,27 +98,27 @@
 /** Build prime field extension module. */
 #define WITH_FPX
 /** Build binary field module. */
-#define WITH_FB
+/* #undef WITH_FB */
 /** Build prime elliptic curve module. */
 #define WITH_EP
 /** Build prime field extension elliptic curve module. */
 #define WITH_EPX
 /** Build binary elliptic curve module. */
-#define WITH_EB
+/* #undef WITH_EB */
 /** Build elliptic Edwards curve module. */
-#define WITH_ED
+/* #undef WITH_ED */
 /** Build elliptic curve cryptography module. */
-#define WITH_EC
+/* #undef WITH_EC */
 /** Build pairings over prime curves module. */
 #define WITH_PP
 /** Build pairing-based cryptography module. */
-#define WITH_PC
+/* #undef WITH_PC */
 /** Build block ciphers. */
-#define WITH_BC
+/* #undef WITH_BC */
 /** Build hash functions. */
 #define WITH_MD
 /** Build cryptographic protocols. */
-#define WITH_CP
+/* #undef WITH_CP */
 
 /** Easy C-only backend. */
 #define EASY	 1

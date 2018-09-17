@@ -42,7 +42,8 @@
 #include <android/log.h>
 #endif
 
-#ifdef _WINDOWS
+
+#if !defined __clang__
 #include <intrin.h>
 #endif
 
@@ -144,13 +145,13 @@ int util_bits_dig(dig_t a) {
 	}
 	return 0;
 #elif WORD == 32
-#ifdef _WINDOWS
+#if !defined __clang__
 	return DIGIT - __lzcnt(a);
 #else
 	return DIGIT - __builtin_clz(a);
 #endif
 #elif WORD == 64
-#ifdef _WINDOWS
+#if !defined __clang__
 	return DIGIT - __lzcnt64(a);
 #else
 	return DIGIT - __builtin_clzll(a);
