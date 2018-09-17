@@ -105,7 +105,8 @@ void eb_norm(eb_t r, const eb_t p) {
 
 void eb_norm_sim(eb_t *r, const eb_t *t, int n) {
 	int i;
-	fb_t *a = malloc(sizeof(fb_t) * n);
+  fb_t *a = NULL;
+  RELIC_CHECKED_CALLOC(a, fb_t, n, sizeof(a[0]));
 
 	if (n == 1) {
 		eb_norm(r[0], t[0]);

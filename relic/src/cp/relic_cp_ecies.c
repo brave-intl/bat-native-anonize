@@ -69,10 +69,11 @@ int cp_ecies_enc(ec_t r, uint8_t *out, int *out_len, uint8_t *in, int in_len,
 	bn_t k, n, x;
 	ec_t p;
 	int l, result = STS_OK, size = CEIL(ec_param_level(), 8);
-	uint8_t
-		*_x = malloc(FC_BYTES + 1),
-		*key = malloc(2 * size),
-		*iv = calloc(1,BC_LEN);// = { 0 };
+
+  int8_t *_x = NULL, *key = NULL, *iv = NULL;
+  RELIC_CHECKED_MALLOC(_x, int8_t, FC_BYTES + 1);
+  RELIC_CHECKED_MALLOC(key, int8_t, 2 * size);
+  RELIC_CHECKED_CALLOC(iv, int8_t, BC_LEN, sizeof(int8_t) ); // = { 0 };
 
 	bn_null(k);
 	bn_null(n);

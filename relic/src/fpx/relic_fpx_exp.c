@@ -278,7 +278,8 @@ void fp12_exp_cyc(fp12_t c, fp12_t a, bn_t b) {
 			fp12_free(t);
 		}
 	} else {
-		fp12_t *u = malloc(sizeof(fp12_t) * w);
+		fp12_t *u = NULL;
+    RELIC_CHECKED_MALLOC(u, fp12_t, sizeof(fp12_t) * w);
 
 		TRY {
 			for (i = 0; i < w; i++) {
@@ -331,7 +332,8 @@ void fp12_exp_cyc(fp12_t c, fp12_t a, bn_t b) {
 
 void fp12_exp_cyc_sps(fp12_t c, fp12_t a, int *b, int len) {
 	int i, j, k, w = len;
-	fp12_t t, *u = malloc(sizeof(fp12_t) * w);
+	fp12_t t, *u = NULL;
+  RELIC_CHECKED_MALLOC(u, fp12_t, sizeof(fp12_t) * w);
 
 	fp12_null(t);
 
@@ -529,9 +531,10 @@ void fp12_back_cyc(fp12_t c, fp12_t a) {
 }
 
 void fp12_back_cyc_sim(fp12_t c[], fp12_t a[], int n) {
-	fp2_t* t0 = malloc(sizeof(fp2_t) * n),
-		 * t1 = malloc(sizeof(fp2_t) * n), 
-		 * t2 = malloc(sizeof(fp2_t) * n);
+	fp2_t* t0 = NULL, * t1 =   NULL, * t2 =   NULL;
+  RELIC_CHECKED_MALLOC(t0, fp2_t, sizeof(fp2_t) * n);
+  RELIC_CHECKED_MALLOC(t1, fp2_t, sizeof(fp2_t) * n);
+  RELIC_CHECKED_MALLOC(t2, fp2_t, sizeof(fp2_t) * n);
 
 	for (int i = 0; i < n; i++) {
 		fp2_null(t0[i]);
@@ -659,7 +662,8 @@ void fp18_exp_cyc(fp18_t c, fp18_t a, bn_t b) {
 			fp18_free(t);
 		}
 	} else {
-		fp18_t *u = malloc(sizeof(fp18_t) * w);
+		fp18_t *u = NULL;
+    RELIC_CHECKED_MALLOC(u, fp18_t, sizeof(fp18_t) * w);
 
 		TRY {
 			for (i = 0; i < w; i++) {
@@ -712,7 +716,8 @@ void fp18_exp_cyc(fp18_t c, fp18_t a, bn_t b) {
 
 void fp18_exp_cyc_sps(fp18_t c, fp18_t a, int *b, int len) {
 	int i, j, k, w = len;
-	fp18_t t, *u = malloc(sizeof(fp18_t) * w);
+	fp18_t t, *u = NULL;
+  RELIC_CHECKED_MALLOC(u, fp18_t, sizeof(fp18_t) * w);
 
 	fp18_null(t);
 
@@ -942,13 +947,21 @@ void fp18_back_cyc(fp18_t c, fp18_t a) {
 }
 
 void fp18_back_cyc_sim(fp18_t c[], fp18_t a[], int n) {
-	fp3_t *t0 = malloc(sizeof(fp3_t) * n),
-		  *t1 = malloc(sizeof(fp3_t) * n),
-		  *t2 = malloc(sizeof(fp3_t) * n),
-		  *t3 = malloc(sizeof(fp3_t) * n),
-		  *t4 = malloc(sizeof(fp3_t) * n),
-		  *t5 = malloc(sizeof(fp3_t) * n),
-		  *t6 = malloc(sizeof(fp3_t) * n);
+	fp3_t *t0 = NULL,
+		  *t1 = NULL,
+		  *t2 = NULL,
+		  *t3 = NULL,
+		  *t4 = NULL,
+		  *t5 = NULL,
+		  *t6 = NULL;
+
+  RELIC_CHECKED_MALLOC(t0, fp3_t, sizeof(fp3_t) * n);
+  RELIC_CHECKED_MALLOC(t1, fp3_t, sizeof(fp3_t) * n);
+  RELIC_CHECKED_MALLOC(t2, fp3_t, sizeof(fp3_t) * n);
+  RELIC_CHECKED_MALLOC(t3, fp3_t, sizeof(fp3_t) * n);
+  RELIC_CHECKED_MALLOC(t4, fp3_t, sizeof(fp3_t) * n);
+  RELIC_CHECKED_MALLOC(t5, fp3_t, sizeof(fp3_t) * n);
+  RELIC_CHECKED_MALLOC(t6, fp3_t, sizeof(fp3_t) * n);
 
 	for (int i = 0; i < n; i++) {
 		fp3_null(t0[i]);

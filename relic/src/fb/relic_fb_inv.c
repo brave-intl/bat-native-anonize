@@ -411,8 +411,11 @@ void fb_inv_almos(fb_t c, const fb_t a) {
 void fb_inv_itoht(fb_t c, const fb_t a) {
 	int i, x, y, len;
 	const int *chain = fb_poly_get_chain(&len);
-	int * u = malloc(sizeof(int) * (len + 1));
-	fb_t *table = malloc(sizeof(fb_t) * (len + 1));
+	int * u = NULL;
+  RELIC_CHECKED_MALLOC(u, int, sizeof(int) * (len + 1));
+
+	fb_t *table = NULL;
+  RELIC_CHECKED_MALLOC(table, fb_t, sizeof(fb_t) * (len + 1));
 
 	for (i = 0; i <= len; i++) {
 		fb_null(table[i]);
@@ -543,7 +546,8 @@ void fb_inv_lower(fb_t c, const fb_t a) {
 
 void fb_inv_sim(fb_t *c, const fb_t *a, int n) {
 	int i;
-	fb_t u, *t = malloc(sizeof(fb_t) * n);
+	fb_t u, *t = NULL;
+  RELIC_CHECKED_MALLOC(t, fb_t, sizeof(fb_t) * n);
 
 	for (i = 0; i < n; i++) {
 		fb_null(t[i]);

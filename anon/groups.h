@@ -55,27 +55,6 @@ extern "C" {
 
 //using namespace std;
 
-void rand(char* buf, int sz) {
-#if defined _WINDOWS
-  HCRYPTPROV hCryptProv;
-  if (!CryptAcquireContext(&hCryptProv, NULL, NULL, PROV_RSA_FULL, CRYPT_VERIFYCONTEXT | CRYPT_SILENT)) {
-    return;
-  }
-  if (hCryptProv && !CryptGenRandom(hCryptProv, sz, (BYTE*)buf)) {
-    return;
-  }
-  if (hCryptProv && !CryptReleaseContext(hCryptProv, 0)) {
-    return;
-  }
-#else
-  int rr = open("/dev/urandom", O_RDONLY);
-  if (rr<0 || read(rr, buf, sz) != sz) {
-    fprintf(stderr, "Could not read %d byes from /dev/urandom. Abort.\n", sz);
-  }
-  close(rr);
-#endif
-}
-
 static inline void H(sha256_ctx ctx[1], std::string s) {
 	sha256_hash((unsigned char*)s.c_str(), s.length(), ctx);
 }

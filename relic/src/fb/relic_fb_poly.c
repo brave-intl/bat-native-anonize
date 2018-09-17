@@ -266,7 +266,8 @@ static void find_chain() {
 			break;
 	}
 
-	int x, y, *u = malloc(sizeof(int) * (ctx->chain_len + 1));
+	int x, y, *u = NULL;
+  RELIC_CHECKED_MALLOC(u, int, sizeof(int) * (ctx->chain_len + 1));
 
 	for (i = 0; i < MAX_TERMS; i++) {
 		for (j = 0; j < FB_TABLE; j++) {

@@ -56,7 +56,8 @@ static void rand_hash(uint8_t *out, int out_len, uint8_t *in,
 		int in_len) {
 	uint32_t j = util_conv_big(8 * out_len);
 	int len = CEIL(out_len, MD_LEN);
-	uint8_t* buf = malloc(1 + sizeof(uint32_t) + in_len), hash[MD_LEN];
+	uint8_t* buf = NULL, hash[MD_LEN];
+  RELIC_CHECKED_MALLOC(buf, uint8_t, 1 + sizeof(uint32_t) + in_len);
 
 	buf[0] = 1;
 	memcpy(buf + 1, &j, sizeof(uint32_t));
@@ -185,7 +186,8 @@ void rand_seed(uint8_t *buf, int size) {
 		rand_hash(ctx->rand + 1 + len, len, ctx->rand, len + 1);
 	} else {
 		/* V = hash_df(01 || V || seed). */
-		uint8_t* tmp = malloc(1 + len + size);
+		uint8_t* tmp = NULL;
+    RELIC_CHECKED_MALLOC(tmp, uint8_t, 1 + len + size);
 		tmp[0] = 1;
 		memcpy(tmp + 1, ctx->rand + 1, len);
 		memcpy(tmp + 1 + len, buf, size);

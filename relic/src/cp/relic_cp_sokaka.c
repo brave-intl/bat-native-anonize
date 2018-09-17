@@ -80,6 +80,7 @@ int cp_sokaka_gen_prv(sokaka_t k, char *id, int len, bn_t master) {
 int cp_sokaka_key(uint8_t *key, unsigned int key_len, char *id1,
 		int len1, sokaka_t k, char *id2, int len2) {
 	int first = 0, result = STS_OK;
+  uint8_t * buf = NULL;
 	g1_t p;
 	g2_t q;
 	gt_t e;
@@ -129,10 +130,10 @@ int cp_sokaka_key(uint8_t *key, unsigned int key_len, char *id1,
 
 		/* Allocate size for storing the output. */
 		int size = gt_size_bin(e, 0);
-		uint8_t * buf = malloc(size);
+
+    RELIC_CHECKED_MALLOC(buf, uint8_t, size);
 		gt_write_bin(buf, size, e, 0);
 		md_kdf1(key, key_len, buf, size);
-		free(buf);
 	}
 	CATCH_ANY {
 		result = STS_ERR;
@@ -141,6 +142,7 @@ int cp_sokaka_key(uint8_t *key, unsigned int key_len, char *id1,
 		g1_free(p);
 		g2_free(q);
 		gt_free(e);
+    free(buf);
 	}
 	return result;
 }

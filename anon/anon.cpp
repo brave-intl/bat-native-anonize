@@ -37,7 +37,6 @@
 #include <iomanip>
 
 void usage(char* me);
-void rand(char* buf, int sz);
 
 using namespace std;
 
