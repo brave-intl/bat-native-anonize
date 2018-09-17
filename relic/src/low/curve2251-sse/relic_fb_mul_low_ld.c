@@ -187,7 +187,7 @@ void fb_muln_low(dig_t *c, const dig_t *a, const dig_t *b) {
 void fb_mulm_low(dig_t *c, const dig_t *a, const dig_t *b) {
 	__m128i tab[16][8], tab1[16][8];
 	__m128i s0, m0, m1, m2, m3, m4, m8, m9;
-	align dig_t t[2*FB_DIGS];
+	relic_align dig_t t[2*FB_DIGS];
 	char ta, tb;
 	int i, j, k;
 
@@ -367,9 +367,9 @@ void fb_mulm_low(dig_t *c, const dig_t *a, const dig_t *b) {
 #else
 
 void fb_mulm_low(dig_t *c, const dig_t *a, const dig_t *b) {
-	align __m128i tab[16][8], tab1[16][8];
+	relic_align __m128i tab[16][8], tab1[16][8];
 	__m128i s0, m0, m1, m2, m3, m4, m8, m9, t0, t1, t2, *t;
-	align dig_t x[2];
+	relic_align dig_t x[2];
 	char ta, tb;
 	int i, j, k;
 

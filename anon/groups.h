@@ -31,9 +31,23 @@
 
 extern "C" {
 #include <fcntl.h>
+
+#if !defined _WINDOWS
 #include <unistd.h>
+#endif
+
 #include "sha2.h"
 }
+
+
+
+#if defined _WINDOWS
+
+#define NOGDI
+#include <windows.h>
+#include <Wincrypt.h>
+
+#endif
 
 #include <iostream>
 #include <fstream>
@@ -42,11 +56,24 @@ extern "C" {
 //using namespace std;
 
 void rand(char* buf, int sz) {
-	int rr = open("/dev/urandom", O_RDONLY);
-	if (rr<0 || read(rr, buf, sz) != sz) {
-		fprintf(stderr,"Could not read %d byes from /dev/urandom. Abort.\n",sz);
-	}
-	close(rr);
+#if defined _WINDOWS
+  HCRYPTPROV hCryptProv;
+  if (!CryptAcquireContext(&hCryptProv, NULL, NULL, PROV_RSA_FULL, CRYPT_VERIFYCONTEXT | CRYPT_SILENT)) {
+    return;
+  }
+  if (hCryptProv && !CryptGenRandom(hCryptProv, sz, (BYTE*)buf)) {
+    return;
+  }
+  if (hCryptProv && !CryptReleaseContext(hCryptProv, 0)) {
+    return;
+  }
+#else
+  int rr = open("/dev/urandom", O_RDONLY);
+  if (rr<0 || read(rr, buf, sz) != sz) {
+    fprintf(stderr, "Could not read %d byes from /dev/urandom. Abort.\n", sz);
+  }
+  close(rr);
+#endif
 }
 
 static inline void H(sha256_ctx ctx[1], std::string s) {
