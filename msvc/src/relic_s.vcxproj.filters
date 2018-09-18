@@ -1,588 +1,200 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\relic_err.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\relic_core.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\relic_conf.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\relic_pool.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\relic_util.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\arch\relic_arch_none.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\rand\relic_rand_core.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\rand\relic_rand_hash.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\relic_test.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\relic_bench.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\bn\relic_bn_add.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\bn\relic_bn_cmp.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\bn\relic_bn_div.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\bn\relic_bn_factor.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\bn\relic_bn_gcd.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\bn\relic_bn_lcm.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\bn\relic_bn_mem.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\bn\relic_bn_mod.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\bn\relic_bn_mul.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\bn\relic_bn_mxp.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\bn\relic_bn_prime.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\bn\relic_bn_rec.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\bn\relic_bn_shift.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\bn\relic_bn_smb.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\bn\relic_bn_sqr.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\bn\relic_bn_srt.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\bn\relic_bn_util.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\dv\relic_dv_mem.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\dv\relic_dv_util.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fp\relic_fp_add.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fp\relic_fp_cmp.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fp\relic_fp_exp.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fp\relic_fp_inv.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fp\relic_fp_mul.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fp\relic_fp_param.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fp\relic_fp_prime.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fp\relic_fp_rdc.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fp\relic_fp_shift.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fp\relic_fp_sqr.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fp\relic_fp_srt.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fp\relic_fp_util.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fpx\relic_fp12_mul.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fpx\relic_fp12_sqr.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fpx\relic_fp18_mul.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fpx\relic_fp18_sqr.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fpx\relic_fp2_mul.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fpx\relic_fp2_sqr.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fpx\relic_fp3_mul.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fpx\relic_fp3_sqr.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fpx\relic_fp6_mul.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fpx\relic_fp6_sqr.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fpx\relic_fpx_add.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fpx\relic_fpx_cmp.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fpx\relic_fpx_exp.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fpx\relic_fpx_frb.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fpx\relic_fpx_inv.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fpx\relic_fpx_pck.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fpx\relic_fpx_rdc.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fpx\relic_fpx_srt.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fpx\relic_fpx_util.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fb\relic_fb_add.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fb\relic_fb_cmp.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fb\relic_fb_exp.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fb\relic_fb_inv.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fb\relic_fb_itr.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fb\relic_fb_mul.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fb\relic_fb_param.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fb\relic_fb_poly.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fb\relic_fb_rdc.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fb\relic_fb_shift.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fb\relic_fb_slv.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fb\relic_fb_sqr.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fb\relic_fb_srt.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fb\relic_fb_trc.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fb\relic_fb_util.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fbx\relic_fb2_inv.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fbx\relic_fb2_mul.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fbx\relic_fb2_slv.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\fbx\relic_fb2_sqr.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\ep\relic_ep_add.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\ep\relic_ep_curve.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\ep\relic_ep_dbl.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\ep\relic_ep_map.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\ep\relic_ep_mul.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\ep\relic_ep_mul_fix.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\ep\relic_ep_mul_sim.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\ep\relic_ep_neg.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\ep\relic_ep_norm.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\ep\relic_ep_param.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\ep\relic_ep_pck.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\ep\relic_ep_util.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\epx\relic_ep2_add.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\epx\relic_ep2_curve.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\epx\relic_ep2_dbl.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\epx\relic_ep2_frb.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\epx\relic_ep2_map.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\epx\relic_ep2_mul.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\epx\relic_ep2_mul_fix.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\epx\relic_ep2_mul_sim.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\epx\relic_ep2_neg.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\epx\relic_ep2_norm.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\epx\relic_ep2_pck.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\epx\relic_ep2_util.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\eb\relic_eb_add.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\eb\relic_eb_curve.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\eb\relic_eb_dbl.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\eb\relic_eb_frb.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\eb\relic_eb_hlv.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\eb\relic_eb_map.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\eb\relic_eb_mul.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\eb\relic_eb_mul_fix.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\eb\relic_eb_mul_sim.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\eb\relic_eb_neg.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\eb\relic_eb_norm.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\eb\relic_eb_param.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\eb\relic_eb_pck.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\eb\relic_eb_util.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\ed\relic_ed_add.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\ed\relic_ed_curve.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\ed\relic_ed_dbl.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\ed\relic_ed_map.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\ed\relic_ed_mul.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\ed\relic_ed_mul_fix.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\ed\relic_ed_mul_sim.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\ed\relic_ed_param.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\ed\relic_ed_serialize.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\ed\relic_ed_util.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\pp\relic_pp_add.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\pp\relic_pp_dbl.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\pp\relic_pp_exp.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\pp\relic_pp_map.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\pp\relic_pp_norm.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\pc\relic_pc_util.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\cp\relic_cp_rsa.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\cp\relic_cp_rabin.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\cp\relic_cp_bdpe.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\cp\relic_cp_phpe.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\cp\relic_cp_ecdh.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\cp\relic_cp_ecmqv.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\cp\relic_cp_ecies.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\cp\relic_cp_ecdsa.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\cp\relic_cp_ecss.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\cp\relic_cp_vbnn_ibs.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\cp\relic_cp_sokaka.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\cp\relic_cp_bgn.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\cp\relic_cp_ibe.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\cp\relic_cp_bls.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\cp\relic_cp_bbs.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\cp\relic_cp_zss.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\bc\relic_bc_aes.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\bc\rijndael-alg-fst.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\bc\rijndael-api-fst.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\md\blake2s-ref.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\md\relic_md_blake2s.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\md\relic_md_hmac.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\md\relic_md_kdf.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\md\relic_md_mgf.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\md\relic_md_sha1.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\md\relic_md_sha224.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\md\relic_md_sha256.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\md\relic_md_sha384.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\md\relic_md_sha512.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\md\sha1.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\md\sha224-256.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\md\sha384-512.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\low\easy\relic_bn_add_low.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\low\easy\relic_bn_cmp_low.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\low\easy\relic_bn_div_low.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\low\easy\relic_bn_mod_low.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\low\easy\relic_bn_mul_low.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\low\easy\relic_bn_shift_low.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\low\easy\relic_bn_sqr_low.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\low\easy\relic_fp_add_low.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\low\easy\relic_fp_cmp_low.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\low\easy\relic_fp_inv_low.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\low\easy\relic_fp_mul_low.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\low\easy\relic_fp_rdc_low.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\low\easy\relic_fp_shift_low.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\low\easy\relic_fp_sqr_low.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\low\easy\relic_fpx_add_low.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\low\easy\relic_fpx_mul_low.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\low\easy\relic_fpx_rdc_low.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\low\easy\relic_fpx_sqr_low.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\low\easy\relic_fb_add_low.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\low\easy\relic_fb_cmp_low.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\low\easy\relic_fb_inv_low.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\low\easy\relic_fb_itr_low.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\low\easy\relic_fb_mul_low.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\low\easy\relic_fb_rdc_low.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\low\easy\relic_fb_shift_low.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\low\easy\relic_fb_slv_low.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\low\easy\relic_fb_sqr_low.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\low\easy\relic_fb_srt_low.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\temp\bat-native-anonize\relic\src\low\easy\relic_fb_trc_low.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ClCompile Include="..\..\relic\src\relic_err.c" />
+    <ClCompile Include="..\..\relic\src\relic_core.c" />
+    <ClCompile Include="..\..\relic\src\relic_conf.c" />
+    <ClCompile Include="..\..\relic\src\relic_pool.c" />
+    <ClCompile Include="..\..\relic\src\relic_util.c" />
+    <ClCompile Include="..\..\relic\src\arch\relic_arch_none.c" />
+    <ClCompile Include="..\..\relic\src\rand\relic_rand_core.c" />
+    <ClCompile Include="..\..\relic\src\rand\relic_rand_hash.c" />
+    <ClCompile Include="..\..\relic\src\relic_test.c" />
+    <ClCompile Include="..\..\relic\src\relic_bench.c" />
+    <ClCompile Include="..\..\relic\src\bn\relic_bn_add.c" />
+    <ClCompile Include="..\..\relic\src\bn\relic_bn_cmp.c" />
+    <ClCompile Include="..\..\relic\src\bn\relic_bn_div.c" />
+    <ClCompile Include="..\..\relic\src\bn\relic_bn_factor.c" />
+    <ClCompile Include="..\..\relic\src\bn\relic_bn_gcd.c" />
+    <ClCompile Include="..\..\relic\src\bn\relic_bn_lcm.c" />
+    <ClCompile Include="..\..\relic\src\bn\relic_bn_mem.c" />
+    <ClCompile Include="..\..\relic\src\bn\relic_bn_mod.c" />
+    <ClCompile Include="..\..\relic\src\bn\relic_bn_mul.c" />
+    <ClCompile Include="..\..\relic\src\bn\relic_bn_mxp.c" />
+    <ClCompile Include="..\..\relic\src\bn\relic_bn_prime.c" />
+    <ClCompile Include="..\..\relic\src\bn\relic_bn_rec.c" />
+    <ClCompile Include="..\..\relic\src\bn\relic_bn_shift.c" />
+    <ClCompile Include="..\..\relic\src\bn\relic_bn_smb.c" />
+    <ClCompile Include="..\..\relic\src\bn\relic_bn_sqr.c" />
+    <ClCompile Include="..\..\relic\src\bn\relic_bn_srt.c" />
+    <ClCompile Include="..\..\relic\src\bn\relic_bn_util.c" />
+    <ClCompile Include="..\..\relic\src\dv\relic_dv_mem.c" />
+    <ClCompile Include="..\..\relic\src\dv\relic_dv_util.c" />
+    <ClCompile Include="..\..\relic\src\fp\relic_fp_add.c" />
+    <ClCompile Include="..\..\relic\src\fp\relic_fp_cmp.c" />
+    <ClCompile Include="..\..\relic\src\fp\relic_fp_exp.c" />
+    <ClCompile Include="..\..\relic\src\fp\relic_fp_inv.c" />
+    <ClCompile Include="..\..\relic\src\fp\relic_fp_mul.c" />
+    <ClCompile Include="..\..\relic\src\fp\relic_fp_param.c" />
+    <ClCompile Include="..\..\relic\src\fp\relic_fp_prime.c" />
+    <ClCompile Include="..\..\relic\src\fp\relic_fp_rdc.c" />
+    <ClCompile Include="..\..\relic\src\fp\relic_fp_shift.c" />
+    <ClCompile Include="..\..\relic\src\fp\relic_fp_sqr.c" />
+    <ClCompile Include="..\..\relic\src\fp\relic_fp_srt.c" />
+    <ClCompile Include="..\..\relic\src\fp\relic_fp_util.c" />
+    <ClCompile Include="..\..\relic\src\fpx\relic_fp12_mul.c" />
+    <ClCompile Include="..\..\relic\src\fpx\relic_fp12_sqr.c" />
+    <ClCompile Include="..\..\relic\src\fpx\relic_fp18_mul.c" />
+    <ClCompile Include="..\..\relic\src\fpx\relic_fp18_sqr.c" />
+    <ClCompile Include="..\..\relic\src\fpx\relic_fp2_mul.c" />
+    <ClCompile Include="..\..\relic\src\fpx\relic_fp2_sqr.c" />
+    <ClCompile Include="..\..\relic\src\fpx\relic_fp3_mul.c" />
+    <ClCompile Include="..\..\relic\src\fpx\relic_fp3_sqr.c" />
+    <ClCompile Include="..\..\relic\src\fpx\relic_fp6_mul.c" />
+    <ClCompile Include="..\..\relic\src\fpx\relic_fp6_sqr.c" />
+    <ClCompile Include="..\..\relic\src\fpx\relic_fpx_add.c" />
+    <ClCompile Include="..\..\relic\src\fpx\relic_fpx_cmp.c" />
+    <ClCompile Include="..\..\relic\src\fpx\relic_fpx_exp.c" />
+    <ClCompile Include="..\..\relic\src\fpx\relic_fpx_frb.c" />
+    <ClCompile Include="..\..\relic\src\fpx\relic_fpx_inv.c" />
+    <ClCompile Include="..\..\relic\src\fpx\relic_fpx_pck.c" />
+    <ClCompile Include="..\..\relic\src\fpx\relic_fpx_rdc.c" />
+    <ClCompile Include="..\..\relic\src\fpx\relic_fpx_srt.c" />
+    <ClCompile Include="..\..\relic\src\fpx\relic_fpx_util.c" />
+    <ClCompile Include="..\..\relic\src\fb\relic_fb_add.c" />
+    <ClCompile Include="..\..\relic\src\fb\relic_fb_cmp.c" />
+    <ClCompile Include="..\..\relic\src\fb\relic_fb_exp.c" />
+    <ClCompile Include="..\..\relic\src\fb\relic_fb_inv.c" />
+    <ClCompile Include="..\..\relic\src\fb\relic_fb_itr.c" />
+    <ClCompile Include="..\..\relic\src\fb\relic_fb_mul.c" />
+    <ClCompile Include="..\..\relic\src\fb\relic_fb_param.c" />
+    <ClCompile Include="..\..\relic\src\fb\relic_fb_poly.c" />
+    <ClCompile Include="..\..\relic\src\fb\relic_fb_rdc.c" />
+    <ClCompile Include="..\..\relic\src\fb\relic_fb_shift.c" />
+    <ClCompile Include="..\..\relic\src\fb\relic_fb_slv.c" />
+    <ClCompile Include="..\..\relic\src\fb\relic_fb_sqr.c" />
+    <ClCompile Include="..\..\relic\src\fb\relic_fb_srt.c" />
+    <ClCompile Include="..\..\relic\src\fb\relic_fb_trc.c" />
+    <ClCompile Include="..\..\relic\src\fb\relic_fb_util.c" />
+    <ClCompile Include="..\..\relic\src\fbx\relic_fb2_inv.c" />
+    <ClCompile Include="..\..\relic\src\fbx\relic_fb2_mul.c" />
+    <ClCompile Include="..\..\relic\src\fbx\relic_fb2_slv.c" />
+    <ClCompile Include="..\..\relic\src\fbx\relic_fb2_sqr.c" />
+    <ClCompile Include="..\..\relic\src\ep\relic_ep_add.c" />
+    <ClCompile Include="..\..\relic\src\ep\relic_ep_curve.c" />
+    <ClCompile Include="..\..\relic\src\ep\relic_ep_dbl.c" />
+    <ClCompile Include="..\..\relic\src\ep\relic_ep_map.c" />
+    <ClCompile Include="..\..\relic\src\ep\relic_ep_mul.c" />
+    <ClCompile Include="..\..\relic\src\ep\relic_ep_mul_fix.c" />
+    <ClCompile Include="..\..\relic\src\ep\relic_ep_mul_sim.c" />
+    <ClCompile Include="..\..\relic\src\ep\relic_ep_neg.c" />
+    <ClCompile Include="..\..\relic\src\ep\relic_ep_norm.c" />
+    <ClCompile Include="..\..\relic\src\ep\relic_ep_param.c" />
+    <ClCompile Include="..\..\relic\src\ep\relic_ep_pck.c" />
+    <ClCompile Include="..\..\relic\src\ep\relic_ep_util.c" />
+    <ClCompile Include="..\..\relic\src\epx\relic_ep2_add.c" />
+    <ClCompile Include="..\..\relic\src\epx\relic_ep2_curve.c" />
+    <ClCompile Include="..\..\relic\src\epx\relic_ep2_dbl.c" />
+    <ClCompile Include="..\..\relic\src\epx\relic_ep2_frb.c" />
+    <ClCompile Include="..\..\relic\src\epx\relic_ep2_map.c" />
+    <ClCompile Include="..\..\relic\src\epx\relic_ep2_mul.c" />
+    <ClCompile Include="..\..\relic\src\epx\relic_ep2_mul_fix.c" />
+    <ClCompile Include="..\..\relic\src\epx\relic_ep2_mul_sim.c" />
+    <ClCompile Include="..\..\relic\src\epx\relic_ep2_neg.c" />
+    <ClCompile Include="..\..\relic\src\epx\relic_ep2_norm.c" />
+    <ClCompile Include="..\..\relic\src\epx\relic_ep2_pck.c" />
+    <ClCompile Include="..\..\relic\src\epx\relic_ep2_util.c" />
+    <ClCompile Include="..\..\relic\src\eb\relic_eb_add.c" />
+    <ClCompile Include="..\..\relic\src\eb\relic_eb_curve.c" />
+    <ClCompile Include="..\..\relic\src\eb\relic_eb_dbl.c" />
+    <ClCompile Include="..\..\relic\src\eb\relic_eb_frb.c" />
+    <ClCompile Include="..\..\relic\src\eb\relic_eb_hlv.c" />
+    <ClCompile Include="..\..\relic\src\eb\relic_eb_map.c" />
+    <ClCompile Include="..\..\relic\src\eb\relic_eb_mul.c" />
+    <ClCompile Include="..\..\relic\src\eb\relic_eb_mul_fix.c" />
+    <ClCompile Include="..\..\relic\src\eb\relic_eb_mul_sim.c" />
+    <ClCompile Include="..\..\relic\src\eb\relic_eb_neg.c" />
+    <ClCompile Include="..\..\relic\src\eb\relic_eb_norm.c" />
+    <ClCompile Include="..\..\relic\src\eb\relic_eb_param.c" />
+    <ClCompile Include="..\..\relic\src\eb\relic_eb_pck.c" />
+    <ClCompile Include="..\..\relic\src\eb\relic_eb_util.c" />
+    <ClCompile Include="..\..\relic\src\ed\relic_ed_add.c" />
+    <ClCompile Include="..\..\relic\src\ed\relic_ed_curve.c" />
+    <ClCompile Include="..\..\relic\src\ed\relic_ed_dbl.c" />
+    <ClCompile Include="..\..\relic\src\ed\relic_ed_map.c" />
+    <ClCompile Include="..\..\relic\src\ed\relic_ed_mul.c" />
+    <ClCompile Include="..\..\relic\src\ed\relic_ed_mul_fix.c" />
+    <ClCompile Include="..\..\relic\src\ed\relic_ed_mul_sim.c" />
+    <ClCompile Include="..\..\relic\src\ed\relic_ed_param.c" />
+    <ClCompile Include="..\..\relic\src\ed\relic_ed_serialize.c" />
+    <ClCompile Include="..\..\relic\src\ed\relic_ed_util.c" />
+    <ClCompile Include="..\..\relic\src\pp\relic_pp_add.c" />
+    <ClCompile Include="..\..\relic\src\pp\relic_pp_dbl.c" />
+    <ClCompile Include="..\..\relic\src\pp\relic_pp_exp.c" />
+    <ClCompile Include="..\..\relic\src\pp\relic_pp_map.c" />
+    <ClCompile Include="..\..\relic\src\pp\relic_pp_norm.c" />
+    <ClCompile Include="..\..\relic\src\pc\relic_pc_util.c" />
+    <ClCompile Include="..\..\relic\src\cp\relic_cp_rsa.c" />
+    <ClCompile Include="..\..\relic\src\cp\relic_cp_rabin.c" />
+    <ClCompile Include="..\..\relic\src\cp\relic_cp_bdpe.c" />
+    <ClCompile Include="..\..\relic\src\cp\relic_cp_phpe.c" />
+    <ClCompile Include="..\..\relic\src\cp\relic_cp_ecdh.c" />
+    <ClCompile Include="..\..\relic\src\cp\relic_cp_ecmqv.c" />
+    <ClCompile Include="..\..\relic\src\cp\relic_cp_ecies.c" />
+    <ClCompile Include="..\..\relic\src\cp\relic_cp_ecdsa.c" />
+    <ClCompile Include="..\..\relic\src\cp\relic_cp_ecss.c" />
+    <ClCompile Include="..\..\relic\src\cp\relic_cp_vbnn_ibs.c" />
+    <ClCompile Include="..\..\relic\src\cp\relic_cp_sokaka.c" />
+    <ClCompile Include="..\..\relic\src\cp\relic_cp_bgn.c" />
+    <ClCompile Include="..\..\relic\src\cp\relic_cp_ibe.c" />
+    <ClCompile Include="..\..\relic\src\cp\relic_cp_bls.c" />
+    <ClCompile Include="..\..\relic\src\cp\relic_cp_bbs.c" />
+    <ClCompile Include="..\..\relic\src\cp\relic_cp_zss.c" />
+    <ClCompile Include="..\..\relic\src\bc\relic_bc_aes.c" />
+    <ClCompile Include="..\..\relic\src\bc\rijndael-alg-fst.c" />
+    <ClCompile Include="..\..\relic\src\bc\rijndael-api-fst.c" />
+    <ClCompile Include="..\..\relic\src\md\blake2s-ref.c" />
+    <ClCompile Include="..\..\relic\src\md\relic_md_blake2s.c" />
+    <ClCompile Include="..\..\relic\src\md\relic_md_hmac.c" />
+    <ClCompile Include="..\..\relic\src\md\relic_md_kdf.c" />
+    <ClCompile Include="..\..\relic\src\md\relic_md_mgf.c" />
+    <ClCompile Include="..\..\relic\src\md\relic_md_sha1.c" />
+    <ClCompile Include="..\..\relic\src\md\relic_md_sha224.c" />
+    <ClCompile Include="..\..\relic\src\md\relic_md_sha256.c" />
+    <ClCompile Include="..\..\relic\src\md\relic_md_sha384.c" />
+    <ClCompile Include="..\..\relic\src\md\relic_md_sha512.c" />
+    <ClCompile Include="..\..\relic\src\md\sha1.c" />
+    <ClCompile Include="..\..\relic\src\md\sha224-256.c" />
+    <ClCompile Include="..\..\relic\src\md\sha384-512.c" />
+    <ClCompile Include="..\..\relic\src\low\easy\relic_bn_add_low.c" />
+    <ClCompile Include="..\..\relic\src\low\easy\relic_bn_cmp_low.c" />
+    <ClCompile Include="..\..\relic\src\low\easy\relic_bn_div_low.c" />
+    <ClCompile Include="..\..\relic\src\low\easy\relic_bn_mod_low.c" />
+    <ClCompile Include="..\..\relic\src\low\easy\relic_bn_mul_low.c" />
+    <ClCompile Include="..\..\relic\src\low\easy\relic_bn_shift_low.c" />
+    <ClCompile Include="..\..\relic\src\low\easy\relic_bn_sqr_low.c" />
+    <ClCompile Include="..\..\relic\src\low\easy\relic_fp_add_low.c" />
+    <ClCompile Include="..\..\relic\src\low\easy\relic_fp_cmp_low.c" />
+    <ClCompile Include="..\..\relic\src\low\easy\relic_fp_inv_low.c" />
+    <ClCompile Include="..\..\relic\src\low\easy\relic_fp_mul_low.c" />
+    <ClCompile Include="..\..\relic\src\low\easy\relic_fp_rdc_low.c" />
+    <ClCompile Include="..\..\relic\src\low\easy\relic_fp_shift_low.c" />
+    <ClCompile Include="..\..\relic\src\low\easy\relic_fp_sqr_low.c" />
+    <ClCompile Include="..\..\relic\src\low\easy\relic_fpx_add_low.c" />
+    <ClCompile Include="..\..\relic\src\low\easy\relic_fpx_mul_low.c" />
+    <ClCompile Include="..\..\relic\src\low\easy\relic_fpx_rdc_low.c" />
+    <ClCompile Include="..\..\relic\src\low\easy\relic_fpx_sqr_low.c" />
+    <ClCompile Include="..\..\relic\src\low\easy\relic_fb_add_low.c" />
+    <ClCompile Include="..\..\relic\src\low\easy\relic_fb_cmp_low.c" />
+    <ClCompile Include="..\..\relic\src\low\easy\relic_fb_inv_low.c" />
+    <ClCompile Include="..\..\relic\src\low\easy\relic_fb_itr_low.c" />
+    <ClCompile Include="..\..\relic\src\low\easy\relic_fb_mul_low.c" />
+    <ClCompile Include="..\..\relic\src\low\easy\relic_fb_rdc_low.c" />
+    <ClCompile Include="..\..\relic\src\low\easy\relic_fb_shift_low.c" />
+    <ClCompile Include="..\..\relic\src\low\easy\relic_fb_slv_low.c" />
+    <ClCompile Include="..\..\relic\src\low\easy\relic_fb_sqr_low.c" />
+    <ClCompile Include="..\..\relic\src\low\easy\relic_fb_srt_low.c" />
+    <ClCompile Include="..\..\relic\src\low\easy\relic_fb_trc_low.c" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
