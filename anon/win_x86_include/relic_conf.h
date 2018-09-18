@@ -89,7 +89,7 @@
 #define WORD     32
 
 /** Byte boundary to align digit vectors. */
-#define ALIGN    1
+#define ALIGN    16
 
 /** Build multiple precision integer module. */
 #define WITH_BN

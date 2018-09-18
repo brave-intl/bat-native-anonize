@@ -129,7 +129,13 @@ typedef unsigned long long ull_t;
  * Specification for aligned variables.
  */
 #if ALIGN > 1
+
+#if OPSYS == WINDOWS
+#define relic_align 			__declspec( align( ALIGN ) )
+#else
 #define relic_align 			__attribute__ ((aligned (ALIGN)))
+#endif
+
 #else
 #define relic_align 			/* empty*/
 #endif
