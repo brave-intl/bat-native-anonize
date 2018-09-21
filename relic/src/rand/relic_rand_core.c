@@ -52,6 +52,7 @@
 #undef WORD
 #undef DOUBLE
 
+#define NOGDI
 #include <windows.h>
 #include <Wincrypt.h>
 

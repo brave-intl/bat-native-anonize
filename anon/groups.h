@@ -31,23 +31,29 @@
 
 extern "C" {
 #include <fcntl.h>
+
+#if !defined _WINDOWS
 #include <unistd.h>
+#endif
+
 #include "sha2.h"
 }
+
+
+
+#if defined _WINDOWS
+
+#define NOGDI
+#include <windows.h>
+#include <Wincrypt.h>
+
+#endif
 
 #include <iostream>
 #include <fstream>
 #include <sstream>
 
 //using namespace std;
-
-void rand(char* buf, int sz) {
-	int rr = open("/dev/urandom", O_RDONLY);
-	if (rr<0 || read(rr, buf, sz) != sz) {
-		fprintf(stderr,"Could not read %d byes from /dev/urandom. Abort.\n",sz);
-	}
-	close(rr);
-}
 
 static inline void H(sha256_ctx ctx[1], std::string s) {
 	sha256_hash((unsigned char*)s.c_str(), s.length(), ctx);

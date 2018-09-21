@@ -129,9 +129,15 @@ typedef unsigned long long ull_t;
  * Specification for aligned variables.
  */
 #if ALIGN > 1
-#define align 			__attribute__ ((aligned (ALIGN)))
+
+#if OPSYS == WINDOWS
+#define relic_align 			__declspec( align( ALIGN ) )
 #else
-#define align 			/* empty*/
+#define relic_align 			__attribute__ ((aligned (ALIGN)))
+#endif
+
+#else
+#define relic_align 			/* empty*/
 #endif
 
 /**
@@ -146,7 +152,7 @@ typedef unsigned long long ull_t;
 /**
  * Align digit vector pointer to specified byte-boundary.
  *
- * @param[in,out] A		- the pointer to align.
+ * @param[in,out] A		- the pointer to relic_align.
  */
 #if ALIGN > 1
 #if ARCH == AVR || ARCH == MSP || ARCH == X86 || ARCH == ARM

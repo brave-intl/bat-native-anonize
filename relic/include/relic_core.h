@@ -444,4 +444,10 @@ ctx_t *core_get(void);
  */
 void core_set(ctx_t *ctx);
 
+#define RELIC_CHECKED_MALLOC(var, T, size) \
+  var=(T*)malloc(size); if(NULL==var){THROW(ERR_NO_MEMORY);}
+
+#define RELIC_CHECKED_CALLOC(var, T, items, size) \
+  var=(T*)calloc(items,size); if(NULL==var){THROW(ERR_NO_MEMORY);}
+
 #endif /* !RELIC_CORE_H */

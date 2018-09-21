@@ -105,7 +105,8 @@ void eb_norm(eb_t r, const eb_t p) {
 
 void eb_norm_sim(eb_t *r, const eb_t *t, int n) {
 	int i;
-	fb_t a[n];
+  fb_t *a = NULL;
+  RELIC_CHECKED_CALLOC(a, fb_t, n, sizeof(a[0]));
 
 	if (n == 1) {
 		eb_norm(r[0], t[0]);
@@ -143,6 +144,7 @@ void eb_norm_sim(eb_t *r, const eb_t *t, int n) {
 		for (i = 0; i < n; i++) {
 			fb_free(a[i]);
 		}
+		free(a);
 	}
 
 	for (i = 0; i < n; i++) {

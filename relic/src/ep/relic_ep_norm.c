@@ -102,7 +102,8 @@ void ep_norm(ep_t r, const ep_t p) {
 
 void ep_norm_sim(ep_t *r, const ep_t *t, int n) {
 	int i;
-	fp_t a[n];
+	fp_t* a = NULL;
+  RELIC_CHECKED_MALLOC(a, fp_t, sizeof(fp_t) * n);
 
 	for (i = 0; i < n; i++) {
 		fp_null(a[i]);
@@ -133,5 +134,6 @@ void ep_norm_sim(ep_t *r, const ep_t *t, int n) {
 		for (i = 0; i < n; i++) {
 			fp_free(a[i]);
 		}
+		free(a);
 	}
 }

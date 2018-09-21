@@ -22,7 +22,11 @@
 #endif
 
 #include <fcntl.h>
+
+#if !defined _WINDOWS
 #include <unistd.h>
+#endif
+
 #include <string.h>
 #include <stdlib.h>
 //}
@@ -33,7 +37,6 @@
 #include <iomanip>
 
 void usage(char* me);
-void rand(char* buf, int sz);
 
 using namespace std;
 
@@ -47,6 +50,19 @@ void log(const char *msg, string str) 		{ fprintf(stderr, "%s %s\n",msg, str.c_s
 //
 // To verify, check that
 //     e(sigma, wg^r) = e(g, g^m1 t^m2 u v^s)
+
+
+#ifdef _WINDOWS
+char * strsep(char **sp, const char *sep) {
+  char *p, *s;
+  if (sp == NULL || *sp == NULL || **sp == '\0') return(NULL);
+  s = *sp;
+  p = s + strcspn(s, sep);
+  if (*p != '\0') *p++ = '\0';
+  *sp = p;
+  return(s);
+}
+#endif
 
 class SIG {
 public:
