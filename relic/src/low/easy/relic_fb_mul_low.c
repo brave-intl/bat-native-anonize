@@ -151,7 +151,7 @@ void fb_muln_low(dig_t *c, const dig_t *a, const dig_t *b) {
 void fb_muld_low(dig_t *c, const dig_t *a, const dig_t *b, int size) {
   dig_t* t[16];
   dig_t *tt = NULL;
-  RELIC_CHECKED_MALLOC(tt, dig_t, sizeof(dig_t) * (size + 1) * 16);
+  RELIC_CHECKED_CALLOC(tt, dig_t, 16, sizeof(dig_t) * (size + 1));
   for (int i = 0; i < 16; ++i) {
     t[i] = tt + i * (size + 1);
   }
