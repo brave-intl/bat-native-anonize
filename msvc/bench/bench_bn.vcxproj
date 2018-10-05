@@ -89,6 +89,7 @@
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <Optimization>Disabled</Optimization>
       <AdditionalOptions>/FS</AdditionalOptions>
+      <PreprocessorDefinitions>WITH_FB;WITH_EB;WITH_ED;WITH_EC;WITH_PC;WITH_BC;WITH_CP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_DEBUG;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -124,6 +125,7 @@
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <AdditionalOptions>/FS</AdditionalOptions>
+      <PreprocessorDefinitions>WITH_FB;WITH_EB;WITH_ED;WITH_EC;WITH_PC;WITH_BC;WITH_CP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_DEBUG;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -160,6 +162,7 @@
       <DebugInformationFormat>
       </DebugInformationFormat>
       <AdditionalOptions>/FS</AdditionalOptions>
+      <PreprocessorDefinitions>WITH_FB;WITH_EB;WITH_ED;WITH_EC;WITH_PC;WITH_BC;WITH_CP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;NDEBUG;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -195,6 +198,7 @@
       <DebugInformationFormat>
       </DebugInformationFormat>
       <AdditionalOptions>/FS</AdditionalOptions>
+      <PreprocessorDefinitions>WITH_FB;WITH_EB;WITH_ED;WITH_EC;WITH_PC;WITH_BC;WITH_CP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;NDEBUG;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>

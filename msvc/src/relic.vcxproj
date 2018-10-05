@@ -89,7 +89,7 @@
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <WarningLevel>EnableAllWarnings</WarningLevel>
-      <PreprocessorDefinitions>WITH_FB;WITH_EP;WITH_EPX;WITH_EB;WITH_ED;WITH_EC;WITH_PP;WITH_PC;WITH_BC;WITH_MD;WITH_CP;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WITH_FB;WITH_EB;WITH_ED;WITH_EC;WITH_PC;WITH_BC;WITH_CP;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>/FS</AdditionalOptions>
     </ClCompile>
     <ResourceCompile>
@@ -126,7 +126,7 @@
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <WarningLevel>EnableAllWarnings</WarningLevel>
-      <PreprocessorDefinitions>WITH_FB;WITH_EP;WITH_EPX;WITH_EB;WITH_ED;WITH_EC;WITH_PP;WITH_PC;WITH_BC;WITH_MD;WITH_CP;_WINDOWS;relic_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WITH_FB;WITH_EB;WITH_ED;WITH_EC;WITH_PC;WITH_BC;WITH_CP;_WINDOWS;relic_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>/FS</AdditionalOptions>
     </ClCompile>
     <ResourceCompile>
@@ -161,7 +161,7 @@
       <Optimization>MaxSpeed</Optimization>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <WarningLevel>EnableAllWarnings</WarningLevel>
-      <PreprocessorDefinitions>WITH_FB;WITH_EP;WITH_EPX;WITH_EB;WITH_ED;WITH_EC;WITH_PP;WITH_PC;WITH_BC;WITH_MD;WITH_CP;_WINDOWS;NDEBUG;relic_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WITH_FB;WITH_EB;WITH_ED;WITH_EC;WITH_PC;WITH_BC;WITH_CP;_WINDOWS;NDEBUG;relic_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DebugInformationFormat>
       </DebugInformationFormat>
       <AdditionalOptions>/FS</AdditionalOptions>
@@ -198,7 +198,7 @@
       <Optimization>MaxSpeed</Optimization>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <WarningLevel>EnableAllWarnings</WarningLevel>
-      <PreprocessorDefinitions>WITH_FB;WITH_EP;WITH_EPX;WITH_EB;WITH_ED;WITH_EC;WITH_PP;WITH_PC;WITH_BC;WITH_MD;WITH_CP;_WINDOWS;NDEBUG;relic_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WITH_FB;WITH_EB;WITH_ED;WITH_EC;WITH_PC;WITH_BC;WITH_CP;_WINDOWS;NDEBUG;relic_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DebugInformationFormat>
       </DebugInformationFormat>
       <AdditionalOptions>/FS</AdditionalOptions>
