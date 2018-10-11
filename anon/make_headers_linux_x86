@@ -1,5 +1,5 @@
 cmake ../relic -G "Unix Makefiles"  \
-        -DCHECK=on -DDEBUG=on \
+        -DRELIC_CHECK=on -DDEBUG=on \
         -DARCH=X86 -DALIGN=16 \
         -DOPSYS=LINUX \
         -DCOLOR=OFF -DSEED=UDEV \

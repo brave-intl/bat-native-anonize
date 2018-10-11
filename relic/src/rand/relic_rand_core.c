@@ -48,7 +48,7 @@
 #elif SEED == WCGR
 
 /* Avoid redefinition warning. */
-#undef ERROR
+#undef RELIC_ERROR
 #undef WORD
 #undef DOUBLE
 

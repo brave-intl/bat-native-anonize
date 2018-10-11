@@ -13,9 +13,9 @@ macro(ADD_MODULE MODULE)
 	add_test(bench_${MODULE} ${SIMUL} ${SIMAR} ${EXECUTABLE_OUTPUT_PATH}/bench_${MODULE})
 endmacro(ADD_MODULE)
 
-if (CHECK)
+if (RELIC_CHECK)
 	ADD_MODULE(err)
-endif(CHECK)
+endif(RELIC_CHECK)
 
 if (WITH_BN)
 	ADD_MODULE(bn)

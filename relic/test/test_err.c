@@ -85,7 +85,7 @@ int main(void) {
 		switch (e) {
 			case ERR_NO_MEMORY:
 				TEST_END;
-				ERROR(end);
+				RELIC_ERROR(end);
 				break;
 		}
 	}

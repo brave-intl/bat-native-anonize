@@ -40,7 +40,7 @@
 /** Profiling support. */
 #cmakedefine PROFL
 /** Error handling support. */
-#cmakedefine CHECK
+#cmakedefine RELIC_CHECK
 /** Verbose error messages. */
 #cmakedefine VERBS
 /** Trace support. */

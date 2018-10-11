@@ -52,7 +52,7 @@ static int memory(void) {
 		switch (e) {
 			case ERR_NO_MEMORY:
 				util_print("FATAL ERROR!\n");
-				ERROR(end);
+				RELIC_ERROR(end);
 				break;
 		}
 	}
@@ -287,7 +287,7 @@ static int util(void) {
 		TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -350,7 +350,7 @@ static int addition(void) {
 		} TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -407,7 +407,7 @@ static int subtraction(void) {
 		TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -550,7 +550,7 @@ static int multiplication(void) {
 
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -612,7 +612,7 @@ static int squaring(void) {
 
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -650,7 +650,7 @@ static int doubling_halving(void) {
 		} TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -730,7 +730,7 @@ static int shifting(void) {
 		} TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -836,7 +836,7 @@ static int division(void) {
 		} TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -931,7 +931,7 @@ static int reduction(void) {
 
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -1016,7 +1016,7 @@ static int exponentiation(void) {
 
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -1048,7 +1048,7 @@ static int square_root(void) {
 		TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -1184,7 +1184,7 @@ static int gcd(void) {
 		} TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -1220,7 +1220,7 @@ static int lcm(void) {
 		} TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -1398,7 +1398,7 @@ static int symbol(void) {
 		} TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -1527,7 +1527,7 @@ static int digit(void) {
 		TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -1593,7 +1593,7 @@ static int prime(void) {
 		} TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -1626,7 +1626,7 @@ static int factor(void) {
 		} TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -1744,7 +1744,7 @@ static int recoding(void) {
 						} else {
 							if (tnaf[k] > 0) {
 								if (beta[tnaf[k] / 2] >= 0) {
-									bn_add_dig(a, a, beta[tnaf[k] / 2]);	
+									bn_add_dig(a, a, beta[tnaf[k] / 2]);
 								} else {
 									bn_sub_dig(a, a, -beta[tnaf[k] / 2]);
 								}
@@ -1765,7 +1765,7 @@ static int recoding(void) {
 								} else {
 									bn_add_dig(b, b, -gama[-tnaf[k] / 2]);
 								}
-							}							
+							}
 						}
 					}
 					free(beta);
@@ -1816,7 +1816,7 @@ static int recoding(void) {
 						} else {
 							if (tnaf[k] > 0) {
 								if (beta[tnaf[k] / 2] >= 0) {
-									bn_add_dig(a, a, beta[tnaf[k] / 2]);	
+									bn_add_dig(a, a, beta[tnaf[k] / 2]);
 								} else {
 									bn_sub_dig(a, a, -beta[tnaf[k] / 2]);
 								}
@@ -1837,7 +1837,7 @@ static int recoding(void) {
 								} else {
 									bn_add_dig(b, b, -gama[-tnaf[k] / 2]);
 								}
-							}				
+							}
 						}
 					}
 					free(beta);
@@ -1845,7 +1845,7 @@ static int recoding(void) {
 					TEST_ASSERT(bn_cmp(a, v1[0]) == CMP_EQ, end);
 					TEST_ASSERT(bn_cmp(b, v1[1]) == CMP_EQ, end);
 				}
-			} TEST_END;			
+			} TEST_END;
 		}
 #endif
 
@@ -1923,7 +1923,7 @@ static int recoding(void) {
 #endif /* WITH_EP && EP_KBLTZ */
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -2041,7 +2041,7 @@ int main(void) {
 	if (factor() != STS_OK) {
 		core_clean();
 		return 1;
-	}	
+	}
 
 	util_banner("All tests have passed.\n", 0);
 

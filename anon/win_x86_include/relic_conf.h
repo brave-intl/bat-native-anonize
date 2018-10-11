@@ -40,7 +40,7 @@
 /** Profiling support. */
 /* #undef PROFL */
 /** Error handling support. */
-#define CHECK
+#define RELIC_CHECK
 /** Verbose error messages. */
 #define VERBS
 /** Trace support. */
@@ -647,7 +647,7 @@
 /** ECDSA with fast verification. */
 #define QUICK    2
 /** Chosen ECDSA method. */
-#define CP_ECDSA 
+#define CP_ECDSA
 
 /** Automatic memory allocation. */
 #define AUTO     1

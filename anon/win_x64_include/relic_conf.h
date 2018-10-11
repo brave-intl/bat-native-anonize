@@ -40,7 +40,7 @@
 /** Profiling support. */
 /* #undef PROFL */
 /** Error handling support. */
-#define CHECK
+#define RELIC_CHECK
 /** Verbose error messages. */
 #define VERBS
 /** Trace support. */

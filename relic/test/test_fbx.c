@@ -49,7 +49,7 @@ static int memory2(void) {
 		switch (e) {
 			case ERR_NO_MEMORY:
 				util_print("FATAL ERROR!\n");
-				ERROR(end);
+				RELIC_ERROR(end);
 				break;
 		}
 	}
@@ -130,7 +130,7 @@ static int util2(void) {
 
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -192,7 +192,7 @@ static int addition2(void) {
 	}
 	CATCH_ANY {
 		util_print("FATAL ERROR!\n");
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -246,7 +246,7 @@ static int subtraction2(void) {
 	}
 	CATCH_ANY {
 		util_print("FATAL ERROR!\n");
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -324,7 +324,7 @@ static int multiplication2(void) {
 	}
 	CATCH_ANY {
 		util_print("FATAL ERROR!\n");
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -359,7 +359,7 @@ static int squaring2(void) {
 	}
 	CATCH_ANY {
 		util_print("FATAL ERROR!\n");
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -396,7 +396,7 @@ static int solve2(void) {
 		} TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -428,7 +428,7 @@ static int inversion2(void) {
 	}
 	CATCH_ANY {
 		util_print("FATAL ERROR!\n");
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:

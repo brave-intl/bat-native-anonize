@@ -76,11 +76,11 @@ int core_init(void) {
 		core_ctx = &(first_ctx);
 	}
 
-#if defined(CHECK) && defined(TRACE)
+#if defined(RELIC_CHECK) && defined(TRACE)
 	core_ctx->trace = 0;
 #endif
 
-#ifdef CHECK
+#ifdef RELIC_CHECK
 	core_ctx->reason[ERR_NO_MEMORY] = MSG_NO_MEMORY;
 	core_ctx->reason[ERR_NO_PRECI] = MSG_NO_PRECI;
 	core_ctx->reason[ERR_NO_FILE] = MSG_NO_FILE;
@@ -91,7 +91,7 @@ int core_init(void) {
 	core_ctx->reason[ERR_NO_CURVE] = MSG_NO_CURVE;
 	core_ctx->reason[ERR_NO_CONFIG] = MSG_NO_CONFIG;
 	core_ctx->last = NULL;
-#endif /* CHECK */
+#endif /* RELIC_CHECK */
 
 #if ALLOC == STATIC
 	core_ctx->next = 0;

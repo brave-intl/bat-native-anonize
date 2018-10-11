@@ -50,7 +50,7 @@ static int memory(void) {
 		switch (e) {
 			case ERR_NO_MEMORY:
 				util_print("FATAL ERROR!\n");
-				ERROR(end);
+				RELIC_ERROR(end);
 				break;
 		}
 	}
@@ -141,7 +141,7 @@ int addition(void) {
 		} TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -237,7 +237,7 @@ int util(void) {
 	}
 	CATCH_ANY {
 		util_print("FATAL ERROR!\n");
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -272,7 +272,7 @@ int doubling(void) {
 		} TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -364,7 +364,7 @@ static int multiplication(void) {
 	}
 	CATCH_ANY {
 		util_print("FATAL ERROR!\n");
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -398,7 +398,7 @@ static int compression(void) {
 		TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -432,7 +432,7 @@ static int hashing(void) {
 		TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:

@@ -45,7 +45,7 @@
 /* Public definitions                                                         */
 /*============================================================================*/
 
-#ifdef CHECK
+#ifdef RELIC_CHECK
 
 void err_simple_msg(int error) {
 	if (error != ERR_CAUGHT) {
@@ -95,7 +95,7 @@ void err_get_msg(err_t *e, char **msg) {
 	ctx->last = NULL;
 }
 
-#endif /* CHECK */
+#endif /* RELIC_CHECK */
 
 int err_get_code(void) {
 	ctx_t *ctx = core_get();

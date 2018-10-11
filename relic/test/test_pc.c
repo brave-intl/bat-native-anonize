@@ -49,7 +49,7 @@ static int memory1(void) {
 		switch (e) {
 			case ERR_NO_MEMORY:
 				util_print("FATAL ERROR!\n");
-				ERROR(end);
+				RELIC_ERROR(end);
 				break;
 		}
 	}
@@ -143,7 +143,7 @@ int util1(void) {
 	}
 	CATCH_ANY {
 		util_print("FATAL ERROR!\n");
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -211,7 +211,7 @@ int addition1(void) {
 		} TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -268,7 +268,7 @@ int subtraction1(void) {
 		TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -302,7 +302,7 @@ int doubling1(void) {
 		} TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -353,7 +353,7 @@ static int multiplication1(void) {
 	}
 	CATCH_ANY {
 		util_print("FATAL ERROR!\n");
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -408,7 +408,7 @@ static int fixed1(void) {
 	}
 	CATCH_ANY {
 		util_print("FATAL ERROR!\n");
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -467,7 +467,7 @@ static int simultaneous1(void) {
 	}
 	CATCH_ANY {
 		util_print("FATAL ERROR!\n");
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -506,7 +506,7 @@ static int hashing1(void) {
 
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -531,7 +531,7 @@ static int memory2(void) {
 		switch (e) {
 			case ERR_NO_MEMORY:
 				util_print("FATAL ERROR!\n");
-				ERROR(end);
+				RELIC_ERROR(end);
 				break;
 		}
 	}
@@ -625,7 +625,7 @@ int util2(void) {
 	}
 	CATCH_ANY {
 		util_print("FATAL ERROR!\n");
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -693,7 +693,7 @@ int addition2(void) {
 		} TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -750,7 +750,7 @@ int subtraction2(void) {
 		TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -784,7 +784,7 @@ int doubling2(void) {
 		} TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -835,7 +835,7 @@ static int multiplication2(void) {
 	}
 	CATCH_ANY {
 		util_print("FATAL ERROR!\n");
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -890,7 +890,7 @@ static int fixed2(void) {
 	}
 	CATCH_ANY {
 		util_print("FATAL ERROR!\n");
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -949,7 +949,7 @@ static int simultaneous2(void) {
 	}
 	CATCH_ANY {
 		util_print("FATAL ERROR!\n");
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -988,7 +988,7 @@ static int hashing2(void) {
 
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -1013,7 +1013,7 @@ static int memory(void) {
 		switch (e) {
 			case ERR_NO_MEMORY:
 				util_print("FATAL ERROR!\n");
-				ERROR(end);
+				RELIC_ERROR(end);
 				break;
 		}
 	}
@@ -1083,7 +1083,7 @@ int util(void) {
 	}
 	CATCH_ANY {
 		util_print("FATAL ERROR!\n");
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -1140,7 +1140,7 @@ int multiplication(void) {
 		} TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -1173,7 +1173,7 @@ int squaring(void) {
 		} TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -1202,7 +1202,7 @@ static int inversion(void) {
 	}
 	CATCH_ANY {
 		util_print("FATAL ERROR!\n");
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -1243,7 +1243,7 @@ int exponentiation(void) {
 	}
 	CATCH_ANY {
 		util_print("FATAL ERROR!\n");
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:
@@ -1317,7 +1317,7 @@ static int pairing(void) {
 	}
 	CATCH_ANY {
 		util_print("FATAL ERROR!\n");
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
   end:

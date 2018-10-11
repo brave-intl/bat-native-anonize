@@ -18,4 +18,4 @@ export RANLIB="$NDK/$MIDDLE/${PREF}ranlib  --sysroot=$SYSROOT"
 export CCLD="$NDK/$MIDDLE/${PREF}gcc  --sysroot=$SYSROOT"
 export AR="$NDK/$MIDDLE/${PREF}ar  --sysroot=$SYSROOT"
 
-cmake -DWITH="DV;BN;MD;FP;EP;FPX;EPX;PP;PC" -DCHECK=off -DARITH=arm-asm-254 -DARCH=ARM -DCOLOR=off -DOPSYS=DROID -DSEED=ZERO -DSHLIB=off -DFP_PRIME=254 -DFP_QNRES=on -DFP_METHD="INTEG;INTEG;INTEG;MONTY;EXGCD;SLIDE" -DFPX_METHD="INTEG;INTEG;LAZYR" -DPP_METHD="LAZYR;OATEP" -DCOMP="-O3 -funroll-loops -fomit-frame-pointer -I/opt/android-ndk/platforms/android-14/arch-arm/usr/include" -DLINK="-L/opt/android-ndk/platforms/android-14/arch-arm/usr/lib/ -llog" -DTIMER=HREAL -DWORD=32 -DSTLIB=on $1
+cmake -DWITH="DV;BN;MD;FP;EP;FPX;EPX;PP;PC" -DRELIC_CHECK=off -DARITH=arm-asm-254 -DARCH=ARM -DCOLOR=off -DOPSYS=DROID -DSEED=ZERO -DSHLIB=off -DFP_PRIME=254 -DFP_QNRES=on -DFP_METHD="INTEG;INTEG;INTEG;MONTY;EXGCD;SLIDE" -DFPX_METHD="INTEG;INTEG;LAZYR" -DPP_METHD="LAZYR;OATEP" -DCOMP="-O3 -funroll-loops -fomit-frame-pointer -I/opt/android-ndk/platforms/android-14/arch-arm/usr/include" -DLINK="-L/opt/android-ndk/platforms/android-14/arch-arm/usr/lib/ -llog" -DTIMER=HREAL -DWORD=32 -DSTLIB=on $1

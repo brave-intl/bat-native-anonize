@@ -1,5 +1,5 @@
 cmake ../relic -G "Unix Makefiles"  \
-		   -DCHECK=on -DDEBUG=on \
+		   -DRELIC_CHECK=on -DDEBUG=on \
 		   -DARCH=X64 -DALIGN=16 \
 		   -DOPSYS=MACOSX -DSTLIB=ON -DSHLIB=OFF \
 		   -DALLOC=AUTO \

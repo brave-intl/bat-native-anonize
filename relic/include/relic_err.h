@@ -224,7 +224,7 @@ typedef struct _sts_t {
 		}																\
 	}																	\
 
-#ifdef CHECK
+#ifdef RELIC_CHECK
 /**
  * Implements a TRY clause.
  */
@@ -236,7 +236,7 @@ typedef struct _sts_t {
 #define TRY					if (1)
 #endif
 
-#ifdef CHECK
+#ifdef RELIC_CHECK
 /**
  * Implements a CATCH clause.
  */
@@ -248,7 +248,7 @@ typedef struct _sts_t {
 #define CATCH(E)			else
 #endif
 
-#ifdef CHECK
+#ifdef RELIC_CHECK
 /**
  * Implements a CATCH clause for any possible error.
  *
@@ -263,7 +263,7 @@ typedef struct _sts_t {
 #define CATCH_ANY			if (0)
 #endif
 
-#ifdef CHECK
+#ifdef RELIC_CHECK
 /**
  * Implements a FINALLY clause.
  */
@@ -272,7 +272,7 @@ typedef struct _sts_t {
 #define FINALLY				if (1)
 #endif
 
-#ifdef CHECK
+#ifdef RELIC_CHECK
 /**
  * Implements a THROW clause.
  */
@@ -296,7 +296,7 @@ typedef struct _sts_t {
  *
  * @param[in] LABEL			- the label to jump
  */
-#define ERROR(LABEL)		goto LABEL
+#define RELIC_ERROR(LABEL)		goto LABEL
 
 #ifdef VERBS
 
@@ -324,7 +324,7 @@ typedef struct _sts_t {
 /* Function prototypes                                                        */
 /*============================================================================*/
 
-#ifdef CHECK
+#ifdef RELIC_CHECK
 
 /**
  * Prints the error message with little information.

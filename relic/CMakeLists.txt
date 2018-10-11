@@ -21,11 +21,11 @@ set(WFLAGS "-Wall")
 
 message("\n-- Configuring ${PROJECT_NAME} ${PROJECT_VERSION}...\n")
 
-message(STATUS "Available switches (default = CHECK, VERBS, DOCUM):\n")
+message(STATUS "Available switches (default = RELIC_CHECK, VERBS, DOCUM):\n")
 
 message("   DEBUG=[off|on] Build with debugging support.")
 message("   PROFL=[off|on] Build with profiling support.")
-message("   CHECK=[off|on] Build with error-checking support.")
+message("   RELIC_CHECK=[off|on] Build with error-checking support.")
 message("   VERBS=[off|on] Build with detailed error messages.")
 message("   TRACE=[off|on] Build with tracing support.")
 message("   OVERH=[off|on] Build with overhead estimation.")
@@ -41,7 +41,7 @@ message("   AMALG=[off|on] Build amalgamation for better performance.\n")
 
 option(DEBUG "Build with debugging support" off)
 option(PROFL "Build with profiling support" off)
-option(CHECK "Build with error-checking support" on)
+option(RELIC_CHECK "Build with error-checking support" on)
 option(VERBS "Build with detailed error messages" on)
 option(TRACE "Build with tracing support" off)
 option(OVERH "Build with overhead estimation" off)
