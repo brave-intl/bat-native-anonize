@@ -27,7 +27,7 @@ $ git clone ...
 $ mkdir relic-darwin
 $ cd relic-darwin
 $ cmake ../relic -G "Unix Makefiles"  \
-		   -DCHECK=on -DDEBUG=on \
+		   -DRELIC_CHECK=on -DDEBUG=on \
 		   -DARCH=X64 -DALIGN=16 \
 		   -DOPSYS=MACOSX -DSTLIB=ON -DSHLIB=OFF \
 		   -DALLOC=AUTO \
@@ -44,7 +44,7 @@ The `setup.sh` file in `relic-darwin` just has that cmake command in it.
 I believe the following will setup `relic` for linux.
 ```sh
 $ cmake ../relic -G "Unix Makefiles"  \
-        -DCHECK=on -DDEBUG=on \
+        -DRELIC_CHECK=on -DDEBUG=on \
         -DARCH=X64 -DALIGN=16 \
         -DOPSYS=LINUX \
         -DCOLOR=OFF -DSEED=UDEV \

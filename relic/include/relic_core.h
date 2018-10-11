@@ -145,7 +145,7 @@ typedef struct _ctx_t {
 	/** The value returned by the last call, can be STS_OK or STS_ERR. */
 	int code;
 
-#ifdef CHECK
+#ifdef RELIC_CHECK
 	/** The state of the last error caught. */
 	sts_t *last;
 	/** Error state to be used outside try-catch blocks. */
@@ -156,12 +156,12 @@ typedef struct _ctx_t {
 	char *reason[ERR_MAX];
 	/** A flag to indicate if the last error was already caught. */
 	int caught;
-#endif /* CHECK */
+#endif /* RELIC_CHECK */
 
-#if defined(CHECK) && defined(TRACE)
+#if defined(RELIC_CHECK) && defined(TRACE)
 	/** The current trace size. */
 	int trace;
-#endif /* CHECK && TRACE */
+#endif /* RELIC_CHECK && TRACE */
 
 #if ALLOC == STATIC
 	/** The static pool of digit vectors. */

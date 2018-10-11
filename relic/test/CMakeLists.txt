@@ -13,9 +13,9 @@ macro(ADD_MODULE MODULE)
 	add_test(test_${MODULE} ${SIMUL} ${SIMAR} ${EXECUTABLE_OUTPUT_PATH}/test_${MODULE})
 endmacro(ADD_MODULE)
 
-if (CHECK)
+if (RELIC_CHECK)
 	ADD_MODULE(err)
-endif(CHECK)
+endif(RELIC_CHECK)
 
 if (WITH_BN)
 	ADD_MODULE(bn)
@@ -47,7 +47,7 @@ endif(WITH_EP)
 
 if (WITH_EPX)
 	ADD_MODULE(epx)
-endif(WITH_EPX)	
+endif(WITH_EPX)
 
 if (WITH_EB)
 	ADD_MODULE(eb)
@@ -67,7 +67,7 @@ endif(WITH_PC)
 
 if (WITH_PP)
 	ADD_MODULE(pp)
-endif(WITH_PP)	
+endif(WITH_PP)
 
 if (WITH_MD)
 	ADD_MODULE(md)

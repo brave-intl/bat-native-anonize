@@ -77,7 +77,7 @@
 		util_print("(at ");													\
 		util_print(__FILE__);												\
 		util_print(":%d)\n", __LINE__);										\
-		ERROR(LABEL);														\
+		RELIC_ERROR(LABEL);														\
 	}																		\
 
 /**

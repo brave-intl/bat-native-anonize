@@ -140,7 +140,7 @@ static int rsa(void) {
 		} TEST_END;
 #endif
 	} CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
 
@@ -179,7 +179,7 @@ static int rabin(void) {
 			TEST_ASSERT(memcmp(in, out, out_len) == 0, end);
 		} TEST_END;
 	} CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
 
@@ -241,7 +241,7 @@ static int benaloh(void) {
 			TEST_ASSERT(in == out, end);
 		} TEST_END;
 	} CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
 
@@ -324,7 +324,7 @@ static int paillier(void) {
 		TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
 
@@ -501,7 +501,7 @@ static int ecdh(void) {
 		(void)key;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
 
@@ -553,7 +553,7 @@ static int ecmqv(void) {
 		} TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
 
@@ -647,7 +647,7 @@ static int ecies(void) {
 #endif
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
 
@@ -688,7 +688,7 @@ static int ecdsa(void) {
 		TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
 
@@ -723,7 +723,7 @@ static int ecss(void) {
 		TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
 
@@ -783,7 +783,7 @@ static int vbnn_ibs(void) {
 		TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
 
@@ -830,7 +830,7 @@ static int sokaka(void) {
 		} TEST_END;
 
 	} CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
 
@@ -872,7 +872,7 @@ static int ibe(void) {
 			TEST_ASSERT(memcmp(in, out, il) == 0, end);
 		} TEST_END;
 	} CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
 
@@ -972,7 +972,7 @@ static int bgn(void) {
 		} TEST_END;
 
 	} CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
 
@@ -1017,7 +1017,7 @@ static int bls(void) {
 		TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
 
@@ -1058,7 +1058,7 @@ static int bbs(void) {
 		TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
 
@@ -1100,7 +1100,7 @@ static int zss(void) {
 		TEST_END;
 	}
 	CATCH_ANY {
-		ERROR(end);
+		RELIC_ERROR(end);
 	}
 	code = STS_OK;
 
