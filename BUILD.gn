@@ -6,76 +6,53 @@ if (is_android) {
   import("//build/config/android/rules.gni")
 }
 
-config("external_config") {
-  defines = [
-    "RELIC_LIBRARY",
-  ]
-  include_dirs = [ "." ]
-
-  if (is_mac) {
-    defines += [
-      "ARCH=X64",
-      "ALIGN=16",
-      "OPSYS=MACOSX",
-      "SHLIB=OFF",
-      "ALLOC=AUTO",
-      "COLOR=OFF",
-      "SEED=UDEV",
-      "WITH=\"BN;DV;FP;FPX;EP;EPX;PP;MD\"",
-      "BN_PRECI=256",
-      "BN_MAGNI=DOUBLE",
-      "BENCH=100",
-      "TESTS=0",
-      "TIMER=NONE",
-      "OVERH=0"
+config("internal_config") {
+  if (is_win) {
+    defines = [
+      "_CRT_NONSTDC_NO_DEPRECATE",
+      "LITTLE_ENDIAN",
+      "_SCL_SECURE_NO_WARNINGS"
     ]
-    include_dirs += [ "anon/macos_include" ]
-  } else if (is_linux) {
-    if (current_cpu == "x64") {
-      defines += [
-        "ARCH=X64",
-      ]
-      include_dirs += [ "anon/linux_x64_include" ]
-    } else if (current_cpu == "x86") {
-      defines += [
-        "ARCH=X86",
-      ]
-      include_dirs += [ "anon/linux_x86_include" ]
-    }
-    defines += [
-      "ALIGN=16",
-      "OPSYS=LINUX",
-      "COLOR=OFF",
-      "SEED=UDEV",
-      "WITH=\"BN;DV;FP;FPX;EP;EPX;PP;MD\"",
-      "BN_PRECI=256",
-      "BN_MAGNI=DOUBLE"
-    ]
-  } else if (is_android) {
-    include_dirs += [ "anon/android_include" ]  
-  } else if (is_win) {
-    if (target_cpu == "x64"){
-      include_dirs += [ "anon/win_x64_include" ]
-    }
-    else if (target_cpu == "x86"){
-      include_dirs += [ "anon/win_x86_include" ]
-    }
-
-    defines += [
-        "_CRT_NONSTDC_NO_DEPRECATE",
-        "LITTLE_ENDIAN",
-        "_SCL_SECURE_NO_WARNINGS"
-      ]
   }
+}
 
-  include_dirs += [
+config("external_config") {
+  include_dirs = [
+    ".",
     "relic/include",
     "relic/include/low",
   ]
+
+  if (is_mac) {
+    include_dirs += [ "anon/macos_include" ]
+  } else if (is_linux) {
+    if (current_cpu == "x64") {
+      include_dirs += [ "anon/linux_x64_include" ]
+    } else if (current_cpu == "x86") {
+      include_dirs += [ "anon/linux_x86_include" ]
+    }
+  } else if (is_android) {
+    include_dirs += [ "anon/android_include" ]
+  } else if (is_win) {
+    if (target_cpu == "x64"){
+      include_dirs += [ "anon/win_x64_include" ]
+    } else if (target_cpu == "x86"){
+      include_dirs += [ "anon/win_x86_include" ]
+    }
+  }
+
+  defines = [
+    "RELIC_LIBRARY",
+  ]
+
+  if (is_win) {
+    libs = [ "advapi32.lib" ]
+  }
 }
 
 static_library("anonize2") {
   public_configs = [ ":external_config" ]
+  configs += [ ":internal_config" ]
   sources = [
     "relic/src/relic_err.c",
     "relic/src/relic_core.c",
