@@ -25,6 +25,12 @@ config("external_config") {
 
   if (is_mac) {
     include_dirs += [ "anon/macos_include" ]
+  } else if (is_ios) {
+    if (current_cpu == "x64") {
+        include_dirs += [ "anon/macos_include" ]
+    } else {
+        include_dirs += [ "anon/ios_include" ]
+    }
   } else if (is_linux) {
     if (current_cpu == "x64") {
       include_dirs += [ "anon/linux_x64_include" ]
