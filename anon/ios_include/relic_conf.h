@@ -128,7 +128,7 @@
 #define ARITH    EASY
 
 /** Required precision in bits. */
-#define BN_PRECI 1024
+#define BN_PRECI 256
 /** A multiple precision integer can store w words. */
 #define SINGLE	 0
 /** A multiple precision integer can store the result of an addition. */
@@ -198,13 +198,13 @@
 #define BN_METHD "COMBA;COMBA;MONTY;SLIDE;BASIC;BASIC"
 
 /** Prime field size in bits. */
-#define FP_PRIME 254
+#define FP_PRIME 256
 /** Number of Karatsuba steps. */
 #define FP_KARAT 0
 /** Prefer Pseudo-Mersenne primes over random primes. */
 /* #undef FP_PMERS */
 /** Use -1 as quadratic non-residue. */
-#define FP_QNRES
+/* #undef FP_QNRES */
 /** Width of window processing for exponentiation methods. */
 #define FP_WIDTH 4
 
